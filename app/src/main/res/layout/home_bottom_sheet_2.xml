@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    tools:context=".view.activities.mainActivity.MainActivity">
+    <!--    app:layout_behavior="com.ekc.ekctracking.view.activities.mainActivity.LockableBottomSheetBehavior"-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ViewAnimator
+            android:id="@+id/home_bottom_sheet_car_details_view_animator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:layout_marginEnd="@dimen/_1sdp"
+                app:cardCornerRadius="@dimen/_12sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/home_bottom_sheet_car_details_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
+                    <View
+                        android:id="@+id/home_bottom_sheet_car_details_toolbar"
+                        android:layout_width="0dp"
+                        android:layout_height="?actionBarSize"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/home_bottom_sheet_car_details_close_ic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_toolbar"
+                        app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_toolbar"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_close_white_24dp" />
+
+                    <TextView
+                        android:id="@+id/home_bottom_sheet_car_details_title_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="بيانات السيارة"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_toolbar"
+                        app:layout_constraintEnd_toEndOf="@id/home_bottom_sheet_car_details_toolbar"
+                        app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_toolbar"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_toolbar">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_car_no_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_directions_car_grey_24dp">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_car_no_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_directions_car_grey_24dp" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_car_no_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="ب ط ر 5 4 2 3"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_car_no_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_car_no_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_car_no_ic" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_car_no_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_date_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_1"
+                            app:srcCompat="@drawable/ic_directions_car_grey_24dp">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_date_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_date_range_grey_24dp" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_car_date_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="02/03/2020"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_date_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_date_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_date_ic" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_date_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_time_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_3sdp"
+                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_car_no_container"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_car_no_container"
+                            app:srcCompat="@drawable/ic_directions_car_grey_24dp">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_time_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_timer_grey_24dp" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_car_time_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="06:18:19 PM"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_time_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_time_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_time_ic" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_time_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_speed_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_3sdp"
+                            app:layout_constraintEnd_toEndOf="@+id/home_bottom_sheet_car_details_time_container"
+                            app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_date_container"
+                            app:srcCompat="@drawable/ic_directions_car_grey_24dp">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_speed_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_car_speed_grey" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_speed_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="14 Km"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_speed_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_speed_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_speed_ic" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_speed_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_status_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_4sdp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_speed_container"
+                            app:srcCompat="@drawable/ic_directions_car_grey_24dp">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_status_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/rounded_ic_red" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_status_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="@string/stopped"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_status_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_status_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_status_ic" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_status_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_address_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_4sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_status_container"
+                            app:srcCompat="@drawable/ic_directions_car_grey_24dp">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_address_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_place_grey_24dp" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_car_address_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:ems="3"
+                                android:maxLines="4"
+                                android:text="العاشر من رمضان الاردنية، ، الشرقية 44634\n، مصر، بجوار دار المناسبات، 10th of Rammadan First, \nAsh Sharqia Governorate, \nEgypt"
+                                android:textColor="@color/dark_blue"
+                                android:textDirection="rtl"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_address_ic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_address_ic" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:background="@color/dark_blue"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_address_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_period_report_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/_4sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_6">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_period_report_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_moving_report_blue_24dp" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_period_report_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="@string/moving_report"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_period_report_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_period_report_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_period_report_ic" />
+
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_period_report_action_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_period_report_ic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_period_report_ic"
+                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_period_report_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_find_trip_report_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/_4sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_7">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_near_me_black_24dp" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_find_trip_report_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="@string/find_trip_report"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_find_trip_report_ic" />
+
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_period_find_trip_action_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_find_trip_report_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_speed_report_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/_4sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_8">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_speed_report_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_clock_speed" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_speed_report_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="@string/speed_report"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_speed_report_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_speed_report_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_speed_report_ic" />
+
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_speed_report_action_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_speed_report_ic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_speed_report_ic"
+                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_speed_report_container" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_distance_report_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/_4sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_9">
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_distance_report_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_route" />
+
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_distance_report_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="@string/distance_report"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_distance_report_ic"
+                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_distance_report_ic"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_distance_report_ic" />
+
+
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_distance_report_action_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_distance_report_ic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_distance_report_ic"
+                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/home_bottom_sheet_car_details_div_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:background="@color/dark_blue"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_distance_report_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:id="@+id/home_bottom_sheet_reports_options_container"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content">-->
+
+            <!--                <View-->
+            <!--                    android:id="@+id/home_bottom_sheet_reports_options_toolbar"-->
+            <!--                    android:layout_width="@dimen/_100sdp"-->
+            <!--                    android:layout_height="@dimen/_10sdp"-->
+            <!--                    android:layout_marginTop="@dimen/_4sdp"-->
+            <!--                    android:background="@drawable/home_options_toolbar_custom_bg"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <androidx.recyclerview.widget.RecyclerView-->
+            <!--                    android:id="@+id/home_bottom_sheet_reports_options_recycler_view"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="@dimen/_12sdp"-->
+            <!--                    android:background="@color/colorPrimary"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_reports_options_toolbar" />-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+        </ViewAnimator>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

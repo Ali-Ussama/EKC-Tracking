@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/ic_city_skyline_vector" />
+
+    <item android:drawable="@drawable/ic_jeep_img" android:gravity="start|bottom"
+        android:width="1500dp"
+        android:height="1500dp"
+        />
+</layer-list>

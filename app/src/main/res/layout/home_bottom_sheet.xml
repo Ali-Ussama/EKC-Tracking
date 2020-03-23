@@ -1,0 +1,255 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/bottom_sheet"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:background="@color/transparent"-->
+<!--    android:orientation="vertical"-->
+<!--    app:behavior_hideable="true"-->
+<!--    app:layout_behavior="com.ekc.ekctracking.view.activities.mainActivity.LockableBottomSheetBehavior"-->
+<!--    tools:context=".view.activities.mainActivity.MainActivity">-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <ViewAnimator-->
+<!--            android:id="@+id/home_bottom_sheet_car_details_view_animator"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_1sdp"-->
+<!--                android:layout_marginEnd="@dimen/_1sdp"-->
+<!--                app:cardCornerRadius="@dimen/_12sdp">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/home_bottom_sheet_car_details_container"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/home_bottom_sheet_car_details_toolbar"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="?actionBarSize"-->
+<!--                        android:background="@color/background_dark"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/home_bottom_sheet_car_details_close_ic"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="@dimen/_8sdp"-->
+<!--                        app:srcCompat="@drawable/ic_close_white_24dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_toolbar"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_toolbar"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/home_bottom_sheet_car_details_title_tv"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="بيانات السيارة"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="@dimen/_14ssp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_toolbar"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/home_bottom_sheet_car_details_toolbar"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_toolbar"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="@dimen/_8sdp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_toolbar">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_car_no_ic"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="@dimen/_4sdp"-->
+<!--                            app:srcCompat="@drawable/ic_directions_car_grey_24dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_car_no_value"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="@dimen/_4sdp"-->
+<!--                            android:text="ب ط ر 5 4 2 3"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_car_no_ic"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_car_no_ic"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_car_no_ic" />-->
+
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_date_ic"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:srcCompat="@drawable/ic_date_range_grey_24dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="@+id/home_bottom_sheet_car_details_car_no_ic"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_car_no_ic" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_car_date_value"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="@dimen/_4sdp"-->
+<!--                            android:text="02/03/2020"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_date_ic"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_date_ic"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_date_ic" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_time_ic"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:srcCompat="@drawable/ic_timer_grey_24dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="@+id/home_bottom_sheet_car_details_date_ic"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_date_ic" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_car_time_value"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="@dimen/_4sdp"-->
+<!--                            android:text="06:18:19 PM"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_time_ic"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_time_ic"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_time_ic" />-->
+
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_address_ic"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:srcCompat="@drawable/ic_place_grey_24dp"-->
+<!--                            app:layout_constraintEnd_toEndOf="@+id/home_bottom_sheet_car_details_time_ic"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_time_ic" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_car_address_value"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="@dimen/_8sdp"-->
+<!--                            android:layout_marginEnd="@dimen/_4sdp"-->
+<!--                            android:ems="3"-->
+<!--                            android:maxLines="4"-->
+<!--                            android:text="العاشر من رمضان الاردنية، ، الشرقية 44634\n، مصر، بجوار دار المناسبات، 10th of Rammadan First, \nAsh Sharqia Governorate, \nEgypt"-->
+<!--                            android:textDirection="rtl"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_address_ic"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_address_ic" />-->
+
+
+<!--                        &lt;!&ndash; left side &ndash;&gt;-->
+<!--                        <ImageView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_status_ic"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/rounded_ic_yellow"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_car_no_ic" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_status_value"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="@dimen/_4sdp"-->
+<!--                            android:text="@string/stopped"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_status_ic"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_status_ic"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_status_ic" />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_speed_ic"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:srcCompat="@drawable/ic_car_speed_grey"-->
+<!--                            app:layout_constraintEnd_toEndOf="@+id/home_bottom_sheet_car_details_status_ic"-->
+<!--                            app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_status_ic"-->
+<!--                            app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_date_ic" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_speed_value"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginEnd="@dimen/_4sdp"-->
+<!--                            android:text="14 Km"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_speed_ic"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_speed_ic"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_speed_ic" />-->
+
+
+<!--                        <Button-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_period_report_btn"-->
+<!--                            android:layout_width="@dimen/_128sdp"-->
+<!--                            android:layout_height="@dimen/_24sdp"-->
+<!--                            android:layout_marginTop="@dimen/_12ssp"-->
+<!--                            android:background="@drawable/custom_car_details_btn_background"-->
+<!--                            android:elevation="@dimen/_4sdp"-->
+<!--                            android:text="تقرير التحرك"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="@dimen/_12ssp"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/home_bottom_sheet_car_details_address_ic"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_car_address_value" />-->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_find_trip_btn"-->
+<!--                            android:layout_width="@dimen/_128sdp"-->
+<!--                            android:layout_height="@dimen/_24sdp"-->
+<!--                            android:background="@drawable/custom_car_details_btn_background"-->
+<!--                            android:elevation="@dimen/_4sdp"-->
+<!--                            android:text="تتبع الرحلة"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="@dimen/_12ssp"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_period_report_btn"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_period_report_btn" />-->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_speed_report_btn"-->
+<!--                            android:layout_width="@dimen/_128sdp"-->
+<!--                            android:layout_height="@dimen/_24sdp"-->
+<!--                            android:layout_marginTop="@dimen/_8sdp"-->
+<!--                            android:background="@drawable/custom_car_details_btn_background"-->
+<!--                            android:elevation="@dimen/_4sdp"-->
+<!--                            android:text="تقرير السرعة"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="@dimen/_12ssp"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/home_bottom_sheet_car_details_period_report_btn"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_period_report_btn" />-->
+
+<!--                        <Button-->
+<!--                            android:id="@+id/home_bottom_sheet_car_details_distance_report_btn"-->
+<!--                            android:layout_width="@dimen/_128sdp"-->
+<!--                            android:layout_height="@dimen/_24sdp"-->
+<!--                            android:layout_marginTop="@dimen/_8sdp"-->
+<!--                            android:background="@drawable/custom_car_details_btn_background"-->
+<!--                            android:elevation="@dimen/_4sdp"-->
+<!--                            android:text="تقرير المسافة"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="@dimen/_12ssp"-->
+<!--                            app:layout_constraintEnd_toEndOf="@id/home_bottom_sheet_car_details_find_trip_btn"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_find_trip_btn" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--        </ViewAnimator>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--</LinearLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

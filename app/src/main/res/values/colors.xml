@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#192633</color>
+    <color name="colorPrimaryDark">#00000c</color>
+    <color name="colorAccent">#192633</color>
+
+    <color name="colorRed">#EF5350</color>
+    <color name="color_white">@android:color/white</color>
+    <color name="color_black">@android:color/black</color>
+    <color name="color_orange">#FAAD39</color>
+    <color name="color_orange_light">#e2ce71</color>
+    <color name="color_list_divider_grey">#E2E2E2</color><!--for common list-->
+    <color name="color_red">#F16856</color>
+    <color name="color_red_">#47f16856</color>
+    <color name="color_grey">#E2E2E2</color>
+    <color name="color_grey_for_bill">#46221D1D</color>
+    <color name="grey">#707070</color>
+    <color name="grey_light">#cfcfcf</color>
+    <color name="dark_grey">#454545</color>
+
+    <color name="color_grey_for_visit_card_view">#fafafa</color>
+
+    <color name="color_green">#64dd17</color>
+    <color name="color_dark_green">#1faa00</color>
+    <color name="color_solid_red">#d50000</color>
+    <color name="color_dark_solid_red">#9b0000</color>
+
+    <color name="attachmentBackgroundColor">#f5f7ff</color>
+    <color name="dialogAttachmentBackgroundColor">#71000000</color>
+
+    <color name="orange">#ff9800</color>
+    <color name="orangeDark">#c66900</color>
+    <color name="backgroundFieldName">#eaf1f7</color>
+    <color name="textColorFieldName">#000000</color>
+
+    <color name="background_dark">#455edd</color>
+    <color name="background_light">#7590fa</color>
+    <color name="transparent">#00b8860b</color>
+
+    <color name="ssss">#f2f0e5</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="green">#00FF00</color>
+    <color name="black">#000000</color>
+    <color name="yellow">#c7cc00</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#0070FF</color>
+    <color name="purple">#4a148c</color>
+
+    <color name="dark_blue">#192633</color>
+
+    <color name="calendar_header">@color/colorPrimary</color>
+    <color name="calendar_header_title">#FFF</color>
+    <color name="selected_date_circle_color_app">#FF5252</color>
+    <color name="range_bg_color_app">#FFCDD2</color>
+
+
+</resources>

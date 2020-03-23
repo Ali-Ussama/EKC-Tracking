@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="home_report_options_names">
+        <item>التحركات</item>
+        <item>تتبع الرحلة</item>
+        <item>السرعات</item>
+        <item>تقرير مسافات</item>
+        <item>تقرير سيارة</item>
+    </string-array>
+
+    <string-array name="home_report_options_icons">
+        <item>@drawable/ic_moving_report_white_24dp</item>
+        <item>@drawable/ic_near_me_white_24dp</item>
+        <item>@drawable/ic_clock_speed_white</item>
+        <item>@drawable/ic_route_white_48</item>
+        <item>@drawable/ic_visibility_white_48dp</item>
+    </string-array>
+</resources>

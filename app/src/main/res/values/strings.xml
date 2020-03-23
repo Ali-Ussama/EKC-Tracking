@@ -1,0 +1,64 @@
+<resources>
+
+
+    <string name="esri_client_id" translatable="false">INbsLInGMU1BxHne</string>
+    <string name="esri_client_secret" translatable="false">dbd3175ed01a449cb69e8f1c0ef23524</string>
+    <string name="esri_token">tdXlq1Sc9dLFke4tocUm-ft5phTnZ9ZvAKyMmvPwkLdWkPrkQpfF9XSBFCdd4hOalhTbaAezaOSon4i6IF5XGTpMYcAvhjg0ja1NmuLf0B2-rNCd65pDzhmq-GY8_1AK</string>
+    <string name="esri_runtime_license_key" translatable="false">runtimelite,1000,rud6134088055,none,NKMFA0PL40YMC2EN0223</string>
+
+    <string name="here_app_id" translatable="false">OP8CUKtC1qXxcxK3J5xV</string>
+    <string name="here_app_code" translatable="false">A6nhvmYUla89AOo_la4voA</string>
+
+    <string name="network_analysis_service" translatable="false">https://utility.arcgis.com/usrsvcs/appservices/XSFNqcwvFGaWg0Jb/rest/services/World/Route/NAServer/Route_World/solve</string>
+    <string name="app_name">EKC Tracking</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">EKC Tracking</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">الرئيسية</string>
+    <string name="menu_moving_report">تقرير التحركات</string>
+    <string name="menu_speed_report">تقرير السرعات</string>
+    <string name="menu_distance_report">تقرير المسافات</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_gallery_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_slideshow_second">Hello HomeSecondFragment. Arg: %1$s</string>
+
+
+    <string name="google_maps_key">AIzaSyAo28qTAIeW5hZ2cvdNLOQNintELqHucPU</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="str_toast_network_error">No Network Connection, Please check your connection</string>
+    <string name="str_ok_lbl">Ok</string>
+    <string name="please_open_gps_location">Please Open GPS Location.</string>
+
+    <string name="stopped">السيارة متوقفة</string>
+    <string name="moving">السيارة تتحرك</string>
+    <string name="disconnected">السيارة لا ترسل احداثيات</string>
+    <string name="disabled">السيارة مفصولة</string>
+    <string name="required">مطلوب</string>
+    <string name="moving_report">تقرير تحركات السيارة</string>
+    <string name="find_trip_report">تقرير تتبع الرحلة</string>
+    <string name="speed_report">تقرير السرعات</string>
+    <string name="distance_report">تقرير المسافة</string>
+    <string name="moving_report_car_title">فلتر تقرير تحركات السيارة</string>
+    <string name="date">Date</string>
+    <string name="date_range">اختر التاريخ من : إلى</string>
+    <string name="time_rang_from">الوقت من</string>
+    <string name="time_rang_to">الوقت إلى</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="find_your_cars_and_track_it">find your cars and track it</string>
+    <string name="ekc_tracking">EKC Tracking</string>
+    <string name="logout_dialog">هل تريد الخروج ؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="please_enter_date_range">من فضلك أدخل فترة التاريخ المراده</string>
+    <string name="please_enter_time_range">من فضلك اختر الوقت</string>
+    <string name="no_history_found">عذرا، لا يوجد سجل لهذه السيارة خلال هذه الفترة</string>
+    <string name="loading">Loading…</string>
+</resources>
