@@ -1,6 +1,6 @@
 package com.ekc.ekctracking.models.findTrip;
 
-import com.ekc.ekctracking.models.CarStatus;
+import com.ekc.ekctracking.models.pojo.CarStatus;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

@@ -17,7 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.configs.AppUtils;
-import com.ekc.ekctracking.models.LoginModel;
+import com.ekc.ekctracking.models.pojo.LoginModel;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
 
 import butterknife.BindView;

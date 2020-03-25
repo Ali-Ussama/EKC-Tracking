@@ -3,14 +3,13 @@ package com.ekc.ekctracking.api_network;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
-import com.ekc.ekctracking.models.LoginModel;
-import com.ekc.ekctracking.models.OnGoingRequest;
-import com.ekc.ekctracking.models.StatusRoot;
-import com.ekc.ekctracking.models.User;
+import com.ekc.ekctracking.models.pojo.LoginModel;
+import com.ekc.ekctracking.models.pojo.OnGoingRequest;
+import com.ekc.ekctracking.models.pojo.StatusRoot;
+import com.ekc.ekctracking.models.pojo.User;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
 import com.ekc.ekctracking.models.hereMapRoutModel.HRoute;
-import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

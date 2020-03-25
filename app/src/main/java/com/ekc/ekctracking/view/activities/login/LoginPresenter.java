@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.ekc.ekctracking.api_network.ApiClient;
 import com.ekc.ekctracking.configs.PrefManager;
-import com.ekc.ekctracking.models.LoginModel;
-import com.ekc.ekctracking.models.User;
+import com.ekc.ekctracking.models.pojo.LoginModel;
+import com.ekc.ekctracking.models.pojo.User;
 
 public class LoginPresenter {
 

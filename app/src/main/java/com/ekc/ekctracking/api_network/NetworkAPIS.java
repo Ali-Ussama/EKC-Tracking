@@ -1,10 +1,9 @@
 package com.ekc.ekctracking.api_network;
 
-import com.ekc.ekctracking.models.StatusRoot;
-import com.ekc.ekctracking.models.User;
+import com.ekc.ekctracking.models.pojo.StatusRoot;
+import com.ekc.ekctracking.models.pojo.User;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.hereMapRoutModel.HRoute;
-import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;

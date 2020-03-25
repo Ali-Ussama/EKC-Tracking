@@ -11,10 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekc.ekctracking.R;
-import com.ekc.ekctracking.models.HomeOptionsModel;
+import com.ekc.ekctracking.models.pojo.HomeOptionsModel;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
 import com.ekc.ekctracking.view.fragments.home.HomeFragmentListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

@@ -36,14 +36,15 @@ import com.archit.calendardaterangepicker.customviews.DateRangeCalendarView;
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.configs.AppUtils;
 import com.ekc.ekctracking.configs.PrefManager;
-import com.ekc.ekctracking.models.CarGroupStatus;
-import com.ekc.ekctracking.models.CarStatus;
-import com.ekc.ekctracking.models.HomeOptionsModel;
-import com.ekc.ekctracking.models.StatusRoot;
+import com.ekc.ekctracking.models.Logger;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
 import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
+import com.ekc.ekctracking.models.pojo.CarGroupStatus;
+import com.ekc.ekctracking.models.pojo.CarStatus;
+import com.ekc.ekctracking.models.pojo.HomeOptionsModel;
+import com.ekc.ekctracking.models.pojo.StatusRoot;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivityViewListener;
 import com.ekc.ekctracking.view.activities.mainActivity.MapSingleTapListener;
@@ -81,9 +82,7 @@ import com.esri.arcgisruntime.tasks.networkanalysis.RouteParameters;
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteResult;
 import com.esri.arcgisruntime.tasks.networkanalysis.RouteTask;
 import com.esri.arcgisruntime.tasks.networkanalysis.Stop;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -103,7 +102,10 @@ import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_
 import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN;
 
 public class HomeFragment extends Fragment implements
-        GoogleMap.OnMyLocationChangeListener, HomeViewCallback, SingleTapListener, View.OnClickListener, HomeFragmentListener, MaterialSearchView.OnQueryTextListener, MapScaleChangedListener {
+        HomeViewCallback, SingleTapListener,
+        View.OnClickListener, HomeFragmentListener,
+        MaterialSearchView.OnQueryTextListener,
+        MapScaleChangedListener {
 
     @BindView(R.id.home_fragment_view_animator)
     ViewAnimator rootViewAnimator;
@@ -130,6 +132,9 @@ public class HomeFragment extends Fragment implements
     @BindView(R.id.home_bottom_sheet_car_details_close_ic)
     ImageView mBottomSheetCloseIcon;
 
+    @BindView(R.id.home_bottom_sheet_car_details_expand_collapse_ic)
+    ImageView mBottomSheetCollapseExpandIcon;
+
     @BindView(R.id.home_bottom_sheet_car_details_title_tv)
     TextView mBottomSheetCarDetailsTitleTV;
 
@@ -145,11 +150,11 @@ public class HomeFragment extends Fragment implements
     @BindView(R.id.home_bottom_sheet_car_details_car_address_value)
     TextView mCarAddressTV;
 
-    @BindView(R.id.home_bottom_sheet_car_details_status_ic)
+    @BindView(R.id.home_bottom_sheet_car_details_gps_unit_ic)
     ImageView mCarStatusIcon;
 
-    @BindView(R.id.home_bottom_sheet_car_details_status_value)
-    TextView mCarStatusTV;
+    @BindView(R.id.home_bottom_sheet_car_details_gps_unit_value)
+    TextView mCarGPSUnitNumberTV;
 
     @BindView(R.id.home_bottom_sheet_car_details_speed_value)
     TextView mCarSpeedTV;
@@ -216,7 +221,7 @@ public class HomeFragment extends Fragment implements
     private ArrayList<MarkerOptions> markerOptions;
     private ArcGISMap baseMap;
     private GraphicsOverlay graphicsOverlay, drawGraphicLayer;
-    private PictureMarkerSymbol pictureMarkerSymbol, greenMarker, redMarker, yellowMarker,startBannerMarker, endBannerMarker;
+    private PictureMarkerSymbol pictureMarkerSymbol, greenMarker, redMarker, yellowMarker, startBannerMarker, endBannerMarker;
     private Point mCurrentLocation;
     private SpatialReference spatialReference;
 
@@ -237,6 +242,8 @@ public class HomeFragment extends Fragment implements
     private boolean queryStatus = false;
     private Portal portal;
     private MaterialDialog mProgressDlg;
+
+    private Logger logger;
 
     public static HomeFragment newInstance(MainActivity current, MainActivityViewListener activityListener) {
         mCurrent = current;
@@ -288,6 +295,8 @@ public class HomeFragment extends Fragment implements
             searchView.setVisibility(View.VISIBLE);
             mCurrent.setSupportActionBar(toolbar);
 
+            logger = new Logger();
+
             ActionBar actionBar = mCurrent.getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayShowTitleEnabled(false);
@@ -295,17 +304,25 @@ public class HomeFragment extends Fragment implements
 
             mPrefManager = new PrefManager(mCurrent);
 
-            presenter = new HomeFragPresenter(mCurrent, this, mPrefManager);
+            presenter = new HomeFragPresenter(mCurrent, this);
+
             presenter.requestToken();
+            presenter.requestOnGoingCarsStatus();
 
             displayHomeLayout();
             initBottomSheet();
 
             initMap();
 
-//            loginIntoArcServer();
-//            startTaskRout(null);
+            initActions();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initActions() {
+        try {
             movingFilterTimeFromET.setOnClickListener(this);
             movingFilterTimeToET.setOnClickListener(this);
 
@@ -365,6 +382,7 @@ public class HomeFragment extends Fragment implements
             sheetBehavior.setState(STATE_HIDDEN);
 
             mBottomSheetCloseIcon.setOnClickListener(this);
+            mBottomSheetCollapseExpandIcon.setOnClickListener(this);
             sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -510,28 +528,10 @@ public class HomeFragment extends Fragment implements
     }
 
     @Override
-    public void onMyLocationChange(Location location) {
-        if (mMap != null) {
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        }
-    }
-
-    @Override
     public void onLocationChanged(Location location) {
         try {
             Log.i(TAG, "onLocationChanged(): is called");
 
-            if (mMap != null) {
-                Log.i(TAG, "onLocationChanged(): mMap not null");
-
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            } else {
-                Log.i(TAG, "onLocationChanged(): mMap is null");
-                initMap();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -713,41 +713,40 @@ public class HomeFragment extends Fragment implements
             String time = foundedCar.getTime();
             String address = foundedCar.getAddress();
 
+            String gpsUnitNumber = foundedCar.getGPSUnitNumber();
+
             mCarNoTV.setText(carNo);
             mCarDateTV.setText(date);
             mCarTimeTV.setText(time);
             mCarAddressTV.setText(address);
+            mCarGPSUnitNumberTV.setText(gpsUnitNumber);
 
-            if (foundedCar.getStatus().matches("Stopped")) {
-                mCarStatusIcon.setImageResource(R.drawable.rounded_ic_red);
-                carDetailsToolbar.setBackgroundResource(R.color.color_dark_solid_red);
-                mCarStatusTV.setText(getString(R.string.stopped));
-                mBottomSheetCarDetailsTitleTV.setText(getString(R.string.stopped));
-            } else if (foundedCar.getStatus().matches("Moving")) {
-                mCarStatusIcon.setImageResource(R.drawable.rounded_ic_green);
-                carDetailsToolbar.setBackgroundResource(R.color.color_dark_green);
-                mBottomSheetCarDetailsTitleTV.setText(getString(R.string.moving));
-                mCarStatusTV.setText(getString(R.string.moving));
-            } else if (foundedCar.getStatus().matches("Disconnected")) {
-                mCarStatusIcon.setImageResource(R.drawable.rounded_ic_yellow);
-                carDetailsToolbar.setBackgroundResource(R.color.color_orange_light);
-                mCarStatusTV.setText(getString(R.string.disconnected));
-                mBottomSheetCarDetailsTitleTV.setText(getString(R.string.disconnected));
-            } else {
-                mCarStatusIcon.setImageResource(R.drawable.rounded_ic_yellow);
-                carDetailsToolbar.setBackgroundResource(R.color.color_orange_light);
-                mCarStatusTV.setText(getString(R.string.disabled));
-                mBottomSheetCarDetailsTitleTV.setText(getString(R.string.disabled));
-            }
-
+            handleBottomSHeetStatus(foundedCar);
             String speed = foundedCar.getSpeed();
-            speed = speed.concat(" Km");
+            speed = speed.concat(" كم/ساعة");
             mCarSpeedTV.setText(speed);
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void handleBottomSHeetStatus(CarStatus foundedCar) {
+        if (foundedCar.getStatus().matches("Stopped")) {
+            carDetailsToolbar.setBackgroundResource(R.color.color_dark_solid_red);
+            mBottomSheetCarDetailsTitleTV.setText(getString(R.string.stopped));
+        } else if (foundedCar.getStatus().matches("Moving")) {
+            carDetailsToolbar.setBackgroundResource(R.color.color_dark_green);
+            mBottomSheetCarDetailsTitleTV.setText(getString(R.string.moving));
+        } else if (foundedCar.getStatus().matches("Disconnected")) {
+            carDetailsToolbar.setBackgroundResource(R.color.color_orange_light);
+            mBottomSheetCarDetailsTitleTV.setText(getString(R.string.disconnected));
+        } else {
+            carDetailsToolbar.setBackgroundResource(R.color.color_orange_light);
+            mBottomSheetCarDetailsTitleTV.setText(getString(R.string.disabled));
+        }
+
     }
 
     private String getCarNo(String carNo) {
@@ -807,8 +806,27 @@ public class HomeFragment extends Fragment implements
                 displayTimeRangePicker(movingFilterTimeToET);
             } else if (mNavDrawerIc.equals(v)) {
                 handleNavigation();
+            } else if (mBottomSheetCollapseExpandIcon.equals(v)) {
+                handleBottomSheetExpandCollapse();
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleBottomSheetExpandCollapse() {
+        try {
+            Log.i(TAG, "handleBottomSheetExpandCollapse: is called");
+            if (sheetBehavior.getState() == STATE_EXPANDED || sheetBehavior.getState() == STATE_HALF_EXPANDED) {
+                Log.i(TAG, "handleBottomSheetExpandCollapse: is STATE_HALF_EXPANDED");
+                sheetBehavior.setState(STATE_COLLAPSED);
+                mBottomSheetCollapseExpandIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
+            }else if (sheetBehavior.getState() == STATE_COLLAPSED){
+                Log.i(TAG, "handleBottomSheetExpandCollapse: is STATE_COLLAPSED");
+                sheetBehavior.setState(STATE_HALF_EXPANDED);
+                mBottomSheetCollapseExpandIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_white_24dp);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -861,7 +879,7 @@ public class HomeFragment extends Fragment implements
     /**
      * ---------------------------------Moving Report Filters--------------------------------
      */
-    private void displayTimeRangePicker(TextInputEditText v) {
+    private void displayTimeRangePicker(TextInputEditText editText) {
         try {
             MaterialDialog dateDialog = AppUtils.showAlertDialogWithCustomView(mCurrent, R.layout.time_range_picker);
             TimePicker timePicker = (TimePicker) dateDialog.findViewById(R.id.time_picker_range);
@@ -907,7 +925,7 @@ public class HomeFragment extends Fragment implements
                     String time = hoursString.concat(":").concat(minuteString).concat(status);
                     Log.i(TAG, "onTimeChanged: time = " + time);
 
-                    v.setText(time);
+                    editText.setText(time);
 
                 }
             });
@@ -966,39 +984,44 @@ public class HomeFragment extends Fragment implements
                 movingFilterTimeToET.setError(getString(R.string.please_enter_time_range));
             } else {
 
+                FindTripRequest findTripRequest = getFindTripRequest();
                 showLoading();
-
-                String selectedDateRange = movingFilterDateET.getText().toString().trim();
-                String fromDate = presenter.getFromDate(selectedDateRange);
-                String toDate = presenter.getToDate(selectedDateRange);
-                String fromTime = movingFilterTimeFromET.getText().toString().trim().replaceAll(":", "");
-                String toTime = movingFilterTimeToET.getText().toString().trim().replaceAll(":", "");
-                String token = presenter.getToken();
-                String gpsUnit = selectedCar.getGPSUnitNumber();
-
-                FindTripRequest findTripRequest = new FindTripRequest();
-                findTripRequest.setToken(token);
-                findTripRequest.setFromDate(fromDate);
-                findTripRequest.setFromTime(fromTime);
-                findTripRequest.setToDate(toDate);
-                findTripRequest.setToTime(toTime);
-                findTripRequest.setGpsUnitNo(gpsUnit);
-
-                movingFilterDateET.clearComposingText();
-                movingFilterTimeFromET.clearComposingText();
-                movingFilterTimeToET.clearComposingText();
-
-                Log.i(TAG, "SaveMovingFilter: token = " + token);
-                Log.i(TAG, "SaveMovingFilter: gpsUnit = " + gpsUnit);
-                Log.i(TAG, "SaveMovingFilter: fromDate = " + fromDate);
-                Log.i(TAG, "SaveMovingFilter: toDate = " + toDate);
-                Log.i(TAG, "SaveMovingFilter: fromTime = " + fromTime);
-                Log.i(TAG, "SaveMovingFilter: toTime = " + toTime);
                 presenter.requestFindTrip(findTripRequest);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private FindTripRequest getFindTripRequest() {
+
+        FindTripRequest findTripRequest = new FindTripRequest();
+
+        try {
+            String selectedDateRange = movingFilterDateET.getText().toString().trim();
+            String fromDate = presenter.getFromDate(selectedDateRange);
+            String toDate = presenter.getToDate(selectedDateRange);
+            String fromTime = movingFilterTimeFromET.getText().toString().trim().replaceAll(":", "");
+            String toTime = movingFilterTimeToET.getText().toString().trim().replaceAll(":", "");
+            String token = presenter.getToken();
+            String gpsUnit = selectedCar.getGPSUnitNumber();
+
+            findTripRequest.setToken(token);
+            findTripRequest.setFromDate(fromDate);
+            findTripRequest.setFromTime(fromTime);
+            findTripRequest.setToDate(toDate);
+            findTripRequest.setToTime(toTime);
+            findTripRequest.setGpsUnitNo(gpsUnit);
+
+            movingFilterDateET.clearComposingText();
+            movingFilterTimeFromET.clearComposingText();
+            movingFilterTimeToET.clearComposingText();
+            logger.logFindTripRequest(token, gpsUnit, fromDate, toDate, fromTime, toTime, TAG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return findTripRequest;
     }
 
     private void showLoading() {
@@ -1037,13 +1060,7 @@ public class HomeFragment extends Fragment implements
             dismissLoading();
             rootViewAnimator.setDisplayedChild(0);
             if (findTrip.getFoundCars().getLocations() != null && !findTrip.getFoundCars().getLocations().isEmpty()) {
-
-                findTrip = presenter.sortPoints(findTrip, spatialReference, mapView.getSpatialReference());
-                findTripResponse = findTrip;
-    //            presenter.requestHereRout(findTripResponse);
-
-                drawFindTripLine(findTrip);
-
+                presenter.sortPoints(findTrip, spatialReference, mapView.getSpatialReference());
             } else {
                 AppUtils.showToast(mCurrent, getString(R.string.no_history_found));
             }
@@ -1094,35 +1111,38 @@ public class HomeFragment extends Fragment implements
     }
 
     private void drawFindTripLine(FindTrip findTrip) {
+        try {
+            Log.d(TAG, "drawFindTripLine: is called");
 
-        PointCollection pointCollection = new PointCollection(mapView.getSpatialReference());
-        ArrayList<Point> wrongPoints = new ArrayList<>();
-        drawGraphicLayer.getGraphics().clear();
-        graphicsOverlay.getGraphics().clear(); // TODO NOT Sure What To Do
-        for (CarStatus location : findTrip.getFoundCars().getLocations()) {
-            Point point = (Point) GeometryEngine.project(new Point(location.getLongitude(), location.getLatitude(), spatialReference), mapView.getSpatialReference());
-//            graphicsOverlay.getGraphics().add(new Graphic(point, greenMarker));
-            pointCollection.add(point);
+            PointCollection pointCollection = new PointCollection(mapView.getSpatialReference());
+            drawGraphicLayer.getGraphics().clear();
+            graphicsOverlay.getGraphics().clear(); // TODO NOT Sure What To Do
+            for (CarStatus location : findTrip.getFoundCars().getLocations()) {
+                Point point = (Point) GeometryEngine.project(new Point(location.getLongitude(), location.getLatitude(), spatialReference), mapView.getSpatialReference());
+                pointCollection.add(point);
+            }
+
+            if (pointCollection.size() > 1) {
+                graphicsOverlay.getGraphics().add(new Graphic(pointCollection.get(0), startBannerMarker));
+                graphicsOverlay.getGraphics().add(new Graphic(pointCollection.get(pointCollection.size() - 1), endBannerMarker));
+            }
+
+//            ArrayList<PointCollection> trips = new ArrayList<>();
+//            trips = presenter.getTrips(pointCollection,findTrip.getFoundCars().getLocations());
+
+            // create a new point collection for polyline
+            Polyline polyline = new Polyline(pointCollection);
+
+            //define a line symbol
+            SimpleLineSymbol lineSymbol =
+                    new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
+            Graphic line = new Graphic(polyline, lineSymbol);
+            drawGraphicLayer.getGraphics().add(line);
+
+            zoomToLine(line);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        if (pointCollection.size() > 1){
-            graphicsOverlay.getGraphics().add(new Graphic(pointCollection.get(0), startBannerMarker));
-            graphicsOverlay.getGraphics().add(new Graphic(pointCollection.get(pointCollection.size() -1), endBannerMarker));
-        }
-
-        ArrayList<PointCollection> trips = new ArrayList<>();
-        trips = presenter.getTrips(pointCollection,findTrip.getFoundCars().getLocations());
-
-        // create a new point collection for polyline
-        Polyline polyline = new Polyline(pointCollection);
-
-        //define a line symbol
-        SimpleLineSymbol lineSymbol =
-                new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
-        Graphic line = new Graphic(polyline, lineSymbol);
-        drawGraphicLayer.getGraphics().add(line);
-
-        zoomToLine(line);
 
     }
 
@@ -1188,6 +1208,28 @@ public class HomeFragment extends Fragment implements
     public void onHereRoutFailure(Throwable throwable) {
         dismissLoading();
         throwable.printStackTrace();
+    }
+
+    @Override
+    public void onSortPoints(FindTrip findTrip) {
+        try {
+            Log.d(TAG, "onSortPoints: is called");
+            if (mCurrent != null) {
+                Log.d(TAG, "onSortPoints: mCurrent not null");
+                mCurrent.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        findTripResponse = findTrip;
+                        Log.d(TAG, "run: calling drawFindTripLine method");
+                        drawFindTripLine(findTrip);
+                    }
+                });
+            } else {
+                Log.d(TAG, "onSortPoints: mCurrent is null");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
