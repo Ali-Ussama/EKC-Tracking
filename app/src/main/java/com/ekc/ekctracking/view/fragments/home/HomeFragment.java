@@ -576,8 +576,10 @@ public class HomeFragment extends Fragment implements
                             carGraphic = new Graphic(point, yellowMarker);
                         }
 
-                        pictureMarkerSymbol.setAngle(90f);
-                        graphicsOverlay.getGraphics().add(carGraphic);
+                        if (drawGraphicLayer != null && drawGraphicLayer.getGraphics() != null && drawGraphicLayer.getGraphics().isEmpty()) {
+                            pictureMarkerSymbol.setAngle(90f);
+                            graphicsOverlay.getGraphics().add(carGraphic);
+                        }
                         //                        ListenableList<Graphic> iterable = graphicsOverlay.getGraphics();
 
                         //                        graphicsOverlay.selectGraphics(iterable);
@@ -721,7 +723,7 @@ public class HomeFragment extends Fragment implements
             mCarAddressTV.setText(address);
             mCarGPSUnitNumberTV.setText(gpsUnitNumber);
 
-            handleBottomSHeetStatus(foundedCar);
+            handleBottomSheetStatus(foundedCar);
             String speed = foundedCar.getSpeed();
             speed = speed.concat(" كم/ساعة");
             mCarSpeedTV.setText(speed);
@@ -732,7 +734,7 @@ public class HomeFragment extends Fragment implements
         }
     }
 
-    private void handleBottomSHeetStatus(CarStatus foundedCar) {
+    private void handleBottomSheetStatus(CarStatus foundedCar) {
         if (foundedCar.getStatus().matches("Stopped")) {
             carDetailsToolbar.setBackgroundResource(R.color.color_dark_solid_red);
             mBottomSheetCarDetailsTitleTV.setText(getString(R.string.stopped));
@@ -822,7 +824,7 @@ public class HomeFragment extends Fragment implements
                 Log.i(TAG, "handleBottomSheetExpandCollapse: is STATE_HALF_EXPANDED");
                 sheetBehavior.setState(STATE_COLLAPSED);
                 mBottomSheetCollapseExpandIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
-            }else if (sheetBehavior.getState() == STATE_COLLAPSED){
+            } else if (sheetBehavior.getState() == STATE_COLLAPSED) {
                 Log.i(TAG, "handleBottomSheetExpandCollapse: is STATE_COLLAPSED");
                 sheetBehavior.setState(STATE_HALF_EXPANDED);
                 mBottomSheetCollapseExpandIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_white_24dp);
@@ -1123,14 +1125,10 @@ public class HomeFragment extends Fragment implements
             }
 
             if (pointCollection.size() > 1) {
-                graphicsOverlay.getGraphics().add(new Graphic(pointCollection.get(0), startBannerMarker));
-                graphicsOverlay.getGraphics().add(new Graphic(pointCollection.get(pointCollection.size() - 1), endBannerMarker));
+                drawGraphicLayer.getGraphics().add(new Graphic(pointCollection.get(0), startBannerMarker));
+                drawGraphicLayer.getGraphics().add(new Graphic(pointCollection.get(pointCollection.size() - 1), endBannerMarker));
             }
 
-//            ArrayList<PointCollection> trips = new ArrayList<>();
-//            trips = presenter.getTrips(pointCollection,findTrip.getFoundCars().getLocations());
-
-            // create a new point collection for polyline
             Polyline polyline = new Polyline(pointCollection);
 
             //define a line symbol

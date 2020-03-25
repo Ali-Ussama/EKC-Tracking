@@ -389,6 +389,7 @@ public class CarUtils {
 
     public void requestOnGoingCarsStatus() {
         try {
+
             Log.d(TAG, "requestOnGoingCarsStatus: is called");
             OnGoingRequest onGoingRequest = new OnGoingRequest();
 
@@ -400,6 +401,7 @@ public class CarUtils {
                 auth = token_type.concat(" ").concat(token);
 
                 onGoingRequest.setAuthorization(auth);
+
                 Log.d(TAG, "requestOnGoingCarsStatus: authorization = " + auth);
                 if (mApiClient != null) {
                     mApiClient.getOnGoingStatus(onGoingRequest, new ApiClient.CommonCallback<Object>() {

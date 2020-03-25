@@ -5,8 +5,6 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
-import com.ekc.ekctracking.api_network.ApiClient;
-import com.ekc.ekctracking.configs.PrefManager;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
@@ -20,6 +18,9 @@ import com.ekc.ekctracking.view.fragments.home.callbacks.HomeViewCallback;
 import com.esri.arcgisruntime.geometry.SpatialReference;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class HomeFragPresenter extends ViewModel implements HomeActivityCallback, HomeFragPresenterListener {
 
@@ -66,7 +67,17 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
     void requestOnGoingCarsStatus() {
         try {
             Log.d(TAG, "requestOnGoingCarsStatus: is called");
-            carUtils.requestOnGoingCarsStatus();
+            ScheduledExecutorService scheduleTaskExecutor = Executors.newScheduledThreadPool(5);
+
+            // This schedule a runnable task every 2 minutes
+            scheduleTaskExecutor.scheduleAtFixedRate(new Runnable() {
+                public void run() {
+                    Log.i(TAG, "run: calling requestOnGoingCarsStatus");
+                    carUtils.requestOnGoingCarsStatus();
+                }
+            }, 0, 30, TimeUnit.SECONDS);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
