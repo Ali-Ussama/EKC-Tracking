@@ -53,6 +53,8 @@ public class CarStatus implements Parcelable, Comparator {
 
     private String dataTime;
 
+    private double angle;
+
     protected CarStatus(Parcel in) {
         carNo = in.readString();
         GPSUnitNumber = in.readString();
@@ -68,6 +70,7 @@ public class CarStatus implements Parcelable, Comparator {
         speed2 = in.readString();
         gpsUnit = in.readString();
         driverName = in.readString();
+        angle = in.readDouble();
     }
 
     public static final Creator<CarStatus> CREATOR = new Creator<CarStatus>() {
@@ -203,6 +206,14 @@ public class CarStatus implements Parcelable, Comparator {
         this.dataTime = dataTime;
     }
 
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
     /**
      * Describe the kinds of special objects contained in this Parcelable
      * instance's marshaled representation. For example, if the object will
@@ -241,6 +252,7 @@ public class CarStatus implements Parcelable, Comparator {
         dest.writeString(speed2);
         dest.writeString(gpsUnit);
         dest.writeString(driverName);
+        dest.writeDouble(angle);
     }
 
     @Override

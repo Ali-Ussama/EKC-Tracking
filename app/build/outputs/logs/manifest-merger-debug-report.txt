@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\8f8fdd9fea16271586ce46aa64fabb18\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-ui:2.2.1] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\36a9cca4d13aa6dd36af35f3f1d2bc7b\navigation-ui-2.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [com.miguelcatalan:materialsearchview:1.4.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\39214bbba5a2208096f1326009f44b9c\jetified-materialsearchview-1.4.0\AndroidManifest.xml:2:1-13:12
@@ -71,22 +71,22 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\AliOsama\.gradle
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\8cc88eb369ac9dc4a1cef5ac3391ee68\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e30dc2ca5e390f51f0d027988c8ec5ba\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\a838255ba5a323d74c35e1a0ff8048c6\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
 	package
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:4:5-34
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-66:12
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:11-69
@@ -153,7 +153,7 @@ ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:20:5-
 	android:name
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:20:19-63
 application
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:22:5-64:19
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:22:5-62:19
 MERGED from [com.miguelcatalan:materialsearchview:1.4.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\39214bbba5a2208096f1326009f44b9c\jetified-materialsearchview-1.4.0\AndroidManifest.xml:11:5-20
 MERGED from [com.miguelcatalan:materialsearchview:1.4.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\39214bbba5a2208096f1326009f44b9c\jetified-materialsearchview-1.4.0\AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\00fab61a2e0d245cba0bd482be7b28c1\material-1.1.0\AndroidManifest.xml:22:5-20
@@ -203,51 +203,45 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Al
 	android:theme
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:28:9-40
 activity#com.ekc.ekctracking.view.activities.login.LoginActivity
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:29:9-38:20
-	android:screenOrientation
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:13-49
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:29:9-37:20
 	android:configChanges
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:31:13-142
 	android:name
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:30:13-64
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:13-37:29
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:13-36:29
 action#android.intent.action.MAIN
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:34:17-69
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:17-69
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:34:25-66
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:25-66
 category#android.intent.category.LAUNCHER
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:36:17-77
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:35:17-77
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:36:27-74
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:35:27-74
 meta-data#com.google.android.geo.API_KEY
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:47:9-49:55
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:46:9-48:55
 	android:value
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:49:13-52
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:48:13-52
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:48:13-58
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:47:13-58
 activity#com.ekc.ekctracking.view.activities.MapsActivity
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:51:9-55:51
-	android:screenOrientation
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:55:13-49
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:50:9-54:15
 	android:label
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:54:13-56
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:53:13-56
 	android:configChanges
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:53:13-142
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:52:13-142
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:52:13-57
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:51:13-57
 activity#com.ekc.ekctracking.view.activities.mainActivity.MainActivity
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:56:9-63:20
-	android:screenOrientation
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:60:13-49
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:55:9-61:20
 	android:label
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:59:13-45
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:58:13-45
 	android:configChanges
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:58:13-142
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:57:13-142
 	android:theme
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:61:13-56
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:59:13-56
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:57:13-70
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:56:13-70
 uses-sdk
 INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml

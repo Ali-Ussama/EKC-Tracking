@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -51,22 +53,22 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 
     DrawerLayout drawer;
 
+    private FragmentManager fragmentManager;
+
     private HomeActivityCallback callback;
 
     private HomeFragPresenter mHomeFragPresenter;
 
 
     private HomeFragment mHomeFragment;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         try {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-//                getWindow().setExitTransition(new Explode());
-//            }
+
             setContentView(R.layout.activity_main);
 
             init();
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     private void initHomeFragmentViewModel() {
         try {
 
-            mHomeFragment = HomeFragment.newInstance(mCurrent,this);
+            mHomeFragment = HomeFragment.newInstance(mCurrent, this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,7 +221,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
         if (item.getItemId() == R.id.nav_log_out) {
             logout();
             return false;
-        }
+        } /*else if (item.getItemId() == R.id.nav_home) {
+            addFragment(mHomeFragment);
+        }*/
         return true;
+    }
+
+    private void addFragment(Fragment fragment) {
+        try {
+//            if (currentFragment != null) {
+//                fragmentManager = getSupportFragmentManager();
+//                fragmentManager.beginTransaction().replace(fragment,);
+//            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

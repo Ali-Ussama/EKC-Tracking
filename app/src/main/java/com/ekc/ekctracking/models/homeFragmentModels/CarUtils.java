@@ -6,17 +6,17 @@ import android.util.Log;
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.api_network.ApiClient;
 import com.ekc.ekctracking.configs.PrefManager;
+import com.ekc.ekctracking.models.findTrip.FindTrip;
+import com.ekc.ekctracking.models.findTrip.FindTripRequest;
+import com.ekc.ekctracking.models.hereMapRoutModel.HRoute;
+import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
+import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
 import com.ekc.ekctracking.models.pojo.CarGroupStatus;
 import com.ekc.ekctracking.models.pojo.CarStatus;
 import com.ekc.ekctracking.models.pojo.LoginModel;
 import com.ekc.ekctracking.models.pojo.OnGoingRequest;
 import com.ekc.ekctracking.models.pojo.StatusRoot;
 import com.ekc.ekctracking.models.pojo.User;
-import com.ekc.ekctracking.models.findTrip.FindTrip;
-import com.ekc.ekctracking.models.findTrip.FindTripRequest;
-import com.ekc.ekctracking.models.hereMapRoutModel.HRoute;
-import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
-import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
 import com.esri.arcgisruntime.geometry.GeometryEngine;
 import com.esri.arcgisruntime.geometry.Point;
 import com.esri.arcgisruntime.geometry.PointCollection;
@@ -71,7 +71,7 @@ public class CarUtils {
     public CarStatus getCar(ArrayList<CarStatus> cars, String filter) {
 
         for (CarStatus car : cars) {
-            String carNo = car.getCarNo().toLowerCase().split("(car no:)")[1];
+            String carNo = car.getCarNo();
             if (car.getGPSUnitNumber().equals(filter) || carNo.contains(filter)) {
                 return car;
             }
@@ -423,6 +423,7 @@ public class CarUtils {
 
                                             Log.i(TAG, "requestOnGoingCarsStatus: address = " + reArrangeAddress(car.getAddress()));
                                             car.setAddress(reArrangeAddress(car.getAddress()));
+                                            car.setCarNo(getCarNo(car.getCarNo()));
                                         }
                                     }
 
@@ -449,6 +450,59 @@ public class CarUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String getCarNo(String carNo) {
+        String result = "";
+        try {
+
+            result = carNo.substring(7);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars) {
+        for (CarStatus newCar : newCars) {
+            for (CarStatus oldCar : oldCars) {
+                if (newCar.getCarNo().equals(oldCar.getCarNo())) {
+                    double angle = getAngle(oldCar.getLatitude(), oldCar.getLongitude(), newCar.getLatitude(), newCar.getLongitude());
+                    Log.d(TAG, "calcAngle: carNo = " + newCar.getCarNo() + " angle = " + angle);
+                    if (angle == 0 && oldCar.getAngle() != 0) {
+                        newCar.setAngle(oldCar.getAngle());
+                    } else {
+                        newCar.setAngle(angle);
+                    }
+                    break;
+                }
+            }
+        }
+
+        return newCars;
+    }
+
+    private double getAngle(double lat1, double long1, double lat2, double long2) {
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+
+        long1 = Math.toRadians(long1);
+        long2 = Math.toRadians(long2);
+
+        double dLon = (long2 - long1);
+
+        double y = Math.sin(dLon) * Math.cos(lat2);
+        double x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+
+        double angle = (float) Math.atan2(y, x);
+
+        angle = (float) Math.toDegrees(angle);
+//        angle = (angle + 360) % 360;
+        angle = (angle + 360) % 360;
+//        angle -= 90;
+        return angle;
+
     }
 
 }

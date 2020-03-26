@@ -46,10 +46,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/menu_home"
-                        android:textSize="@dimen/_12ssp"
                         android:gravity="center"
-                        android:textColor="@color/white"/>
+                        android:text="@string/menu_home"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp" />
 
                     <com.miguelcatalan.materialsearchview.MaterialSearchView
                         android:id="@+id/search_view"
@@ -67,6 +67,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <include layout="@layout/frag_home_cars_list_layout" />
 
             <include
                 layout="@layout/home_bottom_sheet_2"

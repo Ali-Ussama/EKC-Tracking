@@ -24,6 +24,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_moving_report_white_24dp.xml"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_how_car_list_custom_bg.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\how_car_list_custom_bg.xml"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_visibility_white_48dp.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_visibility_white_48dp.xml"
     },
@@ -78,6 +82,10 @@
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_ic_blue.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\rounded_ic_blue.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_ic_menu_slideshow.xml.flat",
@@ -200,12 +208,12 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_time_range_picker.xml.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\time_range_picker.xml"
-    },
-    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_custom_car_details_btn_background.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\custom_car_details_btn_background.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_time_range_picker.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\time_range_picker.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_chevron_left_black_24dp.xml.flat",
@@ -296,6 +304,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_frag_home_cars_list_layout.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\frag_home_cars_list_layout.xml"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\transition_explode.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\transition\\explode.xml"
     },
@@ -312,8 +324,8 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_car_test_3.png"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_city_skyline_vector_01.xml.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_city_skyline_vector_01.xml"
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_cars_list_rec_row_item.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\cars_list_rec_row_item.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_ic_menu_camera.xml.flat",
@@ -334,6 +346,10 @@
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_home_bottom_sheet_2.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\home_bottom_sheet_2.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_blue.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\blue.png"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_moving_report.xml.flat",
@@ -376,6 +392,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_jeep_img.png"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_directions_car_white_24dp.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_directions_car_white_24dp.xml"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
@@ -386,10 +406,6 @@
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\xml_google_maps_api.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\xml\\google_maps_api.xml"
-    },
-    {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_jeep.xml.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_jeep.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_date_range_picker.xml.flat",

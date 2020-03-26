@@ -1,6 +1,8 @@
 package com.ekc.ekctracking.view.activities.login;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +16,8 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.configs.AppUtils;
@@ -82,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (!presenter.loggedInBefore()) {
                         mInputsContainers.setVisibility(View.VISIBLE);
                         loginBtn.setVisibility(View.VISIBLE);
+                        checkPermissions();
                     } else {
                         onLogin(true, null);
                     }
@@ -91,6 +96,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
 
+    }
+
+    private void checkPermissions() {
+        try {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(mCurrent, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -126,12 +144,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mProgressBar.setVisibility(View.GONE);
         if (status) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-//            }else{
             startActivity(intent);
-//            }
-
+            finish();
         } else {
             if (t != null) {
                 t.printStackTrace();

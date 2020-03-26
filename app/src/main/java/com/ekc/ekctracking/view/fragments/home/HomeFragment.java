@@ -16,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +32,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.archit.calendardaterangepicker.customviews.DateRangeCalendarView;
@@ -43,13 +47,12 @@ import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
 import com.ekc.ekctracking.models.pojo.CarGroupStatus;
 import com.ekc.ekctracking.models.pojo.CarStatus;
-import com.ekc.ekctracking.models.pojo.HomeOptionsModel;
 import com.ekc.ekctracking.models.pojo.StatusRoot;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivityViewListener;
 import com.ekc.ekctracking.view.activities.mainActivity.MapSingleTapListener;
 import com.ekc.ekctracking.view.activities.mainActivity.SingleTapListener;
-import com.ekc.ekctracking.view.adapters.HomeOptionsAdapter;
+import com.ekc.ekctracking.view.adapters.CarsListAdapter;
 import com.ekc.ekctracking.view.fragments.home.callbacks.HomeViewCallback;
 import com.esri.arcgisruntime.data.ServiceFeatureTable;
 import com.esri.arcgisruntime.geometry.GeometryEngine;
@@ -161,15 +164,22 @@ public class HomeFragment extends Fragment implements
 
     @BindView(R.id.home_bottom_sheet_car_details_period_report_container)
     ConstraintLayout mMovingReportBottomSheetAction;
+//
+//    @BindView(R.id.home_bottom_sheet_car_details_find_trip_report_container)
+//    ConstraintLayout mFindTripReportBottomSheetAction;
+//
+//    @BindView(R.id.home_bottom_sheet_car_details_speed_report_container)
+//    ConstraintLayout mSpeedReportBottomSheetAction;
+//
+//    @BindView(R.id.home_bottom_sheet_car_details_distance_report_container)
+//    ConstraintLayout mDistanceReportBottomSheetAction;
 
-    @BindView(R.id.home_bottom_sheet_car_details_find_trip_report_container)
-    ConstraintLayout mFindTripReportBottomSheetAction;
+    //Cars List
+    @BindView(R.id.home_cars_list_container)
+    ConstraintLayout mHomeCarsListContainer;
 
-    @BindView(R.id.home_bottom_sheet_car_details_speed_report_container)
-    ConstraintLayout mSpeedReportBottomSheetAction;
-
-    @BindView(R.id.home_bottom_sheet_car_details_distance_report_container)
-    ConstraintLayout mDistanceReportBottomSheetAction;
+    @BindView(R.id.home_cars_list)
+    RecyclerView mHomeCarsListRV;
 
     // Moving Report Filter
     @BindView(R.id.moving_report_filter_car_no_tv)
@@ -205,8 +215,8 @@ public class HomeFragment extends Fragment implements
     BottomSheetBehavior sheetBehavior;
 
     ServiceFeatureTable featureTable;
-    private HomeOptionsAdapter mHomeOptionsAdapter;
-    private ArrayList<HomeOptionsModel> mHomeOptionsData;
+    private CarsListAdapter mCarsListAdapter;
+    private ArrayList<CarStatus> carsListData;
 
     private HomeFragPresenter presenter;
     private static final int ACCESS_LOCATION = 1;
@@ -221,7 +231,7 @@ public class HomeFragment extends Fragment implements
     private ArrayList<MarkerOptions> markerOptions;
     private ArcGISMap baseMap;
     private GraphicsOverlay graphicsOverlay, drawGraphicLayer;
-    private PictureMarkerSymbol pictureMarkerSymbol, greenMarker, redMarker, yellowMarker, startBannerMarker, endBannerMarker;
+    private PictureMarkerSymbol pictureMarkerSymbol, greenMarker, redMarker, yellowMarker, blueMarker, startBannerMarker, endBannerMarker;
     private Point mCurrentLocation;
     private SpatialReference spatialReference;
 
@@ -236,8 +246,7 @@ public class HomeFragment extends Fragment implements
 
     private static MainActivityViewListener mActivityListener;
 
-    private final int homeOptionPeekHeight = 90;
-    private final int carDetailsPeekHeight = 110;
+    private final int carDetailsPeekHeight = 130;
 
     private boolean queryStatus = false;
     private Portal portal;
@@ -290,6 +299,91 @@ public class HomeFragment extends Fragment implements
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_cars_menu) {
+            handleCarList();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void handleCarList() {
+        try {
+            if (mHomeCarsListContainer.getVisibility() == View.GONE) {
+                displayCarsList();
+            } else if (mHomeCarsListContainer.getVisibility() == View.VISIBLE) {
+                hideCarsList();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayCarsList() {
+        try {
+            if (mHomeCarsListContainer.getVisibility() == View.GONE) {
+                mHomeCarsListContainer.setVisibility(View.VISIBLE);
+
+                Animation anim = new ScaleAnimation(
+                        0.5f, 1f, // Start and end values for the X axis scaling
+                        0f, 1f, // Start and end values for the Y axis scaling
+                        Animation.RELATIVE_TO_SELF, 1f, // Pivot point of X scaling
+                        Animation.RELATIVE_TO_SELF, 0f); // Pivot point of Y scaling
+                anim.setFillAfter(true); // Needed to keep the result of the animation
+                anim.setDuration(400);
+                anim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Log.d(TAG, "onAnimationEnd: is called");
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                mHomeCarsListContainer.startAnimation(anim);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void hideCarsList() {
+        if (mHomeCarsListContainer.getVisibility() == View.VISIBLE) {
+            Animation anim = new ScaleAnimation(
+                    1f, 0.5f, // Start and end values for the X axis scaling
+                    1f, 0f, // Start and end values for the Y axis scaling
+                    Animation.RELATIVE_TO_SELF, 1f, // Pivot point of X scaling
+                    Animation.RELATIVE_TO_SELF, 0f); // Pivot point of Y scaling
+            anim.setDuration(300);
+            anim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    Log.d(TAG, "onAnimationEnd: is called");
+                    mHomeCarsListContainer.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            mHomeCarsListContainer.startAnimation(anim);
+        }
+    }
+
     private void init() {
         try {
             searchView.setVisibility(View.VISIBLE);
@@ -310,11 +404,28 @@ public class HomeFragment extends Fragment implements
             presenter.requestOnGoingCarsStatus();
 
             displayHomeLayout();
+
+            initCarsList();
+
             initBottomSheet();
 
             initMap();
 
             initActions();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initCarsList() {
+        try {
+            Log.d(TAG, "initCarsList: is called");
+            cars = new ArrayList<>();
+            mCarsListAdapter = new CarsListAdapter(cars, mCurrent, this);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mCurrent);
+            mHomeCarsListRV.setLayoutManager(layoutManager);
+            mHomeCarsListRV.setAdapter(mCarsListAdapter);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -332,9 +443,9 @@ public class HomeFragment extends Fragment implements
             mLocationFab.setOnClickListener(this);
 
             mMovingReportBottomSheetAction.setOnClickListener(this);
-            mFindTripReportBottomSheetAction.setOnClickListener(this);
-            mSpeedReportBottomSheetAction.setOnClickListener(this);
-            mDistanceReportBottomSheetAction.setOnClickListener(this);
+//            mFindTripReportBottomSheetAction.setOnClickListener(this);
+//            mSpeedReportBottomSheetAction.setOnClickListener(this);
+//            mDistanceReportBottomSheetAction.setOnClickListener(this);
 
             mNavDrawerIc.setOnClickListener(this);
             searchView.setOnQueryTextListener(this);
@@ -388,7 +499,7 @@ public class HomeFragment extends Fragment implements
                 public void onStateChanged(@NonNull View bottomSheet, int newState) {
                     if (newState == STATE_HIDDEN) {
                         sheetBehavior.setState(STATE_COLLAPSED);
-                    } else if (newState == STATE_EXPANDED || newState == STATE_HALF_EXPANDED && mBottomSheetViewAnimator.getDisplayedChild() == 1) {
+                    } else if ((newState == STATE_EXPANDED || newState == STATE_HALF_EXPANDED) && mBottomSheetViewAnimator.getDisplayedChild() == 1) {
                         sheetBehavior.setState(STATE_EXPANDED);
                     }
                 }
@@ -427,6 +538,8 @@ public class HomeFragment extends Fragment implements
             greenMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.green));
             redMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.reed));
             yellowMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.yellow));
+            blueMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.blue));
+
 
             startBannerMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.ic_start_marker_green));
             endBannerMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.ic_start_marker_red));
@@ -551,15 +664,24 @@ public class HomeFragment extends Fragment implements
 
     private void displayCarsOnMap(StatusRoot statusRoot) {
         try {
+            if (cars != null && !cars.isEmpty()) {
+                for (CarGroupStatus carGroupStatus : statusRoot.getRoot().getCarGroupStatus()) {
+                    carGroupStatus.setCars(presenter.calcAngle(carGroupStatus.getCars(), cars));
+                }
+            }
+
             cars = new ArrayList<>();
             graphicsOverlay.clearSelection();
             graphicsOverlay.getGraphics().clear();
             carsPoints = new ArrayList<>();
             markerOptions = new ArrayList<>();
             Log.i(TAG, "onOnGoingStatus: " + mapView.getSpatialReference().getWkid());
+
+
             for (CarGroupStatus carGroupStatus : statusRoot.getRoot().getCarGroupStatus()) {
 
                 Log.i(TAG, "onOnGoingStatus(): Client Name = " + carGroupStatus.getClientName());
+
                 for (CarStatus car : carGroupStatus.getCars()) {
 
                     if (car != null) {
@@ -569,25 +691,47 @@ public class HomeFragment extends Fragment implements
                         Graphic carGraphic = null;
 
                         if (car.getStatus().equals("Moving")) {
+                            greenMarker = null;
+                            greenMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.green));
+                            greenMarker.setWidth(18f);
+                            greenMarker.setHeight(36f);
+                            greenMarker.setAngle((float) car.getAngle());
                             carGraphic = new Graphic(point, greenMarker);
                         } else if (car.getStatus().equals("Stopped")) {
+                            redMarker = null;
+                            redMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.reed));
+                            redMarker.setWidth(18f);
+                            redMarker.setHeight(36f);
+                            redMarker.setAngle((float) car.getAngle());
                             carGraphic = new Graphic(point, redMarker);
-                        } else if (car.getStatus().equals("Disconnected") || car.getStatus().equals("Disabled")) {
+                        } else if (car.getStatus().equals("Disconnected")) {
+                            yellowMarker = null;
+                            yellowMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.yellow));
+                            yellowMarker.setWidth(18f);
+                            yellowMarker.setHeight(36f);
+                            yellowMarker.setAngle((float) car.getAngle());
                             carGraphic = new Graphic(point, yellowMarker);
+                        } else if (car.getStatus().equals("Disabled")) {
+                            blueMarker = null;
+                            blueMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.blue));
+                            blueMarker.setWidth(18f);
+                            blueMarker.setHeight(36f);
+                            blueMarker.setAngle((float) car.getAngle());
+                            carGraphic = new Graphic(point, blueMarker);
                         }
 
                         if (drawGraphicLayer != null && drawGraphicLayer.getGraphics() != null && drawGraphicLayer.getGraphics().isEmpty()) {
-                            pictureMarkerSymbol.setAngle(90f);
+
                             graphicsOverlay.getGraphics().add(carGraphic);
                         }
-                        //                        ListenableList<Graphic> iterable = graphicsOverlay.getGraphics();
 
-                        //                        graphicsOverlay.selectGraphics(iterable);
                         carsPoints.add(point);
 
                     }
                 }
             }
+
+            mCarsListAdapter.onDataChanged(cars);
 
             Log.i(TAG, "onOnGoingStatus: cars size = " + cars.size());
 
@@ -598,7 +742,7 @@ public class HomeFragment extends Fragment implements
                 //                    query_suggestions[i] = cars.get(i).getGPSUnitNumber();
                 //                }
                 if (cars.get(i).getCarNo() != null) {
-                    String carNo = cars.get(i).getCarNo().toLowerCase().split("(car no:)")[1];
+                    String carNo = cars.get(i).getCarNo();
                     carNo = getCarNoWithoutText(carNo);
                     Log.i(TAG, "onOnGoingStatus: Car No = " + carNo.trim());
                     query_suggestions[(i)] = carNo.trim();
@@ -629,8 +773,9 @@ public class HomeFragment extends Fragment implements
 
     @Override
     public void onSingleTap(Point point) {
-
-        if (!queryStatus && drawGraphicLayer != null && drawGraphicLayer.getGraphics() != null && drawGraphicLayer.getGraphics().isEmpty()) {
+        if (mHomeCarsListContainer.getVisibility() == View.VISIBLE) {
+            hideCarsList();
+        } else if (!queryStatus && drawGraphicLayer != null && drawGraphicLayer.getGraphics() != null && drawGraphicLayer.getGraphics().isEmpty()) {
             if (sheetBehavior.getState() != STATE_HIDDEN) {
                 hideCarDetailsBottomSheet();
             }
@@ -647,6 +792,7 @@ public class HomeFragment extends Fragment implements
             Point foundedPoint = null;
             CarStatus foundedCar = null;
             double shortestDistance = 1000000000;
+
             for (Point carsPoint : carsPoints) {
                 double distance = getDistance(carsPoint, point);
 
@@ -657,28 +803,30 @@ public class HomeFragment extends Fragment implements
                 }
             }
 
-            if (cars != null && !cars.isEmpty()) {
-                Log.i(TAG, "selectCar: cars size = " + cars.size());
-                for (CarStatus car : cars) {
-                    Point mProjectCarPoint = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
-                    Log.i(TAG, "selectCar: mProjectCarPoint X = " + mProjectCarPoint.getX() + " Y = " + mProjectCarPoint.getY());
+            if (shortestDistance <= 1000) {
+                if (cars != null && !cars.isEmpty()) {
+                    Log.i(TAG, "selectCar: cars size = " + cars.size());
+                    for (CarStatus car : cars) {
+                        Point mProjectCarPoint = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
+                        Log.i(TAG, "selectCar: mProjectCarPoint X = " + mProjectCarPoint.getX() + " Y = " + mProjectCarPoint.getY());
 
-                    if (mProjectCarPoint.getX() == foundedPoint.getX() && mProjectCarPoint.getY() == foundedPoint.getY()) {
-                        foundedCar = car;
-                        Log.i(TAG, "selectCar: car founded with id = " + foundedCar.getCarID() + " car No = " + car.getCarNo());
-                        break;
+                        if (mProjectCarPoint.getX() == foundedPoint.getX() && mProjectCarPoint.getY() == foundedPoint.getY()) {
+                            foundedCar = car;
+                            Log.i(TAG, "selectCar: car founded with id = " + foundedCar.getCarID() + " car No = " + car.getCarNo());
+                            break;
+                        }
                     }
+                } else {
+                    Log.i(TAG, "selectCar: cars = null");
                 }
-            } else {
-                Log.i(TAG, "selectCar: cars = null");
-            }
 
-            if (foundedCar != null) {
-                Log.i(TAG, "selectCar: car is founded");
-                zoomToPoint(foundedPoint);
-                displayBottomSheet(foundedCar);
-            } else {
-                Log.i(TAG, "selectCar: car not founded");
+                if (foundedCar != null) {
+                    Log.i(TAG, "selectCar: car is founded");
+                    zoomToPoint(foundedPoint);
+                    displayBottomSheet(foundedCar);
+                } else {
+                    Log.i(TAG, "selectCar: car not founded");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -697,10 +845,11 @@ public class HomeFragment extends Fragment implements
 
     private void displayBottomSheet(CarStatus foundedCar) {
         try {
+            hideCarsList();
             selectedCar = foundedCar;
 
             mCarDetailsContainer.setVisibility(View.VISIBLE);
-            mBottomSheetLayout.setBackgroundColor(mCurrent.getResources().getColor(R.color.white));
+            mBottomSheetLayout.setBackgroundColor(mCurrent.getResources().getColor(R.color.transparent));
             mBottomSheetViewAnimator.setDisplayedChild(0);
             sheetBehavior.setPeekHeight(carDetailsPeekHeight, true);
 
@@ -709,8 +858,9 @@ public class HomeFragment extends Fragment implements
 
             sheetBehavior.setState(STATE_HALF_EXPANDED);
             sheetBehavior.setPeekHeight(carDetailsPeekHeight, true);
+            mBottomSheetCollapseExpandIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_white_24dp);
 
-            String carNo = getCarNo(foundedCar.getCarNo());
+            String carNo = foundedCar.getCarNo();
             String date = foundedCar.getDate();
             String time = foundedCar.getTime();
             String address = foundedCar.getAddress();
@@ -745,7 +895,7 @@ public class HomeFragment extends Fragment implements
             carDetailsToolbar.setBackgroundResource(R.color.color_orange_light);
             mBottomSheetCarDetailsTitleTV.setText(getString(R.string.disconnected));
         } else {
-            carDetailsToolbar.setBackgroundResource(R.color.color_orange_light);
+            carDetailsToolbar.setBackgroundResource(R.color.blue);
             mBottomSheetCarDetailsTitleTV.setText(getString(R.string.disabled));
         }
 
@@ -858,12 +1008,12 @@ public class HomeFragment extends Fragment implements
                 drawGraphicLayer.getGraphics().clear();
                 displayCarsOnMap(mStatusRoot);
             }
-            if (sheetBehavior != null) {
-                sheetBehavior.setState(STATE_COLLAPSED);
-                mBottomSheetLayout.setBackgroundColor(mCurrent.getResources().getColor(R.color.transparent));
-                sheetBehavior.setPeekHeight(homeOptionPeekHeight, true);
-                mBottomSheetViewAnimator.setDisplayedChild(1);
-            }
+//            if (sheetBehavior != null) {
+//                sheetBehavior.setState(STATE_COLLAPSED);
+//                mBottomSheetLayout.setBackgroundColor(mCurrent.getResources().getColor(R.color.transparent));
+//                sheetBehavior.setPeekHeight(homeOptionPeekHeight, true);
+//                mBottomSheetViewAnimator.setDisplayedChild(1);
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1230,6 +1380,31 @@ public class HomeFragment extends Fragment implements
         }
     }
 
+    @Override
+    public void onCarSelected(CarStatus car) {
+        try {
+            if (cars != null && !cars.isEmpty()) {
+                Point foundedCar = null;
+                Log.i(TAG, "selectCar: cars size = " + cars.size());
+                Point mProjectCarPoint = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
+
+                for (Point carPoint : carsPoints) {
+                    Log.i(TAG, "selectCar: mProjectCarPoint X = " + mProjectCarPoint.getX() + " Y = " + mProjectCarPoint.getY());
+
+                    if (mProjectCarPoint.getX() == carPoint.getX() && mProjectCarPoint.getY() == carPoint.getY()) {
+                        foundedCar = carPoint;
+                        Log.i(TAG, "selectCar: car founded with id = " + car.getCarID() + " car No = " + car.getCarNo());
+                        zoomToPoint(foundedCar);
+                        displayBottomSheet(car);
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * ---------------------------------Search Listeners--------------------------------------
      */
@@ -1259,59 +1434,72 @@ public class HomeFragment extends Fragment implements
      */
     @Override
     public void mapScaleChanged(MapScaleChangedEvent mapScaleChangedEvent) {
-        if (drawGraphicLayer.getGraphics() == null || drawGraphicLayer.getGraphics().size() == 0) {
-            if (mapScaleChangedEvent.getSource().getMapScale() >= 94249 && cars != null) {
-                Log.i(TAG, "mapScaleChanged: Zooming Out");
-                graphicsOverlay.clearSelection();
-                graphicsOverlay.getGraphics().clear();
-
-
-                for (CarStatus car : cars) {
-
-                    Point point = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
-                    Graphic carGraphic = null;
-
-                    if (car.getStatus().equals("Moving")) {
-                        greenMarker.setWidth(18f);
-                        greenMarker.setHeight(36f);
-                        carGraphic = new Graphic(point, greenMarker);
-                    } else if (car.getStatus().equals("Stopped")) {
-                        redMarker.setWidth(18f);
-                        redMarker.setHeight(36f);
-                        carGraphic = new Graphic(point, redMarker);
-                    } else if (car.getStatus().equals("Disconnected") || car.getStatus().equals("Disabled")) {
-                        yellowMarker.setWidth(18f);
-                        yellowMarker.setHeight(36f);
-                        carGraphic = new Graphic(point, yellowMarker);
-                    }
-                    graphicsOverlay.getGraphics().add(carGraphic);
-                }
-            } else if (mapScaleChangedEvent.getSource().getMapScale() < 94249 && cars != null) {
-                Log.i(TAG, "mapScaleChanged: Zooming In");
-                graphicsOverlay.clearSelection();
-                graphicsOverlay.getGraphics().clear();
-
-                for (CarStatus car : cars) {
-
-                    Point point = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
-                    Graphic carGraphic = null;
-
-                    if (car.getStatus().equals("Moving")) {
-                        greenMarker.setWidth(32f);
-                        greenMarker.setHeight(64f);
-                        carGraphic = new Graphic(point, greenMarker);
-                    } else if (car.getStatus().equals("Stopped")) {
-                        redMarker.setWidth(32f);
-                        redMarker.setHeight(64f);
-                        carGraphic = new Graphic(point, redMarker);
-                    } else if (car.getStatus().equals("Disconnected") || car.getStatus().equals("Disabled")) {
-                        yellowMarker.setWidth(32f);
-                        yellowMarker.setHeight(64f);
-                        carGraphic = new Graphic(point, yellowMarker);
-                    }
-                    graphicsOverlay.getGraphics().add(carGraphic);
-                }
-            }
-        }
+//        if (drawGraphicLayer.getGraphics() == null || drawGraphicLayer.getGraphics().size() == 0) {
+//            if (mapScaleChangedEvent.getSource().getMapScale() >= 94249 && cars != null) {
+//                Log.i(TAG, "mapScaleChanged: Zooming Out");
+//                graphicsOverlay.clearSelection();
+//                graphicsOverlay.getGraphics().clear();
+//
+//
+//                for (CarStatus car : cars) {
+//
+//                    Point point = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
+//                    Graphic carGraphic = null;
+//
+//
+//                    if (car.getStatus().equals("Moving")) {
+//                        greenMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.green));
+//                        greenMarker.setWidth(18f);
+//                        greenMarker.setHeight(36f);
+//                        greenMarker.setAngle((float) car.getAngle());
+//                        carGraphic = new Graphic(point, greenMarker);
+//                    } else if (car.getStatus().equals("Stopped")) {
+//                        redMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.reed));
+//                        redMarker.setWidth(18f);
+//                        redMarker.setHeight(36f);
+//                        redMarker.setAngle((float) car.getAngle());
+//                        carGraphic = new Graphic(point, redMarker);
+//                    } else if (car.getStatus().equals("Disconnected")) {
+//                        yellowMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.yellow));
+//                        yellowMarker.setWidth(18f);
+//                        yellowMarker.setHeight(36f);
+//                        yellowMarker.setAngle((float) car.getAngle());
+//                        carGraphic = new Graphic(point, yellowMarker);
+//                    }else if (car.getStatus().equals("Disabled")) {
+//                        blueMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.blue));
+//                        blueMarker.setWidth(18f);
+//                        blueMarker.setHeight(36f);
+//                        blueMarker.setAngle((float) car.getAngle());
+//                        carGraphic = new Graphic(point, blueMarker);
+//                    }
+//                    graphicsOverlay.getGraphics().add(carGraphic);
+//                }
+//            } else if (mapScaleChangedEvent.getSource().getMapScale() < 94249 && cars != null) {
+//                Log.i(TAG, "mapScaleChanged: Zooming In");
+//                graphicsOverlay.clearSelection();
+//                graphicsOverlay.getGraphics().clear();
+//
+//                for (CarStatus car : cars) {
+//
+//                    Point point = (Point) GeometryEngine.project(new Point(car.getLongitude(), car.getLatitude(), spatialReference), mapView.getSpatialReference());
+//                    Graphic carGraphic = null;
+//
+//                    if (car.getStatus().equals("Moving")) {
+//                        greenMarker.setWidth(32f);
+//                        greenMarker.setHeight(64f);
+//                        carGraphic = new Graphic(point, greenMarker);
+//                    } else if (car.getStatus().equals("Stopped")) {
+//                        redMarker.setWidth(32f);
+//                        redMarker.setHeight(64f);
+//                        carGraphic = new Graphic(point, redMarker);
+//                    } else if (car.getStatus().equals("Disconnected") || car.getStatus().equals("Disabled")) {
+//                        yellowMarker.setWidth(32f);
+//                        yellowMarker.setHeight(64f);
+//                        carGraphic = new Graphic(point, yellowMarker);
+//                    }
+//                    graphicsOverlay.getGraphics().add(carGraphic);
+//                }
+//            }
+//        }
     }
 }

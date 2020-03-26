@@ -3,9 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_cars_menu"
+        android:icon="@drawable/ic_directions_car_white_24dp"
+        android:orderInCategory="99"
+        android:title="@string/cars_list"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_action_action_search"
         android:orderInCategory="100"
         android:title="@string/abc_search_hint"
         app:showAsAction="always" />
+
+
 </menu>

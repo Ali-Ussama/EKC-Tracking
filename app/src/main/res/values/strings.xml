@@ -39,8 +39,14 @@
 
     <string name="stopped">السيارة متوقفة</string>
     <string name="moving">السيارة تتحرك</string>
-    <string name="disconnected">السيارة لا ترسل احداثيات</string>
-    <string name="disabled">السيارة مفصولة</string>
+    <string name="disconnected">السيارة مفصولة</string>
+    <string name="disabled">السيارة غير مستخدمة</string>
+
+    <string name="stopped_short">متوقفة</string>
+    <string name="moving_short">تتحرك</string>
+    <string name="disconnected_short">مفصولة</string>
+    <string name="disabled_short">غير مستخدمة</string>
+
     <string name="required">مطلوب</string>
     <string name="moving_report">تقرير تحركات السيارة</string>
     <string name="find_trip_report">تقرير تتبع الرحلة</string>
@@ -61,4 +67,11 @@
     <string name="please_enter_time_range">من فضلك اختر الوقت</string>
     <string name="no_history_found">عذرا، لا يوجد سجل لهذه السيارة خلال هذه الفترة</string>
     <string name="loading">Loading…</string>
+    <string name="dash">-</string>
+    <string name="moving_english">Moving</string>
+    <string name="stopped_english">Stopped</string>
+    <string name="disconnected_english">Disconnected</string>
+    <string name="disabled_english">Disabled</string>
+    <string name="cars_list">قائمة السيارات</string>
+    <string name="car_report">تقرير السيارة</string>
 </resources>

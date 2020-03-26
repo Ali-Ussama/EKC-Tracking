@@ -121,6 +121,10 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
         }
     }
 
+    ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars) {
+        return carUtils.calcAngle(newCars, oldCars);
+    }
+
     @Override
     public void onOnGoingStatus(StatusRoot statusRoot) {
         try {
