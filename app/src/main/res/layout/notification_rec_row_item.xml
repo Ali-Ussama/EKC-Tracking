@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_4sdp"
+    android:elevation="@dimen/_4sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp">
+
+        <ImageView
+            android:id="@+id/notification_row_item_car_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_directions_car_grey_24dp" />
+
+        <TextView
+            android:id="@+id/notification_row_item_car_no_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="1234 ا ب ط"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/notification_row_item_car_ic"
+            app:layout_constraintEnd_toStartOf="@id/notification_row_item_car_ic"
+            app:layout_constraintTop_toTopOf="@id/notification_row_item_car_ic" />
+
+        <ImageView
+            android:id="@+id/notification_row_item_date_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_car_ic"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_car_ic"
+            app:srcCompat="@drawable/ic_date_range_grey_24dp" />
+
+        <TextView
+            android:id="@+id/notification_row_item_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="29/3/2020"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_row_item_date_ic"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_car_no_tv"
+            app:layout_constraintTop_toTopOf="@+id/notification_row_item_date_ic" />
+
+
+        <ImageView
+            android:id="@+id/notification_row_item_time_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_car_ic"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_date_ic"
+            app:srcCompat="@drawable/ic_timer_grey_24dp" />
+
+        <TextView
+            android:id="@+id/notification_row_item_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="10:40:15 PM  - "
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_row_item_date_tv"
+            app:layout_constraintEnd_toStartOf="@+id/notification_row_item_date_tv"
+            app:layout_constraintTop_toTopOf="@+id/notification_row_item_date_tv" />
+
+        <ImageView
+            android:id="@+id/notification_row_item_status_ic"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_time_ic"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_time_ic"
+            app:srcCompat="@drawable/rounded_ic_yellow" />
+
+        <TextView
+            android:id="@+id/notification_row_item_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/stopped"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_row_item_status_ic"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_date_tv"
+            app:layout_constraintTop_toTopOf="@+id/notification_row_item_status_ic" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/notification_row_item_map_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_marker"
+            app:fabSize="mini"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/notification_row_item_car_ic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

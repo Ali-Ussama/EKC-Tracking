@@ -4,17 +4,7 @@
             "outputFile": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\1c8f68650f0ce039330fa16d877ef222\\core-1.1.0\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\14e70ef47830b09942c431e0a4aef7b6\\appcompat-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\73c044751b02c4f9c5d95bbfe697d338\\appcompat-1.1.0\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -30,6 +20,16 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\14fcab764cf1ca4c91ffc3bedb72de35\\core-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
                     }
                 }
             ]

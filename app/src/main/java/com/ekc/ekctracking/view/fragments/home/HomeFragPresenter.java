@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
@@ -12,7 +13,9 @@ import com.ekc.ekctracking.models.homeFragmentModels.CarUtils;
 import com.ekc.ekctracking.models.homeFragmentModels.HomeFragPresenterListener;
 import com.ekc.ekctracking.models.pojo.CarStatus;
 import com.ekc.ekctracking.models.pojo.StatusRoot;
+import com.ekc.ekctracking.models.realmDB.RealmCarStatus;
 import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
+import com.ekc.ekctracking.view.activities.mainActivity.MainActivityViewListener;
 import com.ekc.ekctracking.view.fragments.home.callbacks.HomeActivityCallback;
 import com.ekc.ekctracking.view.fragments.home.callbacks.HomeViewCallback;
 import com.esri.arcgisruntime.geometry.SpatialReference;
@@ -22,20 +25,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+
 public class HomeFragPresenter extends ViewModel implements HomeActivityCallback, HomeFragPresenterListener {
 
     private static final String TAG = "HomeFragPresenter";
     private MainActivity mContext;
     private HomeViewCallback viewListener;
     private CarUtils carUtils;
+    private Realm realm;
+    private MainActivityViewListener activityViewListener;
 
-    HomeFragPresenter(MainActivity context, HomeViewCallback callback) {
+    HomeFragPresenter(MainActivity context, HomeViewCallback callback, Realm realm, MainActivityViewListener activityViewListener) {
         try {
             mContext = context;
             viewListener = callback;
             mContext.setLocationChangeListener(this);
             carUtils = new CarUtils(context, this);
-
+            this.realm = realm;
+            this.activityViewListener = activityViewListener;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,4 +200,36 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
         }
     }
 
+    public void checkCarsStatusChanged(ArrayList<CarStatus> oldCars, ArrayList<CarStatus> newCars) {
+        RealmList<RealmCarStatus> carStatuses = new RealmList<>();
+        for (CarStatus oldCar : oldCars) {
+            for (CarStatus newCar : newCars) {
+                if (oldCar.getCarNo().equals(newCar.getCarNo()) && !newCar.getStatus().equals(oldCar.getStatus()) && newCar.getStatus().equals(mContext.getString(R.string.disconnected_english))) {
+                    RealmCarStatus realmCarStatus = realm.createObject(RealmCarStatus.class);
+
+                    realmCarStatus.setCarID(newCar.getCarID());
+                    realmCarStatus.setCarNo(newCar.getCarNo());
+                    realmCarStatus.setAddress(newCar.getAddress());
+                    realmCarStatus.setDate(newCar.getDate());
+                    realmCarStatus.setTime(newCar.getTime());
+                    realmCarStatus.setGpsUnit(newCar.getGpsUnit());
+                    realmCarStatus.setGPSUnitNumber(newCar.getGPSUnitNumber());
+                    realmCarStatus.setLatitude(newCar.getLatitude());
+                    realmCarStatus.setLongitude(newCar.getLongitude());
+                    realmCarStatus.setSpeed(newCar.getSpeed());
+                    realmCarStatus.setSpeed2(newCar.getSpeed2());
+                    realmCarStatus.setStatus(newCar.getStatus());
+                    realmCarStatus.setDriverName(newCar.getDriverName());
+                    realmCarStatus.setDisable_count(newCar.getDisable_count());
+                    realmCarStatus.setAngle(newCar.getAngle());
+
+                    carStatuses.add(realmCarStatus);
+                }
+            }
+        }
+
+        if (carStatuses.size() > 0) {
+            activityViewListener.onCarStatusChanged(carStatuses);
+        }
+    }
 }

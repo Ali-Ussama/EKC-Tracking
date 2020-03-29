@@ -2,6 +2,7 @@ package com.ekc.ekctracking.view.activities.mainActivity;
 
 import android.content.Intent;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,7 +23,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.configs.AppUtils;
+import com.ekc.ekctracking.models.realmDB.RealmCarStatus;
 import com.ekc.ekctracking.view.activities.login.LoginActivity;
+import com.ekc.ekctracking.view.activities.notification.NotificationActivity;
 import com.ekc.ekctracking.view.fragments.home.HomeFragPresenter;
 import com.ekc.ekctracking.view.fragments.home.HomeFragment;
 import com.ekc.ekctracking.view.fragments.home.callbacks.HomeActivityCallback;
@@ -32,6 +35,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmList;
 
 public class MainActivity extends AppCompatActivity implements MainActivityViewListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -63,6 +68,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     private HomeFragment mHomeFragment;
     private Fragment currentFragment;
 
+    Realm realm;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initRealmInstance();
+    }
+
+    private void initRealmInstance() {
+        try {
+            realm = Realm.getDefaultInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,12 +102,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     private void init() {
         try {
             mCurrent = MainActivity.this;
+            ButterKnife.bind(mCurrent);
 
             presenter = new MainActivityPresenter(mCurrent, this);
 
-            ButterKnife.bind(mCurrent);
-
-//            setSupportActionBar(toolbar);
+            fragmentManager = getSupportFragmentManager();
 
             initNavDrawer();
 
@@ -98,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 
     private void initHomeFragmentViewModel() {
         try {
-
-            mHomeFragment = HomeFragment.newInstance(mCurrent, this);
+            mHomeFragment = HomeFragment.newInstance(mCurrent, realm, this);
+            addFragment(mHomeFragment);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_moving_report, R.id.nav_speed_report)
+                    R.id.nav_home, R.id.nav_notifications, R.id.nav_speed_report)
                     .setDrawerLayout(drawer)
                     .build();
             navigationView.setNavigationItemSelectedListener(this);
@@ -206,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     public void navDrawIconPressed() {
         try {
             if (drawer != null) {
-                drawer.openDrawer(Gravity.START);
+                drawer.openDrawer(Gravity.LEFT);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,24 +236,45 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     }
 
     @Override
+    public void onCarStatusChanged(RealmList<RealmCarStatus> cars) {
+        if (cars.size() > 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+                presenter.pushCarStatusNotification(cars);
+            }
+        }
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.i(TAG, "onNavigationItemSelected: is called");
-        Log.d(TAG, "onNavigationItemSelected: item id = " + item.getItemId() + " - logout = " + R.id.nav_log_out);
+
         if (item.getItemId() == R.id.nav_log_out) {
             logout();
             return false;
-        } /*else if (item.getItemId() == R.id.nav_home) {
+        } else if (item.getItemId() == R.id.nav_home) {
+            Log.d(TAG, "onNavigationItemSelected: nav home is called");
             addFragment(mHomeFragment);
-        }*/
+        } else if (item.getItemId() == R.id.nav_notifications) {
+            openActivity(getString(R.string.menu_notification));
+        }
+        drawer.closeDrawer(Gravity.LEFT, true);
         return true;
+    }
+
+    private void openActivity(String name) {
+        if (name != null && name.equals(getString(R.string.menu_notification))) {
+            startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+        }
     }
 
     private void addFragment(Fragment fragment) {
         try {
-//            if (currentFragment != null) {
-//                fragmentManager = getSupportFragmentManager();
-//                fragmentManager.beginTransaction().replace(fragment,);
-//            }
+            Log.d(TAG, "addFragment: is called");
+
+            if (currentFragment != null && !currentFragment.equals(fragment)) {
+                Log.d(TAG, "addFragment: selected fragment Home");
+                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

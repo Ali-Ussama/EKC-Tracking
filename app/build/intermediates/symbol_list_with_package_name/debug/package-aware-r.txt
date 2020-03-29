@@ -2460,6 +2460,7 @@ drawable ic_launcher_foreground
 drawable ic_left
 drawable ic_left_blue
 drawable ic_left_selector
+drawable ic_map_black_24dp
 drawable ic_marker
 drawable ic_menu_arrow_down_black_24dp
 drawable ic_menu_arrow_up_black_24dp
@@ -2479,6 +2480,7 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_my_location_white_24dp
 drawable ic_near_me_black_24dp
 drawable ic_near_me_white_24dp
+drawable ic_notifications_active_black_24dp
 drawable ic_place_grey_24dp
 drawable ic_power_settings_new_black_24dp
 drawable ic_right
@@ -2898,7 +2900,7 @@ id nav_home_second
 id nav_host_fragment
 id nav_host_fragment_container
 id nav_log_out
-id nav_moving_report
+id nav_notifications
 id nav_second_group
 id nav_speed_report
 id nav_view
@@ -2907,9 +2909,21 @@ id never
 id noScroll
 id none
 id normal
+id notification_activity_progress_bar
+id notification_activity_rec_view
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id notification_row_item_car_ic
+id notification_row_item_car_no_tv
+id notification_row_item_date_ic
+id notification_row_item_date_tv
+id notification_row_item_map_fab
+id notification_row_item_status_ic
+id notification_row_item_status_tv
+id notification_row_item_time_ic
+id notification_row_item_time_tv
+id notification_view_animator
 id off
 id on
 id outline
@@ -3121,6 +3135,7 @@ layout abc_tooltip
 layout activity_login
 layout activity_main
 layout activity_maps
+layout activity_notification
 layout app_bar_main
 layout arcgisruntime_mapview_esribanner_layout
 layout arcgisruntime_sketcheditor_callout_layout
@@ -3223,6 +3238,7 @@ layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
 layout notification_media_cancel_action
+layout notification_rec_row_item
 layout notification_template_big_media
 layout notification_template_big_media_custom
 layout notification_template_big_media_narrow
@@ -5380,6 +5396,7 @@ string md_storage_perm_error
 string menu_distance_report
 string menu_home
 string menu_moving_report
+string menu_notification
 string menu_speed_report
 string moving
 string moving_english
@@ -5432,6 +5449,7 @@ string new_folder
 string next
 string no
 string no_history_found
+string no_notifications_yet
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
@@ -5457,6 +5475,7 @@ string time_rang_to
 string title_activity_maps
 string title_time_picker
 string yes
+style ActionBar
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

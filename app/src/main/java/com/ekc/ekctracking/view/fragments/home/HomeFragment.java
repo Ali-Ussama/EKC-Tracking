@@ -98,6 +98,7 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED;
 import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED;
@@ -238,6 +239,8 @@ public class HomeFragment extends Fragment implements
     private ArrayList<Point> carsPoints;
     MapSingleTapListener mapSingleTapListener;
     private ArrayList<CarStatus> cars;
+    private ArrayList<CarStatus> oldCars;
+
     private StatusRoot mStatusRoot;
     private CarStatus selectedCar;
     private FindTrip findTripResponse;
@@ -254,9 +257,12 @@ public class HomeFragment extends Fragment implements
 
     private Logger logger;
 
-    public static HomeFragment newInstance(MainActivity current, MainActivityViewListener activityListener) {
+    private static Realm mRealm;
+
+    public static HomeFragment newInstance(MainActivity current, Realm realm, MainActivityViewListener activityListener) {
         mCurrent = current;
         mActivityListener = activityListener;
+        mRealm = realm;
         return new HomeFragment();
     }
 
@@ -398,7 +404,7 @@ public class HomeFragment extends Fragment implements
 
             mPrefManager = new PrefManager(mCurrent);
 
-            presenter = new HomeFragPresenter(mCurrent, this);
+            presenter = new HomeFragPresenter(mCurrent, this, mRealm,mActivityListener);
 
             presenter.requestToken();
             presenter.requestOnGoingCarsStatus();
@@ -669,6 +675,8 @@ public class HomeFragment extends Fragment implements
                     carGroupStatus.setCars(presenter.calcAngle(carGroupStatus.getCars(), cars));
                 }
             }
+            oldCars = new ArrayList<>();
+            oldCars.addAll(cars);
 
             cars = new ArrayList<>();
             graphicsOverlay.clearSelection();
@@ -750,10 +758,18 @@ public class HomeFragment extends Fragment implements
             }
             searchView.setSuggestionIcon(mCurrent.getResources().getDrawable(R.drawable.ic_directions_car_grey_24dp));
             searchView.setSuggestions(query_suggestions);
+
+            if (oldCars != null && !oldCars.isEmpty()) {
+                checkCarsStatusChanged(oldCars, cars);
+            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void checkCarsStatusChanged(ArrayList<CarStatus> oldCars, ArrayList<CarStatus> newCars) {
+        presenter.checkCarsStatusChanged(oldCars, newCars);
     }
 
     private String getCarNoWithoutText(String carNo) {

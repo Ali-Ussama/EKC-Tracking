@@ -4,7 +4,7 @@
             "outputFile": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\00fab61a2e0d245cba0bd482be7b28c1\\material-1.1.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\4933c5a9c5e6f2fe1bfe290204b4a398\\material-1.1.0\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\d9c93c472d6e290f69c846196d024510\\jetified-commons-0.9.6.0\\res\\values-large-v4\\values-large-v4.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "58",
-                        "endOffsets": "109"
-                    },
-                    "to": {
-                        "startLines": "9",
-                        "startColumns": "4",
-                        "startOffsets": "532",
-                        "endColumns": "58",
-                        "endOffsets": "586"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\14e70ef47830b09942c431e0a4aef7b6\\appcompat-1.1.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\73c044751b02c4f9c5d95bbfe697d338\\appcompat-1.1.0\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -52,6 +35,23 @@
                         "startOffsets": "55,114,185,256,326,396,464,591,695",
                         "endColumns": "58,70,70,69,69,67,67,103,115",
                         "endOffsets": "109,180,251,321,391,459,527,690,806"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\4c5f1d2004b16d499ea62b25d56e7fa3\\jetified-commons-0.9.6.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    },
+                    "to": {
+                        "startLines": "9",
+                        "startColumns": "4",
+                        "startOffsets": "532",
+                        "endColumns": "58",
+                        "endOffsets": "586"
                     }
                 }
             ]

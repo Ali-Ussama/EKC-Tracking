@@ -26,6 +26,7 @@ import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginViewListener {
 
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String username;
     private String password;
-
+    Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
             init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initRealmInstance();
+    }
+
+    private void initRealmInstance() {
+        try {
+            realm = Realm.getDefaultInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }

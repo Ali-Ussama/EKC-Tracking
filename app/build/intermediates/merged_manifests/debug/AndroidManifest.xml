@@ -31,15 +31,20 @@
         android:required="true" />
 
     <application
-        android:name="androidx.multidex.MultiDexApplication"
+        android:name="com.ekc.ekctracking.configs.App"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:supportsRtl="false"
+        android:testOnly="true"
+        android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name="com.ekc.ekctracking.view.activities.notification.NotificationActivity"
+            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.ekc.ekctracking.view.activities.login.LoginActivity"
             android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection" >
@@ -69,8 +74,7 @@
             android:name="com.ekc.ekctracking.view.activities.mainActivity.MainActivity"
             android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- Needs to be explicitly declared on P+ -->
         <uses-library
             android:name="org.apache.http.legacy"

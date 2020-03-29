@@ -40,12 +40,12 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\yellow.png"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_ic_yellow.xml.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\rounded_ic_yellow.xml"
-    },
-    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_ic_green.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\rounded_ic_green.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_ic_yellow.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\rounded_ic_yellow.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
@@ -84,16 +84,16 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_ic_blue.xml.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\rounded_ic_blue.xml"
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\menu_home_frag_menu.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\menu\\home_frag_menu.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_ic_menu_slideshow.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable-v21\\ic_menu_slideshow.xml"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\menu_home_frag_menu.xml.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\menu\\home_frag_menu.xml"
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_ic_blue.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\rounded_ic_blue.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable__vertical_rv_grey_divider.xml.flat",
@@ -112,12 +112,12 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_car_speed_grey.xml"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_playstore.png.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\mipmap-anydpi-v26\\playstore.png"
-    },
-    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_start_banner_marker_red_24.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_start_banner_marker_red_24.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_playstore.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\mipmap-anydpi-v26\\playstore.png"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_start_banner_marker_red.png.flat",
@@ -140,6 +140,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_start_banner_marker_green.png"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_map_black_24dp.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_map_black_24dp.xml"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_custom_login_btn_background.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\custom_login_btn_background.xml"
     },
@@ -152,12 +156,12 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_done_black_24dp.xml"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_car_48.png.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_car_48.png"
-    },
-    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_directions_car_grey_24dp.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_directions_car_grey_24dp.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_car_48.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_car_48.png"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_start_marker_green.png.flat",
@@ -224,6 +228,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\app_bar_main.xml"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_notification.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\activity_notification.xml"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_start_banner_marker_green_24.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_start_banner_marker_green_24.xml"
     },
@@ -238,6 +246,14 @@
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_close_black_24dp.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_close_black_24dp.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_notifications_active_black_24dp.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_notifications_active_black_24dp.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_rec_row_item.xml.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\notification_rec_row_item.xml"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_ic_menu_gallery.xml.flat",
@@ -388,12 +404,12 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\menu\\main.xml"
     },
     {
-        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_jeep_img.png.flat",
-        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_jeep_img.png"
-    },
-    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_directions_car_white_24dp.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_directions_car_white_24dp.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_jeep_img.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_jeep_img.png"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",

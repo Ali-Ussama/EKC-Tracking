@@ -74,4 +74,6 @@
     <string name="disabled_english">Disabled</string>
     <string name="cars_list">قائمة السيارات</string>
     <string name="car_report">تقرير السيارة</string>
+    <string name="menu_notification">الإشعارات</string>
+    <string name="no_notifications_yet">ليس لديك اشعارات حتى الآن</string>
 </resources>

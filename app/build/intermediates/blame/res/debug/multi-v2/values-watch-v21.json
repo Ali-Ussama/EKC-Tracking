@@ -4,7 +4,7 @@
             "outputFile": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\14e70ef47830b09942c431e0a4aef7b6\\appcompat-1.1.0\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\73c044751b02c4f9c5d95bbfe697d338\\appcompat-1.1.0\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

@@ -4,7 +4,7 @@
             "outputFile": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\14e70ef47830b09942c431e0a4aef7b6\\appcompat-1.1.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\73c044751b02c4f9c5d95bbfe697d338\\appcompat-1.1.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\79191291d84b91a181feea768aecaa55\\media-1.0.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\AliOsama\\.gradle\\caches\\transforms-2\\files-2.1\\87ebf99683c9a1788afffc2c94cd0999\\media-1.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
