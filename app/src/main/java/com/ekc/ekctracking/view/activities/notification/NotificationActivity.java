@@ -1,6 +1,7 @@
 package com.ekc.ekctracking.view.activities.notification;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ViewAnimator;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import io.realm.RealmList;
 
 public class NotificationActivity extends AppCompatActivity implements NotificationViewListener {
 
+    private static final String TAG = "NotificationActivity";
     @BindView(R.id.notification_activity_rec_view)
     RecyclerView mRecyclerView;
 
@@ -65,11 +67,16 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     @Override
     public void onNotificationsLoaded(RealmList<RealmCarStatus> cars) {
+        Log.d(TAG, "onNotificationsLoaded: is called");
         this.cars = cars;
         if (cars != null && !cars.isEmpty()) {
+            Log.d(TAG, "onNotificationsLoaded: cars != null ");
+            Log.d(TAG, "onNotificationsLoaded: cars size " + cars.size());
             mNotificationAdapter.notifyDataSetChanged();
+            mNotificationAdapter.dataChanged(this.cars);
             viewAnimator.setDisplayedChild(2);
         } else {
+            Log.d(TAG, "onNotificationsLoaded: cars == null ");
             viewAnimator.setDisplayedChild(1);
         }
     }

@@ -238,7 +238,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     @Override
     public void onCarStatusChanged(RealmList<RealmCarStatus> cars) {
         if (cars.size() > 0) {
+            Log.d(TAG, "onCarStatusChanged: is called");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+                Log.d(TAG, "onCarStatusChanged: calling pushCarStatusNotification");
                 presenter.pushCarStatusNotification(cars);
             }
         }
@@ -247,7 +249,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.i(TAG, "onNavigationItemSelected: is called");
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            presenter.dummyPushNotification();
+        }
         if (item.getItemId() == R.id.nav_log_out) {
             logout();
             return false;

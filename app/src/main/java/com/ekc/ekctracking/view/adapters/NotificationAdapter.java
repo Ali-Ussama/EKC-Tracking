@@ -11,11 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekc.ekctracking.R;
-import com.ekc.ekctracking.models.pojo.CarStatus;
 import com.ekc.ekctracking.models.realmDB.RealmCarStatus;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +41,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         RealmCarStatus carStatus = data.get(position);
         holder.carNoTV.setText(carStatus.getCarNo());
         holder.dateTV.setText(carStatus.getDate());
-        holder.timeTV.setText("  -  ".concat(carStatus.getTime()));
+        holder.timeTV.setText(carStatus.getTime().concat("  -  "));
 
         if (carStatus.getStatus().matches(context.getString(R.string.disconnected_english))) {
             holder.statusIc.setImageResource(R.drawable.rounded_ic_yellow);
@@ -53,6 +50,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             holder.statusIc.setImageResource(R.drawable.rounded_ic_blue);
             holder.statusTV.setText(context.getString(R.string.disabled));
         }
+    }
+
+    public void dataChanged(RealmList<RealmCarStatus> cars) {
+        data = cars;
+        notifyDataSetChanged();
     }
 
     @Override

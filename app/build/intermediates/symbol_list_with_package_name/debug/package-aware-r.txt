@@ -2449,6 +2449,9 @@ drawable ic_directions_car_grey_24dp
 drawable ic_directions_car_white_24dp
 drawable ic_done_black_24dp
 drawable ic_edit_black_24dp
+drawable ic_end_trip_marker_flag
+drawable ic_end_trip_marker_flag_32
+drawable ic_end_trip_marker_flag_48
 drawable ic_home_grey_24dp
 drawable ic_jeep_img
 drawable ic_keyboard_arrow_down_white_24dp
@@ -5475,7 +5478,6 @@ string time_rang_to
 string title_activity_maps
 string title_time_picker
 string yes
-style ActionBar
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

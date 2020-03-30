@@ -1,5 +1,9 @@
 [
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_end_trip_marker_flag.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_end_trip_marker_flag.png"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sales_splash_bg.jpg.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\sales_splash_bg.jpg"
     },
@@ -396,6 +400,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_timer_grey_24dp.xml"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_end_trip_marker_flag_48.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_end_trip_marker_flag_48.png"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_moving_report_blue_24dp.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_moving_report_blue_24dp.xml"
     },
@@ -434,6 +442,10 @@
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_marker.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_marker.xml"
+    },
+    {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_end_trip_marker_flag_32.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_end_trip_marker_flag_32.png"
     },
     {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_start_marker_red.png.flat",

@@ -201,35 +201,44 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
     }
 
     public void checkCarsStatusChanged(ArrayList<CarStatus> oldCars, ArrayList<CarStatus> newCars) {
-        RealmList<RealmCarStatus> carStatuses = new RealmList<>();
-        for (CarStatus oldCar : oldCars) {
-            for (CarStatus newCar : newCars) {
-                if (oldCar.getCarNo().equals(newCar.getCarNo()) && !newCar.getStatus().equals(oldCar.getStatus()) && newCar.getStatus().equals(mContext.getString(R.string.disconnected_english))) {
-                    RealmCarStatus realmCarStatus = realm.createObject(RealmCarStatus.class);
+        Log.d(TAG, "checkCarsStatusChanged: is called");
+        try {
+            RealmList<RealmCarStatus> carStatuses = new RealmList<>();
+            for (CarStatus oldCar : oldCars) {
+                for (CarStatus newCar : newCars) {
+                    if (oldCar.getCarNo().equals(newCar.getCarNo()) && !newCar.getStatus().equals(oldCar.getStatus()) && newCar.getStatus().equals(mContext.getString(R.string.disconnected_english))) {
+                        Log.d(TAG, "oldCar: " + oldCar.getCarNo() + " - newCar: " + newCar.getCarNo() + " - status = " + newCar.getStatus());
+                        realm.beginTransaction();
+                        RealmCarStatus realmCarStatus = realm.createObject(RealmCarStatus.class);
 
-                    realmCarStatus.setCarID(newCar.getCarID());
-                    realmCarStatus.setCarNo(newCar.getCarNo());
-                    realmCarStatus.setAddress(newCar.getAddress());
-                    realmCarStatus.setDate(newCar.getDate());
-                    realmCarStatus.setTime(newCar.getTime());
-                    realmCarStatus.setGpsUnit(newCar.getGpsUnit());
-                    realmCarStatus.setGPSUnitNumber(newCar.getGPSUnitNumber());
-                    realmCarStatus.setLatitude(newCar.getLatitude());
-                    realmCarStatus.setLongitude(newCar.getLongitude());
-                    realmCarStatus.setSpeed(newCar.getSpeed());
-                    realmCarStatus.setSpeed2(newCar.getSpeed2());
-                    realmCarStatus.setStatus(newCar.getStatus());
-                    realmCarStatus.setDriverName(newCar.getDriverName());
-                    realmCarStatus.setDisable_count(newCar.getDisable_count());
-                    realmCarStatus.setAngle(newCar.getAngle());
+                        realmCarStatus.setCarID(newCar.getCarID());
+                        realmCarStatus.setCarNo(newCar.getCarNo());
+                        realmCarStatus.setAddress(newCar.getAddress());
+                        realmCarStatus.setDate(newCar.getDate());
+                        realmCarStatus.setTime(newCar.getTime());
+                        realmCarStatus.setGpsUnit(newCar.getGpsUnit());
+                        realmCarStatus.setGPSUnitNumber(newCar.getGPSUnitNumber());
+                        realmCarStatus.setLatitude(newCar.getLatitude());
+                        realmCarStatus.setLongitude(newCar.getLongitude());
+                        realmCarStatus.setSpeed(newCar.getSpeed());
+                        realmCarStatus.setSpeed2(newCar.getSpeed2());
+                        realmCarStatus.setStatus(newCar.getStatus());
+                        realmCarStatus.setDriverName(newCar.getDriverName());
+                        realmCarStatus.setDisable_count(newCar.getDisable_count());
+                        realmCarStatus.setAngle(newCar.getAngle());
+                        realm.commitTransaction();
 
-                    carStatuses.add(realmCarStatus);
+                        carStatuses.add(realmCarStatus);
+                    }
                 }
             }
-        }
+            Log.d(TAG, "checkCarsStatusChanged: carStatuses size = " + carStatuses.size());
 
-        if (carStatuses.size() > 0) {
-            activityViewListener.onCarStatusChanged(carStatuses);
+            if (carStatuses.size() > 0) {
+                activityViewListener.onCarStatusChanged(carStatuses);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

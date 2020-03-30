@@ -78,6 +78,7 @@ import com.esri.arcgisruntime.security.AuthenticationChallengeHandler;
 import com.esri.arcgisruntime.security.AuthenticationManager;
 import com.esri.arcgisruntime.security.DefaultAuthenticationChallengeHandler;
 import com.esri.arcgisruntime.security.UserCredential;
+import com.esri.arcgisruntime.symbology.LineSymbol;
 import com.esri.arcgisruntime.symbology.PictureMarkerSymbol;
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
 import com.esri.arcgisruntime.tasks.networkanalysis.PointBarrier;
@@ -403,8 +404,9 @@ public class HomeFragment extends Fragment implements
             }
 
             mPrefManager = new PrefManager(mCurrent);
+            mRealm = Realm.getDefaultInstance();
 
-            presenter = new HomeFragPresenter(mCurrent, this, mRealm,mActivityListener);
+            presenter = new HomeFragPresenter(mCurrent, this, mRealm, mActivityListener);
 
             presenter.requestToken();
             presenter.requestOnGoingCarsStatus();
@@ -548,7 +550,7 @@ public class HomeFragment extends Fragment implements
 
 
             startBannerMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.ic_start_marker_green));
-            endBannerMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.ic_start_marker_red));
+            endBannerMarker = new PictureMarkerSymbol((BitmapDrawable) getResources().getDrawable(R.drawable.ic_end_trip_marker_flag));
             if (checkLocationPermissions()) {
 
                 // displaying user location on map
@@ -760,6 +762,7 @@ public class HomeFragment extends Fragment implements
             searchView.setSuggestions(query_suggestions);
 
             if (oldCars != null && !oldCars.isEmpty()) {
+                Log.d(TAG, "displayCarsOnMap: calling checkCarsStatusChanged");
                 checkCarsStatusChanged(oldCars, cars);
             }
         } catch (Resources.NotFoundException e) {
@@ -769,6 +772,8 @@ public class HomeFragment extends Fragment implements
     }
 
     private void checkCarsStatusChanged(ArrayList<CarStatus> oldCars, ArrayList<CarStatus> newCars) {
+        Log.d(TAG, "checkCarsStatusChanged: is called");
+        Log.d(TAG, "checkCarsStatusChanged: calling presenter checkCarsStatusChanged");
         presenter.checkCarsStatusChanged(oldCars, newCars);
     }
 
@@ -1300,7 +1305,14 @@ public class HomeFragment extends Fragment implements
             //define a line symbol
             SimpleLineSymbol lineSymbol =
                     new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
-            Graphic line = new Graphic(polyline, lineSymbol);
+
+            LineSymbol mlineSymbol =
+                    new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
+
+            mlineSymbol.setAntiAlias(true);
+
+            Graphic line = new Graphic(polyline, mlineSymbol);
+
             drawGraphicLayer.getGraphics().add(line);
 
             zoomToLine(line);
