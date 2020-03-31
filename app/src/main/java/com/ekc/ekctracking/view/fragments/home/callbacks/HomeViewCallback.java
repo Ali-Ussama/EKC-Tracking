@@ -6,6 +6,7 @@ import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
 import com.ekc.ekctracking.models.pojo.CarStatus;
 import com.ekc.ekctracking.models.pojo.StatusRoot;
+import com.esri.arcgisruntime.geometry.Point;
 
 import java.util.ArrayList;
 
@@ -26,4 +27,6 @@ public interface HomeViewCallback {
     void onSortPoints(FindTrip findTrip);
 
     void onCarSelected(CarStatus carStatus);
+
+    void onSpeedSelected(int position, String speed, Point point);
 }

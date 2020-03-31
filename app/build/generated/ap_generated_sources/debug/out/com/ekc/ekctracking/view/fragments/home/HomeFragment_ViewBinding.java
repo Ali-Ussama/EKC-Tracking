@@ -17,6 +17,7 @@ import com.ekc.ekctracking.R;
 import com.esri.arcgisruntime.mapping.view.MapView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import java.lang.IllegalStateException;
 import java.lang.Override;
@@ -28,6 +29,11 @@ public class HomeFragment_ViewBinding implements Unbinder {
   public HomeFragment_ViewBinding(HomeFragment target, View source) {
     this.target = target;
 
+    target.mSpeedRV = Utils.findRequiredViewAsType(source, R.id.home_frag_speeds_recycler_view, "field 'mSpeedRV'", RecyclerView.class);
+    target.mSpeedToContainer = Utils.findRequiredViewAsType(source, R.id.moving_report_filter_speed_to_outlinedTextField, "field 'mSpeedToContainer'", TextInputLayout.class);
+    target.mSpeedToET = Utils.findRequiredViewAsType(source, R.id.moving_report_filter_speed_to_et, "field 'mSpeedToET'", TextInputEditText.class);
+    target.mSpeedFromContainer = Utils.findRequiredViewAsType(source, R.id.moving_report_filter_speed_from_outlinedTextField, "field 'mSpeedFromContainer'", TextInputLayout.class);
+    target.mSpeedFromET = Utils.findRequiredViewAsType(source, R.id.moving_report_filter_speed_from_et, "field 'mSpeedFromET'", TextInputEditText.class);
     target.rootViewAnimator = Utils.findRequiredViewAsType(source, R.id.home_fragment_view_animator, "field 'rootViewAnimator'", ViewAnimator.class);
     target.mapView = Utils.findRequiredViewAsType(source, R.id.mapView, "field 'mapView'", MapView.class);
     target.mLocationFab = Utils.findRequiredViewAsType(source, R.id.home_frag_location_fab, "field 'mLocationFab'", FloatingActionButton.class);
@@ -67,6 +73,11 @@ public class HomeFragment_ViewBinding implements Unbinder {
     if (target == null) throw new IllegalStateException("Bindings already cleared.");
     this.target = null;
 
+    target.mSpeedRV = null;
+    target.mSpeedToContainer = null;
+    target.mSpeedToET = null;
+    target.mSpeedFromContainer = null;
+    target.mSpeedFromET = null;
     target.rootViewAnimator = null;
     target.mapView = null;
     target.mLocationFab = null;

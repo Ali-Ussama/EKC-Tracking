@@ -2,21 +2,27 @@ package com.ekc.ekctracking.view.activities.notification;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ViewAnimator;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.models.realmDB.RealmCarStatus;
 import com.ekc.ekctracking.view.adapters.NotificationAdapter;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
 
-public class NotificationActivity extends AppCompatActivity implements NotificationViewListener {
+public class NotificationActivity extends AppCompatActivity implements NotificationViewListener, MaterialSearchView.OnQueryTextListener {
 
     private static final String TAG = "NotificationActivity";
     @BindView(R.id.notification_activity_rec_view)
@@ -24,6 +30,12 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     @BindView(R.id.notification_view_animator)
     ViewAnimator viewAnimator;
+
+    @BindView(R.id.notification_activity_toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.notification_activity_search_view)
+    MaterialSearchView searchView;
 
     private NotificationAdapter mNotificationAdapter;
     private NotificationActivity mCurrent;
@@ -44,12 +56,24 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
             ButterKnife.bind(this);
             presenter = new NotificationPresenter(mCurrent, this);
             viewAnimator.setDisplayedChild(0);
+
+            setupToolbar();
             initNotificationsList();
+            searchView.setOnQueryTextListener(this);
 
             presenter.loadNotifications();
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getString(R.string.menu_notification));
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -79,5 +103,34 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
             Log.d(TAG, "onNotificationsLoaded: cars == null ");
             viewAnimator.setDisplayedChild(1);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.notification_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.notification_action_search);
+        searchView.setMenuItem(item);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

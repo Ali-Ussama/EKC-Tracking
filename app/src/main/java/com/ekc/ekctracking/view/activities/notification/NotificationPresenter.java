@@ -5,8 +5,6 @@ import android.util.Log;
 import com.ekc.ekctracking.configs.PrefManager;
 import com.ekc.ekctracking.models.realmDB.RealmCarStatus;
 
-import io.realm.OrderedCollectionChangeSet;
-import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;

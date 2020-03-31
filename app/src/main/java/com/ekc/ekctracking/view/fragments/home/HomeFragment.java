@@ -3,7 +3,6 @@ package com.ekc.ekctracking.view.fragments.home;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -18,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +43,7 @@ import com.ekc.ekctracking.configs.PrefManager;
 import com.ekc.ekctracking.models.Logger;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
+import com.ekc.ekctracking.models.findTrip.SpeedFilter;
 import com.ekc.ekctracking.models.hereMapRoutModel.HereRoute;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
 import com.ekc.ekctracking.models.pojo.CarGroupStatus;
@@ -53,6 +54,7 @@ import com.ekc.ekctracking.view.activities.mainActivity.MainActivityViewListener
 import com.ekc.ekctracking.view.activities.mainActivity.MapSingleTapListener;
 import com.ekc.ekctracking.view.activities.mainActivity.SingleTapListener;
 import com.ekc.ekctracking.view.adapters.CarsListAdapter;
+import com.ekc.ekctracking.view.adapters.SpeedAdapter;
 import com.ekc.ekctracking.view.fragments.home.callbacks.HomeViewCallback;
 import com.esri.arcgisruntime.data.ServiceFeatureTable;
 import com.esri.arcgisruntime.geometry.GeometryEngine;
@@ -78,7 +80,6 @@ import com.esri.arcgisruntime.security.AuthenticationChallengeHandler;
 import com.esri.arcgisruntime.security.AuthenticationManager;
 import com.esri.arcgisruntime.security.DefaultAuthenticationChallengeHandler;
 import com.esri.arcgisruntime.security.UserCredential;
-import com.esri.arcgisruntime.symbology.LineSymbol;
 import com.esri.arcgisruntime.symbology.PictureMarkerSymbol;
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
 import com.esri.arcgisruntime.tasks.networkanalysis.PointBarrier;
@@ -91,11 +92,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -112,6 +115,23 @@ public class HomeFragment extends Fragment implements
         MaterialSearchView.OnQueryTextListener,
         MapScaleChangedListener {
 
+    //Speed
+    @BindView(R.id.home_frag_speeds_recycler_view)
+    RecyclerView mSpeedRV;
+
+    @BindView(R.id.moving_report_filter_speed_to_outlinedTextField)
+    TextInputLayout mSpeedToContainer;
+
+    @BindView(R.id.moving_report_filter_speed_to_et)
+    TextInputEditText mSpeedToET;
+
+    @BindView(R.id.moving_report_filter_speed_from_outlinedTextField)
+    TextInputLayout mSpeedFromContainer;
+
+    @BindView(R.id.moving_report_filter_speed_from_et)
+    TextInputEditText mSpeedFromET;
+
+    //Home Layout
     @BindView(R.id.home_fragment_view_animator)
     ViewAnimator rootViewAnimator;
 
@@ -219,6 +239,9 @@ public class HomeFragment extends Fragment implements
     ServiceFeatureTable featureTable;
     private CarsListAdapter mCarsListAdapter;
     private ArrayList<CarStatus> carsListData;
+    private List<CarStatus> speedRecData;
+    private PointCollection speedRecPoint;
+    private SpeedAdapter mSpeedAdapter;
 
     private HomeFragPresenter presenter;
     private static final int ACCESS_LOCATION = 1;
@@ -259,6 +282,7 @@ public class HomeFragment extends Fragment implements
     private Logger logger;
 
     private static Realm mRealm;
+    private SpeedFilter speedFilter;
 
     public static HomeFragment newInstance(MainActivity current, Realm realm, MainActivityViewListener activityListener) {
         mCurrent = current;
@@ -421,6 +445,19 @@ public class HomeFragment extends Fragment implements
 
             initActions();
 
+            initSpeedList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initSpeedList() {
+        try {
+            speedRecData = new ArrayList<>();
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mCurrent, RecyclerView.HORIZONTAL, false);
+            mSpeedAdapter = new SpeedAdapter(speedRecData, speedRecPoint, mCurrent, this);
+            mSpeedRV.setLayoutManager(layoutManager);
+            mSpeedRV.setAdapter(mSpeedAdapter);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -761,11 +798,12 @@ public class HomeFragment extends Fragment implements
             searchView.setSuggestionIcon(mCurrent.getResources().getDrawable(R.drawable.ic_directions_car_grey_24dp));
             searchView.setSuggestions(query_suggestions);
 
+
             if (oldCars != null && !oldCars.isEmpty()) {
                 Log.d(TAG, "displayCarsOnMap: calling checkCarsStatusChanged");
                 checkCarsStatusChanged(oldCars, cars);
             }
-        } catch (Resources.NotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1027,6 +1065,8 @@ public class HomeFragment extends Fragment implements
 
             if (drawGraphicLayer.getGraphics() != null && drawGraphicLayer.getGraphics().size() > 0) {
                 drawGraphicLayer.getGraphics().clear();
+
+                resetSpeedList();
                 displayCarsOnMap(mStatusRoot);
             }
 //            if (sheetBehavior != null) {
@@ -1052,6 +1092,7 @@ public class HomeFragment extends Fragment implements
     /**
      * ---------------------------------Moving Report Filters--------------------------------
      */
+
     private void displayTimeRangePicker(TextInputEditText editText) {
         try {
             MaterialDialog dateDialog = AppUtils.showAlertDialogWithCustomView(mCurrent, R.layout.time_range_picker);
@@ -1178,6 +1219,17 @@ public class HomeFragment extends Fragment implements
             String toTime = movingFilterTimeToET.getText().toString().trim().replaceAll(":", "");
             String token = presenter.getToken();
             String gpsUnit = selectedCar.getGPSUnitNumber();
+            int speedFrom = -1;
+            int speedTo = -1;
+
+            if (mSpeedFromET.getText() != null && !mSpeedFromET.getText().toString().trim().isEmpty()) {
+                speedFrom = Integer.parseInt(mSpeedFromET.getText().toString());
+            }
+
+            if (mSpeedToET.getText() != null && !mSpeedToET.getText().toString().trim().isEmpty()) {
+                speedTo = Integer.parseInt(mSpeedToET.getText().toString());
+            }
+            speedFilter = new SpeedFilter(speedFrom, speedTo);
 
             findTripRequest.setToken(token);
             findTripRequest.setFromDate(fromDate);
@@ -1237,94 +1289,6 @@ public class HomeFragment extends Fragment implements
             } else {
                 AppUtils.showToast(mCurrent, getString(R.string.no_history_found));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void startTaskRout(FindTrip findTrip) {
-        try {
-//            RouteTask task = new RouteTask(mCurrent, "http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer");
-            RouteTask task = new RouteTask(mCurrent, "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route");
-            task.loadAsync();
-            task.addLoadStatusChangedListener(new LoadStatusChangedListener() {
-                @Override
-                public void loadStatusChanged(LoadStatusChangedEvent loadStatusChangedEvent) {
-                    if (task.getLoadError() == null && task.getLoadStatus() == LoadStatus.LOADED) {
-                        Log.i(TAG, "loadStatusChanged: task is loaded");
-                    } else {
-                        Log.i(TAG, "loadStatusChanged: task is not loaded");
-                    }
-                }
-            });
-
-            // get default route parameters
-            RouteParameters routeParameters = task.createDefaultParametersAsync().get();
-            // set flags to return stops and directions
-            routeParameters.setReturnStops(true);
-
-            Point stop1Loc = new Point(-1.3018598562659847E7, 3863191.8817135547, mapView.getSpatialReference());
-            Point stop2Loc = new Point(-1.3036911787723785E7, 3839935.706521739, mapView.getSpatialReference());
-            routeParameters.setStops(Arrays.asList(new Stop(stop1Loc), new Stop(stop2Loc)));
-            // create barriers
-            PointBarrier pointBarrier = new PointBarrier(new Point(-1.302759917994629E7, 3853256.753745117, mapView.getSpatialReference()));
-            // add barriers to routeParameters
-            routeParameters.setPointBarriers(Arrays.asList(pointBarrier));
-
-            try {
-                RouteResult result = task.solveRouteAsync(routeParameters).get();
-                result.getPolylineBarriers().get(0).getGeometry();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void drawFindTripLine(FindTrip findTrip) {
-        try {
-            Log.d(TAG, "drawFindTripLine: is called");
-
-            PointCollection pointCollection = new PointCollection(mapView.getSpatialReference());
-            drawGraphicLayer.getGraphics().clear();
-            graphicsOverlay.getGraphics().clear(); // TODO NOT Sure What To Do
-            for (CarStatus location : findTrip.getFoundCars().getLocations()) {
-                Point point = (Point) GeometryEngine.project(new Point(location.getLongitude(), location.getLatitude(), spatialReference), mapView.getSpatialReference());
-                pointCollection.add(point);
-            }
-
-            if (pointCollection.size() > 1) {
-                drawGraphicLayer.getGraphics().add(new Graphic(pointCollection.get(0), startBannerMarker));
-                drawGraphicLayer.getGraphics().add(new Graphic(pointCollection.get(pointCollection.size() - 1), endBannerMarker));
-            }
-
-            Polyline polyline = new Polyline(pointCollection);
-
-            //define a line symbol
-            SimpleLineSymbol lineSymbol =
-                    new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
-
-            LineSymbol mlineSymbol =
-                    new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
-
-            mlineSymbol.setAntiAlias(true);
-
-            Graphic line = new Graphic(polyline, mlineSymbol);
-
-            drawGraphicLayer.getGraphics().add(line);
-
-            zoomToLine(line);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void zoomToLine(Graphic line) {
-        try {
-            mapView.setViewpoint(new Viewpoint(line.getGeometry().getExtent()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1431,6 +1395,210 @@ public class HomeFragment extends Fragment implements
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onSpeedSelected(int position, String speed, Point point) {
+        try {
+            zoomToPoint(point);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startTaskRout(FindTrip findTrip) {
+        try {
+//            RouteTask task = new RouteTask(mCurrent, "http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer");
+            RouteTask task = new RouteTask(mCurrent, "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route");
+            task.loadAsync();
+            task.addLoadStatusChangedListener(new LoadStatusChangedListener() {
+                @Override
+                public void loadStatusChanged(LoadStatusChangedEvent loadStatusChangedEvent) {
+                    if (task.getLoadError() == null && task.getLoadStatus() == LoadStatus.LOADED) {
+                        Log.i(TAG, "loadStatusChanged: task is loaded");
+                    } else {
+                        Log.i(TAG, "loadStatusChanged: task is not loaded");
+                    }
+                }
+            });
+
+            // get default route parameters
+            RouteParameters routeParameters = task.createDefaultParametersAsync().get();
+            // set flags to return stops and directions
+            routeParameters.setReturnStops(true);
+
+            Point stop1Loc = new Point(-1.3018598562659847E7, 3863191.8817135547, mapView.getSpatialReference());
+            Point stop2Loc = new Point(-1.3036911787723785E7, 3839935.706521739, mapView.getSpatialReference());
+            routeParameters.setStops(Arrays.asList(new Stop(stop1Loc), new Stop(stop2Loc)));
+            // create barriers
+            PointBarrier pointBarrier = new PointBarrier(new Point(-1.302759917994629E7, 3853256.753745117, mapView.getSpatialReference()));
+            // add barriers to routeParameters
+            routeParameters.setPointBarriers(Arrays.asList(pointBarrier));
+
+            try {
+                RouteResult result = task.solveRouteAsync(routeParameters).get();
+                result.getPolylineBarriers().get(0).getGeometry();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void drawFindTripLine(FindTrip findTrip) {
+        try {
+            Log.d(TAG, "drawFindTripLine: is called");
+
+            PointCollection pointCollection = new PointCollection(mapView.getSpatialReference());
+            drawGraphicLayer.getGraphics().clear();
+            graphicsOverlay.getGraphics().clear(); // TODO NOT Sure What To Do
+            for (CarStatus location : findTrip.getFoundCars().getLocations()) {
+                Point point = (Point) GeometryEngine.project(new Point(location.getLongitude(), location.getLatitude(), spatialReference), mapView.getSpatialReference());
+                pointCollection.add(point);
+            }
+
+            if (pointCollection.size() > 1) {
+                drawGraphicLayer.getGraphics().add(new Graphic(pointCollection.get(0), startBannerMarker));
+                drawGraphicLayer.getGraphics().add(new Graphic(pointCollection.get(pointCollection.size() - 1), endBannerMarker));
+            }
+
+            displaySpeedList(pointCollection, findTrip);
+
+            Polyline polyline = new Polyline(pointCollection);
+
+            //define a line symbol
+            SimpleLineSymbol lineSymbol =
+                    new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.argb(255, 0, 60, 143), 4.0f);
+
+            lineSymbol.setAntiAlias(true);
+
+            Graphic line = new Graphic(polyline, lineSymbol);
+
+            drawGraphicLayer.getGraphics().add(line);
+
+            zoomToLine(line);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void zoomToLine(Graphic line) {
+        try {
+            mapView.setViewpoint(new Viewpoint(line.getGeometry().getExtent()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * -------------------------------------Speed Filter----------------------------------------
+     */
+
+    private void displaySpeedList(PointCollection pointCollection, FindTrip findTrip) {
+        try {
+            Log.d(TAG, "displaySpeedList: is called");
+            if (findTrip.getFoundCars().getLocations() != null) {
+                if (speedFilter != null && speedFilter.getSpeedFrom() == -1 && speedFilter.getSpeedTo() == -1) {
+                    handleWithoutSpeed(pointCollection, findTrip);
+
+                } else if (speedFilter != null && speedFilter.getSpeedFrom() != -1 && speedFilter.getSpeedTo() == -1) {
+                    handleSpeedFrom(pointCollection, findTrip);
+                } else if (speedFilter != null && speedFilter.getSpeedFrom() == -1 && speedFilter.getSpeedTo() != -1) {
+                    handleSpeedTo(pointCollection, findTrip);
+                } else {
+                    handleSpeedFromTo(pointCollection, findTrip);
+                }
+                Log.d(TAG, "displaySpeedList: speed size = " + speedRecData.size());
+                if (!speedRecData.isEmpty()) {
+                    mSpeedRV.setVisibility(View.VISIBLE);
+                    mSpeedAdapter.dataChanged(speedRecPoint, speedRecData);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleWithoutSpeed(PointCollection pointCollection, FindTrip findTrip) {
+        try {
+            Log.d(TAG, "handleWithoutSpeed: is called");
+            speedRecData = findTrip.getFoundCars().getLocations();
+            speedRecPoint = new PointCollection(pointCollection.getSpatialReference());
+            speedRecPoint.addAll(pointCollection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleSpeedFromTo(PointCollection pointCollection, FindTrip findTrip) {
+        try {
+            Log.d(TAG, "handleSpeedFromTo: is called");
+
+            speedRecData = new ArrayList<>();
+            speedRecPoint = new PointCollection(pointCollection.getSpatialReference());
+
+            for (int i = 0; i < findTrip.getFoundCars().getLocations().size(); i++) {
+                CarStatus location = findTrip.getFoundCars().getLocations().get(i);
+                if (Integer.parseInt(location.getSpeed2()) <= speedFilter.getSpeedTo() && Integer.parseInt(location.getSpeed2()) >= speedFilter.getSpeedFrom()) {
+                    Log.d(TAG, "handleSpeedFromTo: location speed = " + location.getSpeed2());
+                    speedRecData.add(location);
+                    speedRecPoint.add(pointCollection.get(i));
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleSpeedTo(PointCollection pointCollection, FindTrip findTrip) {
+        try {
+            Log.d(TAG, "handleSpeedTo: is called");
+            speedRecData = new ArrayList<>();
+            speedRecPoint = new PointCollection(pointCollection.getSpatialReference());
+
+            for (int i = 0; i < findTrip.getFoundCars().getLocations().size(); i++) {
+                CarStatus location = findTrip.getFoundCars().getLocations().get(i);
+                if (Integer.parseInt(location.getSpeed2()) <= speedFilter.getSpeedTo()) {
+                    Log.d(TAG, "handleSpeedTo: location speed = " + location.getSpeed2());
+                    speedRecData.add(location);
+                    speedRecPoint.add(pointCollection.get(i));
+                }
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleSpeedFrom(PointCollection pointCollection, FindTrip findTrip) {
+        try {
+            Log.d(TAG, "handleSpeedFrom: is called");
+            speedRecData = new ArrayList<>();
+            speedRecPoint = new PointCollection(pointCollection.getSpatialReference());
+
+            for (int i = 0; i < findTrip.getFoundCars().getLocations().size(); i++) {
+                CarStatus location = findTrip.getFoundCars().getLocations().get(i);
+                if (Integer.parseInt(location.getSpeed2()) >= speedFilter.getSpeedFrom()) {
+                    Log.d(TAG, "handleSpeedFrom: location speed = " + location.getSpeed2());
+                    speedRecData.add(location);
+                    speedRecPoint.add(pointCollection.get(i));
+                }
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void resetSpeedList() {
+        if (mSpeedRV.getVisibility() == View.VISIBLE) {
+            speedRecData.clear();
+            speedRecPoint.clear();
+            mSpeedRV.setVisibility(View.GONE);
+        }
+
     }
 
     /**
