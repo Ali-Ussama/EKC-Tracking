@@ -29,4 +29,6 @@ public interface HomeViewCallback {
     void onCarSelected(CarStatus carStatus);
 
     void onSpeedSelected(int position, String speed, Point point);
+
+    void onNotifyCarsDisconnected(int count);
 }

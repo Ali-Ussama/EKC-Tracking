@@ -2454,6 +2454,7 @@ drawable ic_end_trip_marker_flag_32
 drawable ic_end_trip_marker_flag_48
 drawable ic_home_grey_24dp
 drawable ic_jeep_img
+drawable ic_jeep_small
 drawable ic_keyboard_arrow_down_white_24dp
 drawable ic_keyboard_arrow_left_black_24dp
 drawable ic_keyboard_arrow_right_black_24dp
@@ -2777,6 +2778,7 @@ id home_frag_speeds_recycler_view
 id home_fragment
 id home_fragment_view_animator
 id home_nav_drawer_ic
+id home_notification_tv_count
 id home_options_rec_row_item_iv
 id home_options_rec_row_item_tv
 id home_toolbar
@@ -2921,6 +2923,7 @@ id noScroll
 id none
 id normal
 id notification_action_search
+id notification_activity_progress_bar
 id notification_activity_rec_view
 id notification_activity_search_view
 id notification_activity_toolbar

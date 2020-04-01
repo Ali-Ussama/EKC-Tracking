@@ -193,7 +193,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Al
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\14fcab764cf1ca4c91ffc3bedb72de35\core-1.1.0\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:28:9-36
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:28:9-35
 		REJECTED from [com.archit.calendar:awesome-calendar:1.1.6] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\c085f8099e6e7404e65e24a8db089c21\jetified-awesome-calendar-1.1.6\AndroidManifest.xml:13:9-35
 	android:label
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:26:9-41

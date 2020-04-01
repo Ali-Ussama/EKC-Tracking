@@ -20,6 +20,8 @@ import com.ekc.ekctracking.view.activities.notification.NotificationActivity;
 
 import io.realm.RealmList;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 public class MainActivityPresenter {
 
     private static final String TAG = "MainActivityPresenter";
@@ -82,25 +84,26 @@ public class MainActivityPresenter {
         Intent intent = new Intent(mCurrent, NotificationActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(mCurrent, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mCurrent, 100, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mCurrent, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_jeep_small)
                 .setContentTitle(subject)
                 .setContentText(body)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Much longer text that cannot fit one line..."))
                 .setContentIntent(pendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mCurrent);
-
+//            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mCurrent);
+        NotificationManager notificationManager = (NotificationManager) mCurrent.getSystemService(NOTIFICATION_SERVICE);
         // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(1, builder.build());
+        notificationManager.notify(0, builder.build());
+
         Log.d(TAG, "Short lived task is done.");
 
     }
@@ -118,25 +121,25 @@ public class MainActivityPresenter {
             Intent intent = new Intent(mCurrent, NotificationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(mCurrent, 0, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getActivity(mCurrent, 100, intent, 0);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(mCurrent, CHANNEL_ID)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_jeep_small)
                     .setContentTitle(subject)
                     .setContentText(body)
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText("Much longer text that cannot fit one line..."))
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(true)
                     .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mCurrent);
-
+//            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mCurrent);
+            NotificationManager notificationManager = (NotificationManager) mCurrent.getSystemService(NOTIFICATION_SERVICE);
             // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(1, builder.build());
+            notificationManager.notify(100, builder.build());
             Log.d(TAG, "Short lived task is done.");
         } catch (Exception e) {
             e.printStackTrace();

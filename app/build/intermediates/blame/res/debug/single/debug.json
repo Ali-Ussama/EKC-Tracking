@@ -392,6 +392,10 @@
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\blue.png"
     },
     {
+        "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_jeep_small.png.flat",
+        "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\drawable\\ic_jeep_small.png"
+    },
+    {
         "merged": "F:\\AndroidProjects\\EKCTracking\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_moving_report.xml.flat",
         "source": "F:\\AndroidProjects\\EKCTracking\\app\\src\\main\\res\\layout\\fragment_moving_report.xml"
     },

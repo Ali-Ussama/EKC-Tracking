@@ -1,6 +1,7 @@
 package com.ekc.ekctracking.view.activities.mainActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,10 +9,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     NavigationView navigationView;
 
     DrawerLayout drawer;
+
+    TextView notificationsCount;
 
     private FragmentManager fragmentManager;
 
@@ -143,6 +148,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 //            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //            NavigationUI.setupWithNavController(navigationView, navController);
 
+            notificationsCount = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                    findItem(R.id.nav_notifications));
+            notificationsCount.setGravity(Gravity.CENTER_VERTICAL);
+            notificationsCount.setTypeface(null, Typeface.BOLD);
+            notificationsCount.setTextColor(getResources().getColor(R.color.red));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -173,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -242,6 +254,19 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
                 Log.d(TAG, "onCarStatusChanged: calling pushCarStatusNotification");
                 presenter.pushCarStatusNotification(cars);
+            }
+
+            int count = cars.size();
+            if (notificationsCount.getText() != null && !notificationsCount.getText().toString().isEmpty())
+                count += Integer.parseInt(notificationsCount.getText().toString());
+
+            if (count > 99){
+                count = 99;
+            }
+            if (count == 99){
+                notificationsCount.setText(String.valueOf(count).concat("+"));
+            }else{
+                notificationsCount.setText(String.valueOf(count));
             }
         }
     }

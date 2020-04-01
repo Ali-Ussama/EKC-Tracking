@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -230,6 +229,9 @@ public class HomeFragment extends Fragment implements
 
     @BindView(R.id.home_toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.home_notification_tv_count)
+    TextView notificationCount;
 
     @BindView(R.id.search_view)
     MaterialSearchView searchView;
@@ -711,7 +713,7 @@ public class HomeFragment extends Fragment implements
         try {
             if (cars != null && !cars.isEmpty()) {
                 for (CarGroupStatus carGroupStatus : statusRoot.getRoot().getCarGroupStatus()) {
-                    carGroupStatus.setCars(presenter.calcAngle(carGroupStatus.getCars(), cars));
+                    carGroupStatus.setCars(presenter.calcAngle(carGroupStatus.getCars(), cars,spatialReference,mapView.getSpatialReference()));
                 }
             }
             oldCars = new ArrayList<>();
@@ -1697,5 +1699,32 @@ public class HomeFragment extends Fragment implements
 //                }
 //            }
 //        }
+    }
+
+    /**
+     * ---------------------------------Notification----------------------------------------------
+     */
+
+
+    @Override
+    public void onNotifyCarsDisconnected(int count) {
+        try {
+            if (notificationCount.getText() != null && !notificationCount.getText().toString().isEmpty())
+                count += Integer.parseInt(notificationCount.getText().toString());
+
+            notificationCount.setText(String.valueOf(count));
+
+            notificationCount.setVisibility(View.VISIBLE);
+            if (count > 99) {
+                count = 99;
+            }
+            if (count == 99) {
+                notificationCount.setText(String.valueOf(count).concat("+"));
+            } else {
+                notificationCount.setText(String.valueOf(count));
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 }

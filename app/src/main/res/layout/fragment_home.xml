@@ -32,16 +32,41 @@
                         android:layout_height="?attr/actionBarSize"
                         android:background="?attr/colorPrimary"
                         app:popupTheme="@style/AppTheme.PopupOverlay" />
+                    <!--                    android:layout_gravity="start|center_vertical"-->
 
-
-                    <ImageView
-                        android:id="@+id/home_nav_drawer_ic"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center_vertical"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:visibility="visible"
-                        app:srcCompat="@drawable/ic_menu_black_24dp" />
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/home_nav_drawer_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_menu_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/home_notification_tv_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:background="@drawable/rounded_ic_red"
+                            android:visibility="gone"
+                            android:textSize="@dimen/_8ssp"
+                            android:paddingEnd="@dimen/_2sdp"
+                            android:paddingStart="@dimen/_2sdp"
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toStartOf="@+id/home_nav_drawer_ic"
+                            app:layout_constraintEnd_toEndOf="@+id/home_nav_drawer_ic"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
                         android:layout_width="match_parent"
@@ -251,11 +276,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/speed_from"
                 android:layout_margin="@dimen/_8sdp"
+                android:hint="@string/speed_from"
                 app:errorEnabled="true"
-                app:layout_constraintStart_toStartOf="@+id/moving_report_filter_time_outlinedTextField"
                 app:layout_constraintEnd_toEndOf="@+id/moving_report_filter_time_outlinedTextField"
+                app:layout_constraintStart_toStartOf="@+id/moving_report_filter_time_outlinedTextField"
                 app:layout_constraintTop_toBottomOf="@+id/speed_report_title_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -263,7 +288,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number"/>
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -272,19 +297,19 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/speed_to"
                 android:layout_margin="@dimen/_8sdp"
+                android:hint="@string/speed_to"
                 app:errorEnabled="true"
-                app:layout_constraintStart_toStartOf="@+id/moving_report_filter_time_to_outlinedTextField"
                 app:layout_constraintEnd_toEndOf="@+id/moving_report_filter_time_to_outlinedTextField"
+                app:layout_constraintStart_toStartOf="@+id/moving_report_filter_time_to_outlinedTextField"
                 app:layout_constraintTop_toBottomOf="@+id/speed_report_title_tv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/moving_report_filter_speed_to_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"/>
+                    android:ems="10"
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

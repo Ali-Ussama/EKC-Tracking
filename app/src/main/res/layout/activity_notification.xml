@@ -7,33 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".view.activities.notification.NotificationActivity">
 
-    <!--    <ProgressBar-->
-    <!--        android:id="@+id/notification_activity_progress_bar"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="center" />-->
+        <ProgressBar
+            android:id="@+id/notification_activity_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:gravity="center"-->
-    <!--        android:orientation="vertical">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <!--        <ImageView-->
-    <!--            android:layout_width="@dimen/_48sdp"-->
-    <!--            android:layout_height="@dimen/_48sdp"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            app:srcCompat="@drawable/ic_jeep_img" />-->
+            <ImageView
+                android:layout_width="@dimen/_48sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_jeep_img" />
 
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="@dimen/_4sdp"-->
-    <!--            android:text="@string/no_notifications_yet"-->
-    <!--            android:textSize="@dimen/_16ssp" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/no_notifications_yet"
+                android:textSize="@dimen/_16ssp" />
 
-    <!--    </LinearLayout>-->
+        </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

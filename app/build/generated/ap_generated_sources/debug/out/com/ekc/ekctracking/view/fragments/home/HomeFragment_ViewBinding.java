@@ -63,6 +63,7 @@ public class HomeFragment_ViewBinding implements Unbinder {
     target.movingFilterTimeToET = Utils.findRequiredViewAsType(source, R.id.moving_report_filter_time_to_et, "field 'movingFilterTimeToET'", TextInputEditText.class);
     target.mNavDrawerIc = Utils.findRequiredViewAsType(source, R.id.home_nav_drawer_ic, "field 'mNavDrawerIc'", ImageView.class);
     target.toolbar = Utils.findRequiredViewAsType(source, R.id.home_toolbar, "field 'toolbar'", Toolbar.class);
+    target.notificationCount = Utils.findRequiredViewAsType(source, R.id.home_notification_tv_count, "field 'notificationCount'", TextView.class);
     target.searchView = Utils.findRequiredViewAsType(source, R.id.search_view, "field 'searchView'", MaterialSearchView.class);
   }
 
@@ -107,6 +108,7 @@ public class HomeFragment_ViewBinding implements Unbinder {
     target.movingFilterTimeToET = null;
     target.mNavDrawerIc = null;
     target.toolbar = null;
+    target.notificationCount = null;
     target.searchView = null;
   }
 }

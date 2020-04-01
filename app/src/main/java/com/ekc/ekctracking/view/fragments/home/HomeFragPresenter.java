@@ -130,7 +130,8 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
         }
     }
 
-    ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars) {
+    ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars,SpatialReference decimalSR,SpatialReference mapSpatialReference) {
+        newCars = carUtils.handleOnGoingGaps(newCars,oldCars,decimalSR,mapSpatialReference);
         return carUtils.calcAngle(newCars, oldCars);
     }
 
@@ -235,6 +236,7 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
             Log.d(TAG, "checkCarsStatusChanged: carStatuses size = " + carStatuses.size());
 
             if (carStatuses.size() > 0) {
+                viewListener.onNotifyCarsDisconnected(carStatuses.size());
                 activityViewListener.onCarStatusChanged(carStatuses);
             }
         } catch (Exception e) {

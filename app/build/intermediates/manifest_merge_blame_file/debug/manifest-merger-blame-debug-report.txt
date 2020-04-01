@@ -82,8 +82,8 @@
 39-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:26:9-41
 40        android:roundIcon="@mipmap/ic_launcher"
 40-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:27:9-48
-41        android:supportsRtl="false"
-41-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:28:9-36
+41        android:supportsRtl="true"
+41-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:28:9-35
 42        android:testOnly="true"
 43        android:theme="@style/AppTheme.NoActionBar" >
 43-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:29:9-52

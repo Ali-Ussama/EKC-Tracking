@@ -79,4 +79,5 @@
     <string name="km_h">كم/س</string>
     <string name="speed_from">السرعة الصغرى</string>
     <string name="speed_to">السرعة الكبرى</string>
+    <string name="check_configuration">تحقق من بيانات جهاز السيارة</string>
 </resources>

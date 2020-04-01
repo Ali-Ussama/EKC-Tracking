@@ -339,18 +339,43 @@ public class CarUtils {
                 CarStatus endPoint = locations.get(i + 1);
                 String startPointTime = startPoint.getTime().replaceAll("(AM)|(PM)| ", "");
                 String endPointTime = endPoint.getTime().replaceAll("(AM)|(PM)| ", "");
-
-                if (getHourDifference(startPointTime, endPointTime) >= 1) {
-
-                }
             }
         }
         return trips;
     }
 
     private int getHourDifference(String startPointTime, String endPointTime) {
+        //10:58:56 AM
+        String[] startSplit = startPointTime.split("(:)|( )");
+        String[] endSplit = endPointTime.split("(:)|( )");
 
-        return 0;
+        int startHour = Integer.parseInt(startSplit[0]);
+        int endHour = Integer.parseInt(startSplit[0]);
+
+        int startMinute = Integer.parseInt(startSplit[1]);
+        int endMinute = Integer.parseInt(startSplit[1]);
+
+        String startPM_AM = startSplit[3];
+        String endPM_AM = endSplit[3];
+
+        if (startHour == endHour && startPM_AM.equals(endPM_AM)) {
+            return endMinute - startMinute;
+        } else if (startHour != endHour && startPM_AM.equals(endPM_AM)) {
+            if (endHour - startHour == 1) {
+                int start = 60 - startMinute;
+                return start + endMinute;
+            }
+            return 60;
+        } else if (Math.abs(endHour - startHour) == 1 && !startPM_AM.equals(endPM_AM)) {
+            //11:59:20 AM old
+            //12:09:15 PM new OR 12:50:15 PM new
+            //12:58:15 PM old - 01:10:10 AM
+            //10:58:15 AM old - 11:10:10 AM
+            int start = 60 - startMinute;
+            return start + endMinute;
+        }
+        return 60;
+
     }
 
     public void requestToken() {
@@ -462,6 +487,26 @@ public class CarUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public ArrayList<CarStatus> handleOnGoingGaps(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars, SpatialReference decimalSR, SpatialReference mapSpatialReference) {
+        for (CarStatus newCar : newCars) {
+            for (CarStatus oldCar : oldCars) {
+                if (oldCar.getCarNo().equals(newCar.getCarNo())) {
+                    Point point = (Point) GeometryEngine.project(new Point(oldCar.getLongitude(), oldCar.getLatitude(), decimalSR), mapSpatialReference);
+                    Point nextPoint = (Point) GeometryEngine.project(new Point(newCar.getLongitude(), newCar.getLatitude(), decimalSR), mapSpatialReference);
+                    double distance = getDistance(nextPoint, point, mapSpatialReference);
+                    int minuteDiff = getHourDifference(oldCar.getTime(), newCar.getTime());
+                    if (distance >= 20000 && minuteDiff <= 10) {
+                        newCar.setLatitude(oldCar.getLatitude());
+                        newCar.setLongitude(oldCar.getLongitude());
+                        newCar.setAngle(oldCar.getAngle());
+                    }
+                    Log.d(TAG, "handleOnGoingGaps: car No = " + newCar.getCarNo() + " distance = " + distance + " - time = " + minuteDiff);
+                }
+            }
+        }
+        return newCars;
     }
 
     public ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars) {

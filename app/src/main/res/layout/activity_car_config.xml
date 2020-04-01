@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_8sdp"
+    tools:context=".view.activities.carConfig.CarConfigActivity">
+
+
+    <ImageView
+        android:id="@+id/activity_car_config_check_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_build_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_configuration"
+        app:layout_constraintTop_toTopOf="@+id/activity_car_config_check_car"
+        app:layout_constraintEnd_toStartOf="@+id/activity_car_config_check_car"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
