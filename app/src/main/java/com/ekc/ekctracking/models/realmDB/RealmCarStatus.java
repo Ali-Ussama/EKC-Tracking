@@ -8,10 +8,11 @@ import java.util.Comparator;
 import javax.annotation.PropertyKey;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class RealmCarStatus  extends RealmObject implements Parcelable, Comparator {
 
-    @PropertyKey
+    @PrimaryKey
     private String carNo;
 
     private String GPSUnitNumber;

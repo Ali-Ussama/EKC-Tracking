@@ -91,18 +91,23 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     @Override
     public void onNotificationsLoaded(RealmList<RealmCarStatus> cars) {
-        Log.d(TAG, "onNotificationsLoaded: is called");
-        this.cars = cars;
-        if (cars != null && !cars.isEmpty()) {
-            Log.d(TAG, "onNotificationsLoaded: cars != null ");
-            Log.d(TAG, "onNotificationsLoaded: cars size " + cars.size());
-            mNotificationAdapter.notifyDataSetChanged();
-            mNotificationAdapter.dataChanged(this.cars);
-            viewAnimator.setDisplayedChild(2);
-        } else {
-            Log.d(TAG, "onNotificationsLoaded: cars == null ");
-            viewAnimator.setDisplayedChild(1);
-        }
+       runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               Log.d(TAG, "onNotificationsLoaded: is called");
+               mCurrent.cars = cars;
+               if (cars != null && !cars.isEmpty()) {
+                   Log.d(TAG, "onNotificationsLoaded: cars != null ");
+                   Log.d(TAG, "onNotificationsLoaded: cars size " + cars.size());
+                   mNotificationAdapter.notifyDataSetChanged();
+                   mNotificationAdapter.dataChanged(mCurrent.cars);
+                   viewAnimator.setDisplayedChild(2);
+               } else {
+                   Log.d(TAG, "onNotificationsLoaded: cars == null ");
+                   viewAnimator.setDisplayedChild(1);
+               }
+           }
+       });
     }
 
     @Override

@@ -52,6 +52,7 @@ public class HomeFragment_ViewBinding implements Unbinder {
     target.mCarGPSUnitNumberTV = Utils.findRequiredViewAsType(source, R.id.home_bottom_sheet_car_details_gps_unit_value, "field 'mCarGPSUnitNumberTV'", TextView.class);
     target.mCarSpeedTV = Utils.findRequiredViewAsType(source, R.id.home_bottom_sheet_car_details_speed_value, "field 'mCarSpeedTV'", TextView.class);
     target.mMovingReportBottomSheetAction = Utils.findRequiredViewAsType(source, R.id.home_bottom_sheet_car_details_period_report_container, "field 'mMovingReportBottomSheetAction'", ConstraintLayout.class);
+    target.mSettingBottomSheetAction = Utils.findRequiredViewAsType(source, R.id.home_bottom_sheet_car_details_settings_container, "field 'mSettingBottomSheetAction'", ConstraintLayout.class);
     target.mHomeCarsListContainer = Utils.findRequiredViewAsType(source, R.id.home_cars_list_container, "field 'mHomeCarsListContainer'", ConstraintLayout.class);
     target.mHomeCarsListRV = Utils.findRequiredViewAsType(source, R.id.home_cars_list, "field 'mHomeCarsListRV'", RecyclerView.class);
     target.movingFilterCarTitle = Utils.findRequiredViewAsType(source, R.id.moving_report_filter_car_no_tv, "field 'movingFilterCarTitle'", TextView.class);
@@ -97,6 +98,7 @@ public class HomeFragment_ViewBinding implements Unbinder {
     target.mCarGPSUnitNumberTV = null;
     target.mCarSpeedTV = null;
     target.mMovingReportBottomSheetAction = null;
+    target.mSettingBottomSheetAction = null;
     target.mHomeCarsListContainer = null;
     target.mHomeCarsListRV = null;
     target.movingFilterCarTitle = null;

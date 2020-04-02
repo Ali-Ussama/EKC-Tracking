@@ -16,31 +16,42 @@ public class NotificationPresenter {
     private NotificationActivity mContext;
     private NotificationViewListener viewListener;
     private PrefManager mPrefManager;
-    private Realm realm;
+    private Realm mRealm;
 
     public NotificationPresenter(NotificationActivity mContext, NotificationViewListener viewListener) {
         this.mContext = mContext;
         this.viewListener = viewListener;
         mPrefManager = new PrefManager(mContext);
-        this.realm = Realm.getDefaultInstance();
+        this.mRealm = Realm.getDefaultInstance();
     }
 
     void loadNotifications() {
         Log.d(TAG, "loadNotifications: is called");
-        final RealmResults<RealmCarStatus> results = realm.where(RealmCarStatus.class).findAll();
-        RealmList<RealmCarStatus> cars = new RealmList<>();
-        cars.addAll(results);
-        if (viewListener != null) {
-            viewListener.onNotificationsLoaded(cars);
+        try {
+            mContext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        final RealmResults<RealmCarStatus> results = mRealm.where(RealmCarStatus.class).findAllAsync();
+                        results.addChangeListener((realmCarStatuses, changeSet) -> {
+                            Log.d(TAG, "loadNotifications: onChange: is called");
+                            RealmList<RealmCarStatus> cars = new RealmList<>();
+                            cars.addAll(realmCarStatuses);
+                            if (viewListener != null) {
+                                viewListener.onNotificationsLoaded(cars);
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        results.addChangeListener((realmCarStatuses, changeSet) -> {
-            Log.d(TAG, "loadNotifications: onChange: is called");
-            cars.clear();
-            cars.addAll(realmCarStatuses);
-            if (viewListener != null) {
-                viewListener.onNotificationsLoaded(cars);
-            }
-        });
+
 
     }
 }

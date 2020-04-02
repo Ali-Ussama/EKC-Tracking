@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
 MERGED from [io.realm:realm-android-library:6.0.2] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\a653ed5a8a67afdec9196b59bd7b6177\jetified-realm-android-library-6.0.2\AndroidManifest.xml:2:1-10:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\fc6e6fc8750309671679c25fa76bdc5b\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-ui:2.2.1] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d0874bacc62d9a41ea0bc5aa7bba52b0\navigation-ui-2.2.1\AndroidManifest.xml:17:1-24:12
@@ -73,22 +73,22 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\AliOsama\.gradle
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\13e1acaceb0ed255044400037e797288\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\9e70bf7f9e88a959f8a784e1ff3cc770\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\5932702fd36954e1d9e7b004456f23ea\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
-INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
 	package
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:4:5-34
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-70:12
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:1-71:12
 		INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:2:11-69
@@ -155,7 +155,7 @@ ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:20:5-
 	android:name
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:20:19-63
 application
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:22:5-68:19
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:22:5-69:19
 MERGED from [com.miguelcatalan:materialsearchview:1.4.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\a7fdc349a38c6e1dc8fcd26930e973c9\jetified-materialsearchview-1.4.0\AndroidManifest.xml:11:5-20
 MERGED from [com.miguelcatalan:materialsearchview:1.4.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\a7fdc349a38c6e1dc8fcd26930e973c9\jetified-materialsearchview-1.4.0\AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.1.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\4933c5a9c5e6f2fe1bfe290204b4a398\material-1.1.0\AndroidManifest.xml:22:5-20
@@ -209,14 +209,18 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Al
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:30:9-44
 	android:name
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:23:9-36
-activity#com.ekc.ekctracking.view.activities.notification.NotificationActivity
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:9-34:47
-	android:configChanges
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:13-142
-	android:theme
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:34:13-44
+activity#com.ekc.ekctracking.view.activities.carConfig.CarConfigActivity
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:31:9-90
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:19-84
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:31:19-78
+activity#com.ekc.ekctracking.view.activities.notification.NotificationActivity
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:9-35:47
+	android:configChanges
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:34:13-142
+	android:theme
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:35:13-44
+	android:name
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:13-78
 activity#com.ekc.ekctracking.view.activities.login.LoginActivity
 ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:36:9-44:20
 	android:configChanges
@@ -234,29 +238,33 @@ ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:42:17
 	android:name
 		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:42:27-74
 meta-data#com.google.android.geo.API_KEY
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:55:9-57:55
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:53:9-55:55
 	android:value
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:57:13-52
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:55:13-52
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:56:13-58
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:54:13-58
 activity#com.ekc.ekctracking.view.activities.MapsActivity
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:59:9-62:59
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:57:9-60:59
 	android:label
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:62:13-56
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:60:13-56
 	android:configChanges
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:61:13-142
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:59:13-142
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:60:13-57
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:58:13-57
 activity#com.ekc.ekctracking.view.activities.mainActivity.MainActivity
-ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:63:9-67:58
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:61:9-65:59
 	android:label
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:66:13-45
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:64:13-45
 	android:configChanges
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:65:13-142
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:63:13-142
 	android:theme
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:67:13-56
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:65:13-56
 	android:name
-		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:64:13-70
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:62:13-70
+receiver#com.ekc.ekctracking.view.activities.mainActivity.MyNotificationPublisher
+ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:67:9-92
+	android:name
+		ADDED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:67:19-89
 uses-sdk
 INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml

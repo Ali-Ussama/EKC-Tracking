@@ -180,6 +180,7 @@ butterknife/internal/ListenerClass.class
 butterknife/internal/ListenerMethod.class
 com/afollestad/materialdialogs/color/ColorChooserDialog$ColorChooserTag.class
 com/archit/calendardaterangepicker/customviews/DateRangeCalendarManager$RANGE_TYPE.class
+com/ekc/ekctracking/configs/App.class
 com/google/android/gms/common/GoogleSignatureVerifier.class
 com/google/android/gms/common/SignInButton$ButtonSize.class
 com/google/android/gms/common/SignInButton$ColorScheme.class
@@ -278,7 +279,11 @@ io/reactivex/annotations/SchedulerSupport.class
 io/reactivex/internal/util/SuppressAnimalSniffer.class
 io/reactivex/parallel/ParallelFlowable.class
 io/realm/BaseModuleMediator.class
+io/realm/BaseRealm.class
+io/realm/DefaultRealmModule.class
+io/realm/DefaultRealmModuleMediator.class
 io/realm/OrderedRealmCollection.class
+io/realm/Realm.class
 io/realm/RealmCollection.class
 io/realm/RealmList.class
 io/realm/RealmModel.class

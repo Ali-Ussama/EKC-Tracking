@@ -145,24 +145,12 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
     @Override
     public void realmSet$carNo(String value) {
         if (proxyState.isUnderConstruction()) {
-            if (!proxyState.getAcceptDefaultValue$realm()) {
-                return;
-            }
-            final Row row = proxyState.getRow$realm();
-            if (value == null) {
-                row.getTable().setNull(columnInfo.carNoIndex, row.getIndex(), true);
-                return;
-            }
-            row.getTable().setString(columnInfo.carNoIndex, row.getIndex(), value, true);
+            // default value of the primary key is always ignored.
             return;
         }
 
         proxyState.getRealm$realm().checkIfValid();
-        if (value == null) {
-            proxyState.getRow$realm().setNull(columnInfo.carNoIndex);
-            return;
-        }
-        proxyState.getRow$realm().setString(columnInfo.carNoIndex, value);
+        throw new io.realm.exceptions.RealmException("Primary key field 'carNo' cannot be changed after object was created.");
     }
 
     @Override
@@ -585,7 +573,7 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
 
     private static OsObjectSchemaInfo createExpectedObjectSchemaInfo() {
         OsObjectSchemaInfo.Builder builder = new OsObjectSchemaInfo.Builder("RealmCarStatus", 16, 0);
-        builder.addPersistedProperty("carNo", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
+        builder.addPersistedProperty("carNo", RealmFieldType.STRING, Property.PRIMARY_KEY, Property.INDEXED, !Property.REQUIRED);
         builder.addPersistedProperty("GPSUnitNumber", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
         builder.addPersistedProperty("disable_count", RealmFieldType.INTEGER, !Property.PRIMARY_KEY, !Property.INDEXED, Property.REQUIRED);
         builder.addPersistedProperty("carID", RealmFieldType.STRING, !Property.PRIMARY_KEY, !Property.INDEXED, !Property.REQUIRED);
@@ -624,16 +612,40 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
     public static com.ekc.ekctracking.models.realmDB.RealmCarStatus createOrUpdateUsingJsonObject(Realm realm, JSONObject json, boolean update)
         throws JSONException {
         final List<String> excludeFields = Collections.<String> emptyList();
-        com.ekc.ekctracking.models.realmDB.RealmCarStatus obj = realm.createObjectInternal(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class, true, excludeFields);
-
-        final com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface objProxy = (com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) obj;
-        if (json.has("carNo")) {
+        com.ekc.ekctracking.models.realmDB.RealmCarStatus obj = null;
+        if (update) {
+            Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
+            RealmCarStatusColumnInfo columnInfo = (RealmCarStatusColumnInfo) realm.getSchema().getColumnInfo(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
+            long pkColumnIndex = columnInfo.carNoIndex;
+            long rowIndex = Table.NO_MATCH;
             if (json.isNull("carNo")) {
-                objProxy.realmSet$carNo(null);
+                rowIndex = table.findFirstNull(pkColumnIndex);
             } else {
-                objProxy.realmSet$carNo((String) json.getString("carNo"));
+                rowIndex = table.findFirstString(pkColumnIndex, json.getString("carNo"));
+            }
+            if (rowIndex != Table.NO_MATCH) {
+                final BaseRealm.RealmObjectContext objectContext = BaseRealm.objectContext.get();
+                try {
+                    objectContext.set(realm, table.getUncheckedRow(rowIndex), realm.getSchema().getColumnInfo(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class), false, Collections.<String> emptyList());
+                    obj = new io.realm.com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy();
+                } finally {
+                    objectContext.clear();
+                }
             }
         }
+        if (obj == null) {
+            if (json.has("carNo")) {
+                if (json.isNull("carNo")) {
+                    obj = (io.realm.com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy) realm.createObjectInternal(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class, null, true, excludeFields);
+                } else {
+                    obj = (io.realm.com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy) realm.createObjectInternal(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class, json.getString("carNo"), true, excludeFields);
+                }
+            } else {
+                throw new IllegalArgumentException("JSON object doesn't have the primary key field 'carNo'.");
+            }
+        }
+
+        final com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface objProxy = (com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) obj;
         if (json.has("GPSUnitNumber")) {
             if (json.isNull("GPSUnitNumber")) {
                 objProxy.realmSet$GPSUnitNumber(null);
@@ -746,6 +758,7 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static com.ekc.ekctracking.models.realmDB.RealmCarStatus createUsingJsonStream(Realm realm, JsonReader reader)
         throws IOException {
+        boolean jsonHasPrimaryKey = false;
         final com.ekc.ekctracking.models.realmDB.RealmCarStatus obj = new com.ekc.ekctracking.models.realmDB.RealmCarStatus();
         final com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface objProxy = (com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) obj;
         reader.beginObject();
@@ -759,6 +772,7 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
                     reader.skipValue();
                     objProxy.realmSet$carNo(null);
                 }
+                jsonHasPrimaryKey = true;
             } else if (name.equals("GPSUnitNumber")) {
                 if (reader.peek() != JsonToken.NULL) {
                     objProxy.realmSet$GPSUnitNumber((String) reader.nextString());
@@ -869,6 +883,9 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
             }
         }
         reader.endObject();
+        if (!jsonHasPrimaryKey) {
+            throw new IllegalArgumentException("JSON object doesn't have the primary key field 'carNo'.");
+        }
         return realm.copyToRealm(obj);
     }
 
@@ -897,7 +914,32 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
             return (com.ekc.ekctracking.models.realmDB.RealmCarStatus) cachedRealmObject;
         }
 
-        return copy(realm, columnInfo, object, update, cache, flags);
+        com.ekc.ekctracking.models.realmDB.RealmCarStatus realmObject = null;
+        boolean canUpdate = update;
+        if (canUpdate) {
+            Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
+            long pkColumnIndex = columnInfo.carNoIndex;
+            String value = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
+            long rowIndex = Table.NO_MATCH;
+            if (value == null) {
+                rowIndex = table.findFirstNull(pkColumnIndex);
+            } else {
+                rowIndex = table.findFirstString(pkColumnIndex, value);
+            }
+            if (rowIndex == Table.NO_MATCH) {
+                canUpdate = false;
+            } else {
+                try {
+                    objectContext.set(realm, table.getUncheckedRow(rowIndex), columnInfo, false, Collections.<String> emptyList());
+                    realmObject = new io.realm.com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy();
+                    cache.put(object, (RealmObjectProxy) realmObject);
+                } finally {
+                    objectContext.clear();
+                }
+            }
+        }
+
+        return (canUpdate) ? update(realm, columnInfo, realmObject, object, cache, flags) : copy(realm, columnInfo, object, update, cache, flags);
     }
 
     public static com.ekc.ekctracking.models.realmDB.RealmCarStatus copy(Realm realm, RealmCarStatusColumnInfo columnInfo, com.ekc.ekctracking.models.realmDB.RealmCarStatus newObject, boolean update, Map<RealmModel,RealmObjectProxy> cache, Set<ImportFlag> flags) {
@@ -945,12 +987,20 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
         Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
         long tableNativePtr = table.getNativePtr();
         RealmCarStatusColumnInfo columnInfo = (RealmCarStatusColumnInfo) realm.getSchema().getColumnInfo(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
-        long rowIndex = OsObject.createRow(table);
-        cache.put(object, rowIndex);
-        String realmGet$carNo = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
-        if (realmGet$carNo != null) {
-            Table.nativeSetString(tableNativePtr, columnInfo.carNoIndex, rowIndex, realmGet$carNo, false);
+        long pkColumnIndex = columnInfo.carNoIndex;
+        String primaryKeyValue = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
+        long rowIndex = Table.NO_MATCH;
+        if (primaryKeyValue == null) {
+            rowIndex = Table.nativeFindFirstNull(tableNativePtr, pkColumnIndex);
+        } else {
+            rowIndex = Table.nativeFindFirstString(tableNativePtr, pkColumnIndex, primaryKeyValue);
         }
+        if (rowIndex == Table.NO_MATCH) {
+            rowIndex = OsObject.createRowWithPrimaryKey(table, pkColumnIndex, primaryKeyValue);
+        } else {
+            Table.throwDuplicatePrimaryKeyException(primaryKeyValue);
+        }
+        cache.put(object, rowIndex);
         String realmGet$GPSUnitNumber = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$GPSUnitNumber();
         if (realmGet$GPSUnitNumber != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.GPSUnitNumberIndex, rowIndex, realmGet$GPSUnitNumber, false);
@@ -1006,6 +1056,7 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
         Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
         long tableNativePtr = table.getNativePtr();
         RealmCarStatusColumnInfo columnInfo = (RealmCarStatusColumnInfo) realm.getSchema().getColumnInfo(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
+        long pkColumnIndex = columnInfo.carNoIndex;
         com.ekc.ekctracking.models.realmDB.RealmCarStatus object = null;
         while (objects.hasNext()) {
             object = (com.ekc.ekctracking.models.realmDB.RealmCarStatus) objects.next();
@@ -1016,12 +1067,19 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
                 cache.put(object, ((RealmObjectProxy) object).realmGet$proxyState().getRow$realm().getIndex());
                 continue;
             }
-            long rowIndex = OsObject.createRow(table);
-            cache.put(object, rowIndex);
-            String realmGet$carNo = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
-            if (realmGet$carNo != null) {
-                Table.nativeSetString(tableNativePtr, columnInfo.carNoIndex, rowIndex, realmGet$carNo, false);
+            String primaryKeyValue = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
+            long rowIndex = Table.NO_MATCH;
+            if (primaryKeyValue == null) {
+                rowIndex = Table.nativeFindFirstNull(tableNativePtr, pkColumnIndex);
+            } else {
+                rowIndex = Table.nativeFindFirstString(tableNativePtr, pkColumnIndex, primaryKeyValue);
             }
+            if (rowIndex == Table.NO_MATCH) {
+                rowIndex = OsObject.createRowWithPrimaryKey(table, pkColumnIndex, primaryKeyValue);
+            } else {
+                Table.throwDuplicatePrimaryKeyException(primaryKeyValue);
+            }
+            cache.put(object, rowIndex);
             String realmGet$GPSUnitNumber = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$GPSUnitNumber();
             if (realmGet$GPSUnitNumber != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.GPSUnitNumberIndex, rowIndex, realmGet$GPSUnitNumber, false);
@@ -1080,14 +1138,18 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
         Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
         long tableNativePtr = table.getNativePtr();
         RealmCarStatusColumnInfo columnInfo = (RealmCarStatusColumnInfo) realm.getSchema().getColumnInfo(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
-        long rowIndex = OsObject.createRow(table);
-        cache.put(object, rowIndex);
-        String realmGet$carNo = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
-        if (realmGet$carNo != null) {
-            Table.nativeSetString(tableNativePtr, columnInfo.carNoIndex, rowIndex, realmGet$carNo, false);
+        long pkColumnIndex = columnInfo.carNoIndex;
+        String primaryKeyValue = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
+        long rowIndex = Table.NO_MATCH;
+        if (primaryKeyValue == null) {
+            rowIndex = Table.nativeFindFirstNull(tableNativePtr, pkColumnIndex);
         } else {
-            Table.nativeSetNull(tableNativePtr, columnInfo.carNoIndex, rowIndex, false);
+            rowIndex = Table.nativeFindFirstString(tableNativePtr, pkColumnIndex, primaryKeyValue);
         }
+        if (rowIndex == Table.NO_MATCH) {
+            rowIndex = OsObject.createRowWithPrimaryKey(table, pkColumnIndex, primaryKeyValue);
+        }
+        cache.put(object, rowIndex);
         String realmGet$GPSUnitNumber = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$GPSUnitNumber();
         if (realmGet$GPSUnitNumber != null) {
             Table.nativeSetString(tableNativePtr, columnInfo.GPSUnitNumberIndex, rowIndex, realmGet$GPSUnitNumber, false);
@@ -1165,6 +1227,7 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
         Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
         long tableNativePtr = table.getNativePtr();
         RealmCarStatusColumnInfo columnInfo = (RealmCarStatusColumnInfo) realm.getSchema().getColumnInfo(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
+        long pkColumnIndex = columnInfo.carNoIndex;
         com.ekc.ekctracking.models.realmDB.RealmCarStatus object = null;
         while (objects.hasNext()) {
             object = (com.ekc.ekctracking.models.realmDB.RealmCarStatus) objects.next();
@@ -1175,14 +1238,17 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
                 cache.put(object, ((RealmObjectProxy) object).realmGet$proxyState().getRow$realm().getIndex());
                 continue;
             }
-            long rowIndex = OsObject.createRow(table);
-            cache.put(object, rowIndex);
-            String realmGet$carNo = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
-            if (realmGet$carNo != null) {
-                Table.nativeSetString(tableNativePtr, columnInfo.carNoIndex, rowIndex, realmGet$carNo, false);
+            String primaryKeyValue = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$carNo();
+            long rowIndex = Table.NO_MATCH;
+            if (primaryKeyValue == null) {
+                rowIndex = Table.nativeFindFirstNull(tableNativePtr, pkColumnIndex);
             } else {
-                Table.nativeSetNull(tableNativePtr, columnInfo.carNoIndex, rowIndex, false);
+                rowIndex = Table.nativeFindFirstString(tableNativePtr, pkColumnIndex, primaryKeyValue);
             }
+            if (rowIndex == Table.NO_MATCH) {
+                rowIndex = OsObject.createRowWithPrimaryKey(table, pkColumnIndex, primaryKeyValue);
+            }
+            cache.put(object, rowIndex);
             String realmGet$GPSUnitNumber = ((com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) object).realmGet$GPSUnitNumber();
             if (realmGet$GPSUnitNumber != null) {
                 Table.nativeSetString(tableNativePtr, columnInfo.GPSUnitNumberIndex, rowIndex, realmGet$GPSUnitNumber, false);
@@ -1293,6 +1359,32 @@ public class com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxy extends
         unmanagedCopy.realmSet$angle(realmSource.realmGet$angle());
 
         return unmanagedObject;
+    }
+
+    static com.ekc.ekctracking.models.realmDB.RealmCarStatus update(Realm realm, RealmCarStatusColumnInfo columnInfo, com.ekc.ekctracking.models.realmDB.RealmCarStatus realmObject, com.ekc.ekctracking.models.realmDB.RealmCarStatus newObject, Map<RealmModel, RealmObjectProxy> cache, Set<ImportFlag> flags) {
+        com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface realmObjectTarget = (com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) realmObject;
+        com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface realmObjectSource = (com_ekc_ekctracking_models_realmDB_RealmCarStatusRealmProxyInterface) newObject;
+        Table table = realm.getTable(com.ekc.ekctracking.models.realmDB.RealmCarStatus.class);
+        OsObjectBuilder builder = new OsObjectBuilder(table, columnInfo.maxColumnIndexValue, flags);
+        builder.addString(columnInfo.carNoIndex, realmObjectSource.realmGet$carNo());
+        builder.addString(columnInfo.GPSUnitNumberIndex, realmObjectSource.realmGet$GPSUnitNumber());
+        builder.addInteger(columnInfo.disable_countIndex, realmObjectSource.realmGet$disable_count());
+        builder.addString(columnInfo.carIDIndex, realmObjectSource.realmGet$carID());
+        builder.addDouble(columnInfo.latitudeIndex, realmObjectSource.realmGet$latitude());
+        builder.addDouble(columnInfo.longitudeIndex, realmObjectSource.realmGet$longitude());
+        builder.addString(columnInfo.statusIndex, realmObjectSource.realmGet$status());
+        builder.addString(columnInfo.speedIndex, realmObjectSource.realmGet$speed());
+        builder.addString(columnInfo.addressIndex, realmObjectSource.realmGet$address());
+        builder.addString(columnInfo.dateIndex, realmObjectSource.realmGet$date());
+        builder.addString(columnInfo.timeIndex, realmObjectSource.realmGet$time());
+        builder.addString(columnInfo.speed2Index, realmObjectSource.realmGet$speed2());
+        builder.addString(columnInfo.gpsUnitIndex, realmObjectSource.realmGet$gpsUnit());
+        builder.addString(columnInfo.driverNameIndex, realmObjectSource.realmGet$driverName());
+        builder.addString(columnInfo.dataTimeIndex, realmObjectSource.realmGet$dataTime());
+        builder.addDouble(columnInfo.angleIndex, realmObjectSource.realmGet$angle());
+
+        builder.updateExistingObject();
+        return realmObject;
     }
 
     @Override

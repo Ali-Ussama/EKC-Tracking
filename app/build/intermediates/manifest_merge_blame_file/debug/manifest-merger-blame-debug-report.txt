@@ -68,7 +68,7 @@
 31-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
 32
 33    <application
-33-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:22:5-68:19
+33-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:22:5-69:19
 34        android:name="com.ekc.ekctracking.configs.App"
 34-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:23:9-36
 35        android:allowBackup="true"
@@ -87,32 +87,34 @@
 42        android:testOnly="true"
 43        android:theme="@style/AppTheme.NoActionBar" >
 43-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:29:9-52
-44        <activity
-44-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:9-34:47
-45            android:name="com.ekc.ekctracking.view.activities.notification.NotificationActivity"
-45-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:19-84
-46            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
-46-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:13-142
-47            android:theme="@style/AppTheme" />
-47-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:34:13-44
-48        <activity
-48-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:36:9-44:20
-49            android:name="com.ekc.ekctracking.view.activities.login.LoginActivity"
-49-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:37:13-64
-50            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection" >
-50-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:38:13-142
-51            <intent-filter>
-51-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:39:13-43:29
-52                <action android:name="android.intent.action.MAIN" />
-52-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:40:17-69
-52-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:40:25-66
-53
-54                <category android:name="android.intent.category.LAUNCHER" />
-54-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:42:17-77
-54-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:42:27-74
-55            </intent-filter>
-56        </activity>
-57
+44        <activity android:name="com.ekc.ekctracking.view.activities.carConfig.CarConfigActivity" />
+44-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:31:9-90
+44-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:31:19-78
+45        <activity
+45-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:32:9-35:47
+46            android:name="com.ekc.ekctracking.view.activities.notification.NotificationActivity"
+46-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:33:13-78
+47            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
+47-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:34:13-142
+48            android:theme="@style/AppTheme" />
+48-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:35:13-44
+49        <activity
+49-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:36:9-44:20
+50            android:name="com.ekc.ekctracking.view.activities.login.LoginActivity"
+50-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:37:13-64
+51            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection" >
+51-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:38:13-142
+52            <intent-filter>
+52-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:39:13-43:29
+53                <action android:name="android.intent.action.MAIN" />
+53-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:40:17-69
+53-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:40:25-66
+54
+55                <category android:name="android.intent.category.LAUNCHER" />
+55-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:42:17-77
+55-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:42:27-74
+56            </intent-filter>
+57        </activity>
 58        <!--
 59             The API key for Google Maps-based APIs is defined as a string resource.
 60             (See the file "res/values/google_maps_api.xml").
@@ -121,75 +123,79 @@
 63             sign the APK for publishing.
 64             You can define the keys for the debug and release targets in src/debug/ and src/release/.
 65        -->
-66
-67        <meta-data
-67-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:55:9-57:55
-68            android:name="com.google.android.geo.API_KEY"
-68-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:56:13-58
-69            android:value="@string/google_maps_key" />
-69-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:57:13-52
-70
-71        <activity
-71-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:59:9-62:59
-72            android:name="com.ekc.ekctracking.view.activities.MapsActivity"
-72-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:60:13-57
-73            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
-73-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:61:13-142
-74            android:label="@string/title_activity_maps" />
-74-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:62:13-56
-75        <activity
-75-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:63:9-67:58
-76            android:name="com.ekc.ekctracking.view.activities.mainActivity.MainActivity"
-76-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:64:13-70
-77            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
-77-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:65:13-142
-78            android:label="@string/app_name"
-78-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:66:13-45
-79            android:theme="@style/AppTheme.NoActionBar" />
-79-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:67:13-56
-80        <!-- Needs to be explicitly declared on P+ -->
-81        <uses-library
-81-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
-82            android:name="org.apache.http.legacy"
-82-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
-83            android:required="false" />
-83-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
-84
-85        <provider
-85-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
-86            android:name="com.squareup.picasso.PicassoProvider"
-86-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
-87            android:authorities="com.ekc.ekctracking.com.squareup.picasso"
-87-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
-88            android:exported="false" />
-88-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
-89
-90        <activity
-90-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
-91            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-91-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
-92            android:exported="false"
-92-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
-93            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-93-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
-94
-95        <meta-data
-95-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e92610c92cb9b2bb370ac289a04cf318\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-96            android:name="com.google.android.gms.version"
-96-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e92610c92cb9b2bb370ac289a04cf318\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-97            android:value="@integer/google_play_services_version" />
-97-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e92610c92cb9b2bb370ac289a04cf318\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-98
-99        <provider
-99-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
-100            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-100-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
-101            android:authorities="com.ekc.ekctracking.lifecycle-process"
-101-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
-102            android:exported="false"
-102-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
-103            android:multiprocess="true" />
-103-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
-104    </application>
-105
-106</manifest>
+66        <meta-data
+66-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:53:9-55:55
+67            android:name="com.google.android.geo.API_KEY"
+67-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:54:13-58
+68            android:value="@string/google_maps_key" />
+68-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:55:13-52
+69
+70        <activity
+70-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:57:9-60:59
+71            android:name="com.ekc.ekctracking.view.activities.MapsActivity"
+71-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:58:13-57
+72            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
+72-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:59:13-142
+73            android:label="@string/title_activity_maps" />
+73-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:60:13-56
+74        <activity
+74-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:61:9-65:59
+75            android:name="com.ekc.ekctracking.view.activities.mainActivity.MainActivity"
+75-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:62:13-70
+76            android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
+76-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:63:13-142
+77            android:label="@string/app_name"
+77-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:64:13-45
+78            android:theme="@style/AppTheme.NoActionBar" />
+78-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:65:13-56
+79
+80        <receiver android:name="com.ekc.ekctracking.view.activities.mainActivity.MyNotificationPublisher" />
+80-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:67:9-92
+80-->F:\AndroidProjects\EKCTracking\app\src\main\AndroidManifest.xml:67:19-89
+81
+82        <!-- Needs to be explicitly declared on P+ -->
+83        <uses-library
+83-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+84            android:name="org.apache.http.legacy"
+84-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+85            android:required="false" />
+85-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\642cd490d99cc195a75b5e5b5a6e208a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+86
+87        <provider
+87-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
+88            android:name="com.squareup.picasso.PicassoProvider"
+88-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
+89            android:authorities="com.ekc.ekctracking.com.squareup.picasso"
+89-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
+90            android:exported="false" />
+90-->[com.squareup.picasso:picasso:2.71828] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\d9c2344f0a7aa2a3f9564054f74e5bfb\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
+91
+92        <activity
+92-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+93            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+93-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+94            android:exported="false"
+94-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+95            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+95-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\6793ee1800d86be6b240b3765600cdfc\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+96
+97        <meta-data
+97-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e92610c92cb9b2bb370ac289a04cf318\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+98            android:name="com.google.android.gms.version"
+98-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e92610c92cb9b2bb370ac289a04cf318\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+99            android:value="@integer/google_play_services_version" />
+99-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\e92610c92cb9b2bb370ac289a04cf318\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+100
+101        <provider
+101-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
+102            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+102-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
+103            android:authorities="com.ekc.ekctracking.lifecycle-process"
+103-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
+104            android:exported="false"
+104-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
+105            android:multiprocess="true" />
+105-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\AliOsama\.gradle\caches\transforms-2\files-2.1\012eb6e0459b5e7ae5719b7636a2f47e\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
+106    </application>
+107
+108</manifest>

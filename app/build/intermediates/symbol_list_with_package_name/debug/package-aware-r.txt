@@ -2428,6 +2428,7 @@ drawable ic_action_navigation_close
 drawable ic_action_navigation_close_inverted
 drawable ic_action_voice_search
 drawable ic_action_voice_search_inverted
+drawable ic_build_black_24dp
 drawable ic_calendar_black_24dp
 drawable ic_car
 drawable ic_car_126
@@ -2466,6 +2467,7 @@ drawable ic_left_blue
 drawable ic_left_selector
 drawable ic_map_black_24dp
 drawable ic_marker
+drawable ic_memory_black_24dp
 drawable ic_menu_arrow_down_black_24dp
 drawable ic_menu_arrow_up_black_24dp
 drawable ic_menu_black_24dp
@@ -2493,6 +2495,7 @@ drawable ic_right_selector
 drawable ic_route
 drawable ic_route_white_48
 drawable ic_search_black_24dp
+drawable ic_settings_black_24dp
 drawable ic_signal_device_technology_radar__satellite__antenna
 drawable ic_start_banner_marker_green
 drawable ic_start_banner_marker_green_24
@@ -2504,6 +2507,7 @@ drawable ic_suggestion
 drawable ic_timer_grey_24dp
 drawable ic_visibility_off_black_24dp
 drawable ic_visibility_white_48dp
+drawable ic_vpn_key_black_24dp
 drawable md_btn_selected
 drawable md_btn_selected_dark
 drawable md_btn_selector
@@ -2628,6 +2632,13 @@ id action_text
 id action_up_btn
 id action_voice_btn
 id actions
+id activity_car_config_check_car_container
+id activity_car_config_check_car_divider
+id activity_car_config_check_car_ic
+id activity_car_config_check_car_tv
+id activity_car_config_check_gprs_container
+id activity_car_config_check_gprs_divider
+id activity_car_config_check_gprs_ic
 id activity_chooser_view_content
 id add
 id adjust_height
@@ -2754,12 +2765,16 @@ id home_bottom_sheet_car_details_div_5
 id home_bottom_sheet_car_details_div_6
 id home_bottom_sheet_car_details_div_7
 id home_bottom_sheet_car_details_expand_collapse_ic
+id home_bottom_sheet_car_details_find_trip_report_ic
+id home_bottom_sheet_car_details_find_trip_report_value
 id home_bottom_sheet_car_details_gps_unit_ic
 id home_bottom_sheet_car_details_gps_unit_value
+id home_bottom_sheet_car_details_period_find_trip_action_ic
 id home_bottom_sheet_car_details_period_report_action_ic
 id home_bottom_sheet_car_details_period_report_container
 id home_bottom_sheet_car_details_period_report_ic
 id home_bottom_sheet_car_details_period_report_value
+id home_bottom_sheet_car_details_settings_container
 id home_bottom_sheet_car_details_speed_container
 id home_bottom_sheet_car_details_speed_ic
 id home_bottom_sheet_car_details_speed_value
@@ -3155,6 +3170,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_car_config
 layout activity_login
 layout activity_main
 layout activity_maps
@@ -5345,6 +5361,7 @@ string arcgisruntime_sketcheditor_callout_remove_vertex
 string bottom_sheet_behavior
 string cancel
 string car_report
+string car_settings
 string cars_list
 string cdrp_fri
 string cdrp_mon
@@ -5356,6 +5373,7 @@ string cdrp_wed
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
+string check_configuration
 string chip_text
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button
@@ -5399,6 +5417,7 @@ string fab_transformation_sheet_behavior
 string find_trip_report
 string find_your_cars_and_track_it
 string google_maps_key
+string gprs_configuration
 string hello_gallery_second
 string hello_home_second
 string hello_slideshow_second

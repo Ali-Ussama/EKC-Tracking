@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.ViewModel;
 
 import com.ekc.ekctracking.R;
+import com.ekc.ekctracking.configs.DateUtils;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
 import com.ekc.ekctracking.models.hereMapRoutModel.Maneuver;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class HomeFragPresenter extends ViewModel implements HomeActivityCallback, HomeFragPresenterListener {
 
@@ -130,8 +132,8 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
         }
     }
 
-    ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars,SpatialReference decimalSR,SpatialReference mapSpatialReference) {
-        newCars = carUtils.handleOnGoingGaps(newCars,oldCars,decimalSR,mapSpatialReference);
+    ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars, SpatialReference decimalSR, SpatialReference mapSpatialReference) {
+        newCars = carUtils.handleOnGoingGaps(newCars, oldCars, decimalSR, mapSpatialReference);
         return carUtils.calcAngle(newCars, oldCars);
     }
 
@@ -207,29 +209,62 @@ public class HomeFragPresenter extends ViewModel implements HomeActivityCallback
             RealmList<RealmCarStatus> carStatuses = new RealmList<>();
             for (CarStatus oldCar : oldCars) {
                 for (CarStatus newCar : newCars) {
-                    if (oldCar.getCarNo().equals(newCar.getCarNo()) && !newCar.getStatus().equals(oldCar.getStatus()) && newCar.getStatus().equals(mContext.getString(R.string.disconnected_english))) {
-                        Log.d(TAG, "oldCar: " + oldCar.getCarNo() + " - newCar: " + newCar.getCarNo() + " - status = " + newCar.getStatus());
+                    int minuteDiff = carUtils.getHourDifference(DateUtils.getTimeNow(), newCar.getTime());
+                    if (oldCar.getCarNo().equals(newCar.getCarNo()) && /*!newCar.getStatus().equals(oldCar.getStatus())
+                            &&*/ newCar.getStatus().equals(mContext.getString(R.string.disconnected_english)) &&
+                            minuteDiff >= 10) {
                         realm.beginTransaction();
-                        RealmCarStatus realmCarStatus = realm.createObject(RealmCarStatus.class);
 
-                        realmCarStatus.setCarID(newCar.getCarID());
-                        realmCarStatus.setCarNo(newCar.getCarNo());
-                        realmCarStatus.setAddress(newCar.getAddress());
-                        realmCarStatus.setDate(newCar.getDate());
-                        realmCarStatus.setTime(newCar.getTime());
-                        realmCarStatus.setGpsUnit(newCar.getGpsUnit());
-                        realmCarStatus.setGPSUnitNumber(newCar.getGPSUnitNumber());
-                        realmCarStatus.setLatitude(newCar.getLatitude());
-                        realmCarStatus.setLongitude(newCar.getLongitude());
-                        realmCarStatus.setSpeed(newCar.getSpeed());
-                        realmCarStatus.setSpeed2(newCar.getSpeed2());
-                        realmCarStatus.setStatus(newCar.getStatus());
-                        realmCarStatus.setDriverName(newCar.getDriverName());
-                        realmCarStatus.setDisable_count(newCar.getDisable_count());
-                        realmCarStatus.setAngle(newCar.getAngle());
-                        realm.commitTransaction();
+                        Log.d(TAG, "checkCarsStatusChanged: oldCar: " + oldCar.getCarNo() + " - newCar: " + newCar.getCarNo() + " - status = " + newCar.getStatus());
 
-                        carStatuses.add(realmCarStatus);
+                        RealmResults<RealmCarStatus> results = realm.where(RealmCarStatus.class).equalTo("carNo", newCar.getCarNo()).findAll();
+
+                        if (results != null && results.size() > 0) {
+                            RealmCarStatus realmCarStatus = results.first();
+                            if (realmCarStatus != null) {
+                                Log.d(TAG, "checkCarsStatusChanged: carNo = " + realmCarStatus.getCarNo() + " founded");
+                                realmCarStatus.setCarID(newCar.getCarID());
+//                        realmCarStatus.setCarNo(newCar.getCarNo());
+                                realmCarStatus.setAddress(newCar.getAddress());
+                                realmCarStatus.setDate(newCar.getDate());
+                                realmCarStatus.setTime(newCar.getTime());
+                                realmCarStatus.setGpsUnit(newCar.getGpsUnit());
+                                realmCarStatus.setGPSUnitNumber(newCar.getGPSUnitNumber());
+                                realmCarStatus.setLatitude(newCar.getLatitude());
+                                realmCarStatus.setLongitude(newCar.getLongitude());
+                                realmCarStatus.setSpeed(newCar.getSpeed());
+                                realmCarStatus.setSpeed2(newCar.getSpeed2());
+                                realmCarStatus.setStatus(newCar.getStatus());
+                                realmCarStatus.setDriverName(newCar.getDriverName());
+                                realmCarStatus.setDisable_count(newCar.getDisable_count());
+                                realmCarStatus.setAngle(newCar.getAngle());
+                            }else{
+                                Log.d(TAG, "checkCarsStatusChanged: carNo = " + newCar.getCarNo() + " founded == null");
+                            }
+                            realm.commitTransaction();
+                        } else {
+                            Log.d(TAG, "checkCarsStatusChanged: carNo = " + newCar.getCarNo() + " not founded");
+                            RealmCarStatus realmCarStatus = realm.createObject(RealmCarStatus.class, newCar.getCarNo());
+
+                            realmCarStatus.setCarID(newCar.getCarID());
+//                        realmCarStatus.setCarNo(newCar.getCarNo());
+                            realmCarStatus.setAddress(newCar.getAddress());
+                            realmCarStatus.setDate(newCar.getDate());
+                            realmCarStatus.setTime(newCar.getTime());
+                            realmCarStatus.setGpsUnit(newCar.getGpsUnit());
+                            realmCarStatus.setGPSUnitNumber(newCar.getGPSUnitNumber());
+                            realmCarStatus.setLatitude(newCar.getLatitude());
+                            realmCarStatus.setLongitude(newCar.getLongitude());
+                            realmCarStatus.setSpeed(newCar.getSpeed());
+                            realmCarStatus.setSpeed2(newCar.getSpeed2());
+                            realmCarStatus.setStatus(newCar.getStatus());
+                            realmCarStatus.setDriverName(newCar.getDriverName());
+                            realmCarStatus.setDisable_count(newCar.getDisable_count());
+                            realmCarStatus.setAngle(newCar.getAngle());
+                            realm.commitTransaction();
+
+                            carStatuses.add(realmCarStatus);
+                        }
                     }
                 }
             }

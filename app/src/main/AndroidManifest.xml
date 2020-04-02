@@ -63,6 +63,9 @@
             android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name = ".view.activities.mainActivity.MyNotificationPublisher" />
+
     </application>
 
 </manifest>

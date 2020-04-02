@@ -49,7 +49,7 @@
 
     <string name="required">مطلوب</string>
     <string name="moving_report">تقرير تحركات السيارة</string>
-    <string name="find_trip_report">تقرير تتبع الرحلة</string>
+    <string name="find_trip_report">بحث عن رحلة</string>
     <string name="speed_report">تقرير السرعات</string>
     <string name="distance_report">تقرير المسافة</string>
     <string name="moving_report_car_title">فلتر تقرير تحركات السيارة</string>
@@ -80,4 +80,6 @@
     <string name="speed_from">السرعة الصغرى</string>
     <string name="speed_to">السرعة الكبرى</string>
     <string name="check_configuration">تحقق من بيانات جهاز السيارة</string>
+    <string name="gprs_configuration">تحقق من جهاز السيارة GPRS</string>
+    <string name="car_settings">إعدادات السيارة</string>
 </resources>

@@ -1,25 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_8sdp"
     tools:context=".view.activities.carConfig.CarConfigActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/activity_car_config_check_car"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_build_black_24dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_car_config_check_car_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/check_configuration"
-        app:layout_constraintTop_toTopOf="@+id/activity_car_config_check_car"
-        app:layout_constraintEnd_toStartOf="@+id/activity_car_config_check_car"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/activity_car_config_check_car_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_build_black_24dp" />
+
+            <TextView
+                android:id="@+id/activity_car_config_check_car_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/check_configuration"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/activity_car_config_check_car_ic"
+                app:layout_constraintEnd_toStartOf="@+id/activity_car_config_check_car_ic"
+                app:layout_constraintTop_toTopOf="@+id/activity_car_config_check_car_ic" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/activity_car_config_check_car_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_car_config_check_car_container"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_car_config_check_gprs_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_car_config_check_car_divider">
+
+            <ImageView
+                android:id="@+id/activity_car_config_check_gprs_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_memory_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/gprs_configuration"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/activity_car_config_check_gprs_ic"
+                app:layout_constraintEnd_toStartOf="@+id/activity_car_config_check_gprs_ic"
+                app:layout_constraintTop_toTopOf="@+id/activity_car_config_check_gprs_ic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/activity_car_config_check_gprs_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_car_config_check_gprs_container"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

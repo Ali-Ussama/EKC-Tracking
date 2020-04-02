@@ -186,8 +186,8 @@ public class HomeFragment extends Fragment implements
     @BindView(R.id.home_bottom_sheet_car_details_period_report_container)
     ConstraintLayout mMovingReportBottomSheetAction;
 //
-//    @BindView(R.id.home_bottom_sheet_car_details_find_trip_report_container)
-//    ConstraintLayout mFindTripReportBottomSheetAction;
+    @BindView(R.id.home_bottom_sheet_car_details_settings_container)
+    ConstraintLayout mSettingBottomSheetAction;
 //
 //    @BindView(R.id.home_bottom_sheet_car_details_speed_report_container)
 //    ConstraintLayout mSpeedReportBottomSheetAction;

@@ -93,6 +93,20 @@ public class DateUtils {
         }
     }
 
+    public static String getDateNow() {
+        String dateTime;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss aa", Locale.ENGLISH);
+        dateTime = dateFormat.format(new Date());
+        return dateTime;
+    }
+
+    public static String getTimeNow() {
+        String dateTime;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss aa", Locale.ENGLISH);
+        dateTime = dateFormat.format(new Date());
+        return dateTime;
+    }
+
     public static String formatDateTime(Calendar mCalendar, String format) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);

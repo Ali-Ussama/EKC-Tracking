@@ -41,6 +41,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme.NoActionBar" >
+        <activity android:name="com.ekc.ekctracking.view.activities.carConfig.CarConfigActivity" />
         <activity
             android:name="com.ekc.ekctracking.view.activities.notification.NotificationActivity"
             android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
@@ -54,7 +55,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -63,7 +63,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -77,6 +76,9 @@
             android:configChanges="screenSize|keyboard|fontScale|keyboardHidden|locale|density|smallestScreenSize|navigation|layoutDirection"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name="com.ekc.ekctracking.view.activities.mainActivity.MyNotificationPublisher" />
+
         <!-- Needs to be explicitly declared on P+ -->
         <uses-library
             android:name="org.apache.http.legacy"
