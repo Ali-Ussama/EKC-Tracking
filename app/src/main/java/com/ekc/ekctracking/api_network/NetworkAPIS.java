@@ -4,6 +4,7 @@ import com.ekc.ekctracking.models.pojo.StatusRoot;
 import com.ekc.ekctracking.models.pojo.User;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.hereMapRoutModel.HRoute;
+import com.ekc.ekctracking.models.pojo.carType.CarByType;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -35,5 +36,8 @@ public interface NetworkAPIS {
     Observable<HRoute> getHereRouting(@Query("waypoint0") String wayPoint0, @Query("waypoint1") String wayPoint1,
                                       @Query("mode") String mode, @Query("app_id") String app_id,
                                       @Query("app_code") String app_code);
+
+    @GET("api/Cars/byType/0")
+    Observable<CarByType> getCarByType(@Header("Authorization") String auth);
 
 }

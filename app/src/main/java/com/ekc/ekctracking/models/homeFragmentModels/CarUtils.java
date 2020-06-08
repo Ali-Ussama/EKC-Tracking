@@ -223,7 +223,7 @@ public class CarUtils {
 
     public void sortPoints(FindTrip findTrip, SpatialReference decimalSR, SpatialReference mapSpatialReference) {
         try {
-            Log.i(TAG, "sortPoints: is called");
+            Log.i(TAG, "sortPoints: aly is called");
             Collections.sort(findTrip.getFoundCars().getLocations(), new Comparator<CarStatus>() {
                 @Override
                 public int compare(CarStatus o1, CarStatus o2) {
@@ -233,23 +233,23 @@ public class CarUtils {
 
             ArrayList<CarStatus> location = findTrip.getFoundCars().getLocations();
             ArrayList<CarStatus> wrongPoints = new ArrayList<>();
-            getWrongPoints(location, wrongPoints, decimalSR, mapSpatialReference);
+            getWrongPoints(location, wrongPoints, decimalSR, mapSpatialReference, 10000);
 
-            Log.i(TAG, "drawFindTripLine: wrong points size = " + wrongPoints.size());
+            Log.i(TAG, "sortPoints: aly wrong points size = " + wrongPoints.size());
             removeGaps(wrongPoints, location);
 
             /*--------------------------------------------------------*/
 
-            Log.i(TAG, "sortPoints: display distances after correcting gaps\n\n");
+            Log.i(TAG, "sortPoints: aly display distances after correcting gaps\n\n");
             wrongPoints.clear();
-            getWrongPoints(location, wrongPoints, decimalSR, mapSpatialReference);
+//            getWrongPoints(location, wrongPoints, decimalSR, mapSpatialReference, 3000);
 
-            Log.i(TAG, "drawFindTripLine: wrong points size = " + wrongPoints.size());
+            Log.i(TAG, "sortPoints: aly wrong points size = " + wrongPoints.size());
 
-            removeGaps(wrongPoints, location);
+//            removeGaps(wrongPoints, location);
 
             /*--------------------------------------------------------*/
-            sortDistanceThenTime(location);
+//            sortDistanceThenTime(location);
 
             findTrip.getFoundCars().setLocations(location);
 
@@ -259,22 +259,70 @@ public class CarUtils {
         }
     }
 
-    private ArrayList<CarStatus> getWrongPoints(ArrayList<CarStatus> location, ArrayList<CarStatus> wrongPoints, SpatialReference decimalSR, SpatialReference mapSpatialReference) {
+    private ArrayList<CarStatus> getWrongPoints(ArrayList<CarStatus> location, ArrayList<CarStatus> wrongPoints, SpatialReference decimalSR, SpatialReference mapSpatialReference, int maxDistanceInMeter) {
         double distance = 0;
         for (int i = 0; i < location.size(); i++) {
-            if (i != location.size() - 1) {
+            if (i < location.size() - 1) {
+//                Point point = (Point) GeometryEngine.project(new Point(location.get(i).getLongitude(), location.get(i).getLatitude(), decimalSR), mapSpatialReference);
+//                Point nextPoint = (Point) GeometryEngine.project(new Point(location.get(i + 1).getLongitude(), location.get(i + 1).getLatitude(), decimalSR), mapSpatialReference);
+//                distance = getDistance(nextPoint, point, mapSpatialReference);
+                boolean wrongFounded;
+                int j = 1;
+//                if (distance >= maxDistanceInMeter) {
+//                    Log.i(TAG, "getWrongPoints: aly wrong point (lat,long) y,x = " + nextPoint.getY() + "," + nextPoint.getX() + " lat,long = " + location.get(i + 1).getLatitude() + "," + location.get(i + 1).getLongitude());
+//                    wrongPoints.add(location.get(i + 1));
+//                    wrongFounded = true;
+//                    while (wrongFounded) {
+//                        if ((i + j) < location.size() - 1) {
+//                            nextPoint = (Point) GeometryEngine.project(new Point(location.get(i + j).getLongitude(), location.get(i + j).getLatitude(), decimalSR), mapSpatialReference);
+//                            distance = getDistance(nextPoint, point, mapSpatialReference);
+//                            if (distance >= maxDistanceInMeter) {
+//                                Log.i(TAG, "getWrongPoints: aly wrong point (lat,long) y,x = " + nextPoint.getY() + "," + nextPoint.getX() + " lat,long = " + location.get(i + 1).getLatitude() + "," + location.get(i + 1).getLongitude());
+//                                wrongPoints.add(location.get(i + j));
+//                                if ((i + j) < location.size() - 1) {
+//                                    j++;
+//                                } else {
+//                                    wrongFounded = false;
+//                                    i += j;
+//                                }
+//                            } else {
+//                                wrongFounded = false;
+//                                i += j;
+//                            }
+//                        }else{
+//                            wrongFounded = false;
+//                        }
+//                    }
+//                }
                 Point point = (Point) GeometryEngine.project(new Point(location.get(i).getLongitude(), location.get(i).getLatitude(), decimalSR), mapSpatialReference);
-                Point nextPoint = (Point) GeometryEngine.project(new Point(location.get(i + 1).getLongitude(), location.get(i + 1).getLatitude(), decimalSR), mapSpatialReference);
-                distance = getDistance(nextPoint, point, mapSpatialReference);
-
-                if (distance >= 5000) {
-                    Log.i(TAG, "drawFindTripLine: wrong point (lat,long) y,x = " + nextPoint.getY() + "," + nextPoint.getX() + " lat,long = " + location.get(i + 1).getLatitude() + "," + location.get(i + 1).getLongitude());
-                    wrongPoints.add(location.get(i + 1));
-                    i++;
-                }
+                do {
+                    if ((i + j) <= location.size() - 1) {
+                        Point nextPoint = (Point) GeometryEngine.project(new Point(location.get(i + j).getLongitude(), location.get(i + j).getLatitude(), decimalSR), mapSpatialReference);
+                        distance = getDistance(nextPoint, point, mapSpatialReference);
+                        Log.i(TAG, "getWrongPoints: aly date = " + location.get(i + j).getDate() + " - time = " + location.get(i + j).getTime() + " - Speed = " + location.get(i + j).getSpeed2() + " - distance = " + distance + " i = " + (i + j) + " angle = " + getAngle(point.getY(), point.getX(), nextPoint.getY(), nextPoint.getX()));
+                         if (/*(distance >= 10000) || */(distance >= maxDistanceInMeter /*&& getAngle(point.getY(), point.getX(), nextPoint.getY(), nextPoint.getX()) >= 10*/)) {
+                            Log.i(TAG, "getWrongPoints: aly wrong point (lat,long) y,x = "/* + nextPoint.getY() + "," + nextPoint.getX() + " lat,long = " + location.get(i + 1).getLatitude() + "," + location.get(i + 1).getLongitude()*/);
+                            wrongPoints.add(location.get(i + j));
+                            if ((i + j) < location.size() - 1) {
+                                j++;
+                                wrongFounded = true;
+                            } else {
+                                wrongFounded = false;
+                                i += (j - 1);
+                            }
+                        } else {
+                            wrongFounded = false;
+                            i += (j - 1);
+                        }
+                    } else {
+                        wrongFounded = false;
+                    }
+                } while (wrongFounded);
             }
-            Log.i(TAG, "sortPoints: date = " + location.get(i).getDate() + " - time = " + location.get(i).getTime() + " - Speed = " + location.get(i).getSpeed2() + " - distance = " + distance + " i = " + i);
         }
+
+        removeGaps(wrongPoints, location);
+
         return wrongPoints;
     }
 
@@ -339,18 +387,47 @@ public class CarUtils {
                 CarStatus endPoint = locations.get(i + 1);
                 String startPointTime = startPoint.getTime().replaceAll("(AM)|(PM)| ", "");
                 String endPointTime = endPoint.getTime().replaceAll("(AM)|(PM)| ", "");
-
-                if (getHourDifference(startPointTime, endPointTime) >= 1) {
-
-                }
             }
         }
         return trips;
     }
 
-    private int getHourDifference(String startPointTime, String endPointTime) {
 
-        return 0;
+    public int getHourDifference(String startPointTime, String endPointTime) {
+        //10:58:56 AM
+        String[] startSplit = startPointTime.split("(:)|( )");
+        String[] endSplit = endPointTime.split("(:)|( )");
+
+        int startHour = Integer.parseInt(startSplit[0]);
+        int endHour = Integer.parseInt(startSplit[0]);
+
+        int startMinute = Integer.parseInt(startSplit[1]);
+        int endMinute = Integer.parseInt(startSplit[1]);
+
+        String startPM_AM = startSplit[3];
+        String endPM_AM = endSplit[3];
+
+
+//        Log.d(TAG, "getHourDifference: startHour = " + startHour + " - minute = " + startMinute + " - " + startPM_AM);
+//        Log.d(TAG, "getHourDifference: endHour   = " + endHour + " - minute = " + endMinute + " - " + endPM_AM);
+
+        if (startHour == endHour && startPM_AM.equals(endPM_AM)) {
+            return endMinute - startMinute;
+        } else if (startHour != endHour && startPM_AM.equals(endPM_AM)) {
+            if (endHour - startHour == 1) {
+                int start = 60 - startMinute;
+                return start + endMinute;
+            }
+            return ((endHour - startHour) * 60) + ((60 - startMinute) + endMinute);
+        } else if (Math.abs(endHour - startHour) == 1 && !startPM_AM.equals(endPM_AM)) {
+            //11:59:20 AM old
+            //12:09:15 PM new OR 12:50:15 PM new
+            //12:58:15 PM old - 01:10:10 AM
+            //10:58:15 AM old - 11:10:10 AM
+            int start = 60 - startMinute;
+            return start + endMinute;
+        }
+        return (Math.abs(endHour - startHour) * 60) + ((60 - startMinute) + endMinute);
     }
 
     public void requestToken() {
@@ -462,6 +539,26 @@ public class CarUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public ArrayList<CarStatus> handleOnGoingGaps(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars, SpatialReference decimalSR, SpatialReference mapSpatialReference) {
+        for (CarStatus newCar : newCars) {
+            for (CarStatus oldCar : oldCars) {
+                if (oldCar.getCarNo().equals(newCar.getCarNo())) {
+                    Point point = (Point) GeometryEngine.project(new Point(oldCar.getLongitude(), oldCar.getLatitude(), decimalSR), mapSpatialReference);
+                    Point nextPoint = (Point) GeometryEngine.project(new Point(newCar.getLongitude(), newCar.getLatitude(), decimalSR), mapSpatialReference);
+                    double distance = getDistance(nextPoint, point, mapSpatialReference);
+                    int minuteDiff = getHourDifference(oldCar.getTime(), newCar.getTime());
+                    if (distance >= 20000 && minuteDiff <= 10) {
+                        newCar.setLatitude(oldCar.getLatitude());
+                        newCar.setLongitude(oldCar.getLongitude());
+                        newCar.setAngle(oldCar.getAngle());
+                    }
+                    Log.d(TAG, "handleOnGoingGaps: car No = " + newCar.getCarNo() + " distance = " + distance + " - time = " + minuteDiff);
+                }
+            }
+        }
+        return newCars;
     }
 
     public ArrayList<CarStatus> calcAngle(ArrayList<CarStatus> newCars, ArrayList<CarStatus> oldCars) {

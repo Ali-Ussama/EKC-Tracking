@@ -1,16 +1,20 @@
 package com.ekc.ekctracking.view.activities.mainActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,7 +26,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ekc.ekctracking.R;
 import com.ekc.ekctracking.configs.AppUtils;
+import com.ekc.ekctracking.models.realmDB.RealmCarStatus;
 import com.ekc.ekctracking.view.activities.login.LoginActivity;
+import com.ekc.ekctracking.view.activities.notification.NotificationActivity;
 import com.ekc.ekctracking.view.fragments.home.HomeFragPresenter;
 import com.ekc.ekctracking.view.fragments.home.HomeFragment;
 import com.ekc.ekctracking.view.fragments.home.callbacks.HomeActivityCallback;
@@ -32,6 +38,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmList;
 
 public class MainActivity extends AppCompatActivity implements MainActivityViewListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 
     DrawerLayout drawer;
 
+    TextView notificationsCount;
+
     private FragmentManager fragmentManager;
 
     private HomeActivityCallback callback;
@@ -62,6 +72,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 
     private HomeFragment mHomeFragment;
     private Fragment currentFragment;
+
+    Realm realm;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initRealmInstance();
+    }
+
+    private void initRealmInstance() {
+        try {
+            realm = Realm.getDefaultInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +107,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     private void init() {
         try {
             mCurrent = MainActivity.this;
+            ButterKnife.bind(mCurrent);
 
             presenter = new MainActivityPresenter(mCurrent, this);
 
-            ButterKnife.bind(mCurrent);
-
-//            setSupportActionBar(toolbar);
+            fragmentManager = getSupportFragmentManager();
 
             initNavDrawer();
 
@@ -98,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 
     private void initHomeFragmentViewModel() {
         try {
-
-            mHomeFragment = HomeFragment.newInstance(mCurrent, this);
+            mHomeFragment = HomeFragment.newInstance(mCurrent, realm, this);
+            addFragment(mHomeFragment);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_moving_report, R.id.nav_speed_report)
+                    R.id.nav_home, R.id.nav_notifications, R.id.nav_speed_report)
                     .setDrawerLayout(drawer)
                     .build();
             navigationView.setNavigationItemSelectedListener(this);
@@ -121,6 +147,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
 //            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //            NavigationUI.setupWithNavController(navigationView, navController);
+
+            notificationsCount = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                    findItem(R.id.nav_notifications));
+            notificationsCount.setGravity(Gravity.CENTER_VERTICAL);
+            notificationsCount.setTypeface(null, Typeface.BOLD);
+            notificationsCount.setTextColor(getResources().getColor(R.color.red));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -206,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     public void navDrawIconPressed() {
         try {
             if (drawer != null) {
-                drawer.openDrawer(Gravity.START);
+                drawer.openDrawer(Gravity.LEFT);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,24 +248,62 @@ public class MainActivity extends AppCompatActivity implements MainActivityViewL
     }
 
     @Override
+    public void onCarStatusChanged(RealmList<RealmCarStatus> cars) {
+        if (cars.size() > 0) {
+            Log.d(TAG, "onCarStatusChanged: is called");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+                Log.d(TAG, "onCarStatusChanged: calling pushCarStatusNotification");
+                presenter.pushCarStatusNotification(cars);
+            }
+
+            int count = cars.size();
+            if (notificationsCount.getText() != null && !notificationsCount.getText().toString().isEmpty())
+                count += Integer.parseInt(notificationsCount.getText().toString());
+
+            if (count > 99){
+                count = 99;
+            }
+            if (count == 99){
+                notificationsCount.setText(String.valueOf(count).concat("+"));
+            }else{
+                notificationsCount.setText(String.valueOf(count));
+            }
+        }
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.i(TAG, "onNavigationItemSelected: is called");
-        Log.d(TAG, "onNavigationItemSelected: item id = " + item.getItemId() + " - logout = " + R.id.nav_log_out);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            presenter.dummyPushNotification();
+        }
         if (item.getItemId() == R.id.nav_log_out) {
             logout();
             return false;
-        } /*else if (item.getItemId() == R.id.nav_home) {
+        } else if (item.getItemId() == R.id.nav_home) {
+            Log.d(TAG, "onNavigationItemSelected: nav home is called");
             addFragment(mHomeFragment);
-        }*/
+        } else if (item.getItemId() == R.id.nav_notifications) {
+            openActivity(getString(R.string.menu_notification));
+        }
+        drawer.closeDrawer(Gravity.LEFT, true);
         return true;
+    }
+
+    private void openActivity(String name) {
+        if (name != null && name.equals(getString(R.string.menu_notification))) {
+            startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+        }
     }
 
     private void addFragment(Fragment fragment) {
         try {
-//            if (currentFragment != null) {
-//                fragmentManager = getSupportFragmentManager();
-//                fragmentManager.beginTransaction().replace(fragment,);
-//            }
+            Log.d(TAG, "addFragment: is called");
+
+            if (currentFragment != null && !currentFragment.equals(fragment)) {
+                Log.d(TAG, "addFragment: selected fragment Home");
+                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

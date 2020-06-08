@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "984258352107",
+    "firebase_url": "https://ekc-tracking.firebaseio.com",
+    "project_id": "ekc-tracking",
+    "storage_bucket": "ekc-tracking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984258352107:android:2633d16eb1e962068f3fae",
+        "android_client_info": {
+          "package_name": "com.ekc.ekctracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984258352107-dd3l0jp9dgbprrd7bgmllnmdbql618m3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ekc.ekctracking",
+            "certificate_hash": "2e535fb298e212ec319306dccd4a238938756a4a"
+          }
+        },
+        {
+          "client_id": "984258352107-hav1ksahulkb9rktl7auils9nfbpus8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXbqeSCljuOesb33AXZaKJldhcwW-DDeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984258352107-hav1ksahulkb9rktl7auils9nfbpus8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

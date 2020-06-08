@@ -20,7 +20,7 @@
         <ViewAnimator
             android:id="@+id/home_bottom_sheet_car_details_view_animator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/home_bottom_sheet_car_details_container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:visibility="visible">
 
                     <View
@@ -53,6 +53,7 @@
                         android:id="@+id/home_bottom_sheet_car_details_close_ic"
                         android:layout_width="@dimen/_24sdp"
                         android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/_8sdp"
                         app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_toolbar"
                         app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_toolbar"
                         app:layout_constraintTop_toTopOf="parent"
@@ -79,11 +80,11 @@
                         app:layout_constraintStart_toStartOf="@+id/home_bottom_sheet_car_details_toolbar"
                         app:layout_constraintTop_toTopOf="parent" />
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_toolbar">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -360,6 +361,7 @@
                             android:id="@+id/home_bottom_sheet_car_details_period_report_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:background="?android:attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
@@ -374,14 +376,14 @@
                                 android:layout_marginTop="@dimen/_4sdp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/ic_moving_report_blue_24dp" />
+                                app:srcCompat="@drawable/ic_route" />
 
                             <TextView
                                 android:id="@+id/home_bottom_sheet_car_details_period_report_value"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/_12sdp"
-                                android:text="@string/car_report"
+                                android:text="@string/find_trip_report"
                                 android:textColor="@color/dark_blue"
                                 android:textSize="@dimen/_10ssp"
                                 app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_period_report_ic"
@@ -406,54 +408,56 @@
                             android:layout_height="0.5dp"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:background="@color/dark_blue"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/home_bottom_sheet_car_details_period_report_container" />
 
-                        <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-                        <!--                            android:id="@+id/home_bottom_sheet_car_details_find_trip_report_container"-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="wrap_content"-->
-                        <!--                            android:background="?android:attr/selectableItemBackground"-->
-                        <!--                            android:clickable="true"-->
-                        <!--                            android:focusable="true"-->
-                        <!--                            android:padding="@dimen/_4sdp"-->
-                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_7">-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/home_bottom_sheet_car_details_settings_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_24sdp"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/_4sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_bottom_sheet_car_details_div_7">
 
-                        <!--                            <ImageView-->
-                        <!--                                android:id="@+id/home_bottom_sheet_car_details_find_trip_report_ic"-->
-                        <!--                                android:layout_width="wrap_content"-->
-                        <!--                                android:layout_height="wrap_content"-->
-                        <!--                                android:layout_marginTop="@dimen/_4sdp"-->
-                        <!--                                app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--                                app:layout_constraintTop_toTopOf="parent"-->
-                        <!--                                app:srcCompat="@drawable/ic_near_me_black_24dp" />-->
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:srcCompat="@drawable/ic_build_black_24dp" />
 
-                        <!--                            <TextView-->
-                        <!--                                android:id="@+id/home_bottom_sheet_car_details_find_trip_report_value"-->
-                        <!--                                android:layout_width="0dp"-->
-                        <!--                                android:layout_height="wrap_content"-->
-                        <!--                                android:layout_marginEnd="@dimen/_12sdp"-->
-                        <!--                                android:text="@string/find_trip_report"-->
-                        <!--                                android:textColor="@color/dark_blue"-->
-                        <!--                                android:textSize="@dimen/_10ssp"-->
-                        <!--                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"-->
-                        <!--                                app:layout_constraintEnd_toStartOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"-->
-                        <!--                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_find_trip_report_ic" />-->
+                            <TextView
+                                android:id="@+id/home_bottom_sheet_car_details_find_trip_report_value"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_12sdp"
+                                android:text="@string/car_settings"
+                                android:textColor="@color/dark_blue"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintBottom_toBottomOf="@+id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:layout_constraintEnd_toStartOf="@+id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_find_trip_report_ic" />
 
+                            <ImageView
+                                android:id="@+id/home_bottom_sheet_car_details_period_find_trip_action_ic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="@+id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/home_bottom_sheet_car_details_find_trip_report_ic"
+                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
-                        <!--                            <ImageView-->
-                        <!--                                android:id="@+id/home_bottom_sheet_car_details_period_find_trip_action_ic"-->
-                        <!--                                android:layout_width="wrap_content"-->
-                        <!--                                android:layout_height="wrap_content"-->
-                        <!--                                app:layout_constraintBottom_toBottomOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"-->
-                        <!--                                app:layout_constraintStart_toStartOf="parent"-->
-                        <!--                                app:layout_constraintTop_toTopOf="@id/home_bottom_sheet_car_details_find_trip_report_ic"-->
-                        <!--                                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />-->
-
-                        <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!--                        <View-->
                         <!--                            android:id="@+id/home_bottom_sheet_car_details_div_8"-->

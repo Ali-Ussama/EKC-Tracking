@@ -39,17 +39,17 @@
 
     <string name="stopped">السيارة متوقفة</string>
     <string name="moving">السيارة تتحرك</string>
-    <string name="disconnected">السيارة مفصولة</string>
+    <string name="disconnected">السيارة خارج التغطية</string>
     <string name="disabled">السيارة غير مستخدمة</string>
 
     <string name="stopped_short">متوقفة</string>
     <string name="moving_short">تتحرك</string>
-    <string name="disconnected_short">مفصولة</string>
+    <string name="disconnected_short">خارج التغطية</string>
     <string name="disabled_short">غير مستخدمة</string>
 
     <string name="required">مطلوب</string>
     <string name="moving_report">تقرير تحركات السيارة</string>
-    <string name="find_trip_report">تقرير تتبع الرحلة</string>
+    <string name="find_trip_report">بحث عن رحلة</string>
     <string name="speed_report">تقرير السرعات</string>
     <string name="distance_report">تقرير المسافة</string>
     <string name="moving_report_car_title">فلتر تقرير تحركات السيارة</string>
@@ -74,4 +74,47 @@
     <string name="disabled_english">Disabled</string>
     <string name="cars_list">قائمة السيارات</string>
     <string name="car_report">تقرير السيارة</string>
+    <string name="menu_notification">الإشعارات</string>
+    <string name="no_notifications_yet">ليس لديك اشعارات حتى الآن</string>
+    <string name="km_h">كم/س</string>
+    <string name="speed_from">السرعة الصغرى</string>
+    <string name="speed_to">السرعة الكبرى</string>
+    <string name="check_configuration">تحقق من بيانات جهاز التتبع Check</string>
+
+    <string name="basic_configuration">الإعدادات الأساسية</string>
+
+    <string name="gprs_configuration">تفعيل خاصية التتبع GPRS</string>
+    <string name="car_settings">إعدادات السيارة</string>
+    <string name="password_configuration">اعداد كلمة المرور لجهاز التتبع Password</string>
+    <string name="device_begin_configuration">ضبط جهاز التتبع لأول مرة Begin</string>
+    <string name="internet_network_configuration">إعداد شبكة الانترنت الخاصة بجهاز التتبع</string>
+    <string name="ip_network_configuration">إعداد  IP / Port  الخاصة بجهاز التتبع</string>
+    <string name="monitor_configuration">تفعيل خاصية تتبع الصوت داخل السيارة Monitor</string>
+    <string name="tracker_configuration">تفعيل خاصية تتبع احداثيات السيارة Tracker</string>
+
+    <string name="advanced_configurations">الإعدادات المتطورة</string>
+    <string name="time_configurations">إعداد خاصية الفترة الزمنية في ارسال الإحداثيات Time</string>
+    <string name="distance_configuration">إعداد خاصية المسافة في ارسال الإحداثيات Distance</string>
+    <string name="angle_configuration">إعداد خاصية زاوية الإنحراف في ارسال الإحداثيات Angle</string>
+
+    <string name="car_details">بيانات السيارة</string>
+    <string name="car_no">carNo</string>
+    <string name="ip">IP</string>
+    <string name="port">Port</string>
+    <string name="ip_number" translatable="false">92.42.106.205</string>
+    <string name="port_number" translatable="false">8040</string>
+    <string name="time_interval">Time Interval</string>
+    <string name="time_interval_default_no">30</string>
+    <string name="max_time_is_255">"اطول فترة زمنية لا تتعدى  255 ثانية"</string>
+    <string name="min_time_is_20">أقل فترة زمنية  20 ثانية</string>
+    <string name="max_distance_digits">أقصى عدد للأرقام هو 4 أرقام</string>
+    <string name="max_angle_digits">أقصى عدد للأرقام 3 أرقام</string>
+    <string name="angle_default_no">30</string>
+    <string name="distance">Distance</string>
+    <string name="distance_default_no">50</string>
+    <string name="angle">Angle</string>
+    <string name="are_you_sure_to_send_sms">هل أنت متأكد من إرسأل</string>
+    <string name="send">إرسال</string>
+    <string name="message_sent_successfully">تم إرسال رسالتك بنجاح</string>
+    <string name="_cancel">إلغاء</string>
 </resources>

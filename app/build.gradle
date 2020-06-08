@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.ekc.ekctracking"
         minSdkVersion 19
@@ -12,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        vectorDrawables{
+        vectorDrawables {
             useSupportLibrary true
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -80,6 +81,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

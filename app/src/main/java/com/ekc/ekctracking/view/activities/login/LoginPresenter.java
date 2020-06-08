@@ -6,6 +6,13 @@ import com.ekc.ekctracking.api_network.ApiClient;
 import com.ekc.ekctracking.configs.PrefManager;
 import com.ekc.ekctracking.models.pojo.LoginModel;
 import com.ekc.ekctracking.models.pojo.User;
+import com.ekc.ekctracking.models.pojo.carType.CarByType;
+import com.ekc.ekctracking.models.pojo.carType.CarByTypeCars;
+import com.ekc.ekctracking.models.pojo.carType.CarByTypeGroup;
+import com.ekc.ekctracking.models.realmDB.RealmCarByType;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class LoginPresenter {
 
@@ -14,12 +21,66 @@ public class LoginPresenter {
     private LoginViewListener listener;
     private ApiClient mApiClient;
     private PrefManager mPrefManager;
+    private Realm realm;
 
     public LoginPresenter(LoginActivity mCurrent, LoginViewListener listener) {
         this.mCurrent = mCurrent;
         this.listener = listener;
         this.mApiClient = new ApiClient();
         this.mPrefManager = new PrefManager(this.mCurrent);
+        realm = Realm.getDefaultInstance();
+    }
+
+    public void loadCarsDetails() {
+        try {
+            Log.d(TAG, "loadCarsDetails: is called");
+            String token = mPrefManager.readString(PrefManager.KEY_TOKEN);
+            token = "bearer " + token;
+            mApiClient.getCarByType(token, new ApiClient.CommonCallback<Object>() {
+                @Override
+                public void onSuccess(Object response) {
+                    Log.d(TAG, "loadCarsDetails: onSuccess: is called");
+                    if (response instanceof CarByType) {
+                        Log.d(TAG, "loadCarsDetails: onSuccess: instance of CarByType");
+                        CarByType carByType = (CarByType) response;
+                        for (CarByTypeGroup carByTypeGroup : carByType.getRoot().getGroup()) {
+                            for (CarByTypeCars car : carByTypeGroup.getCars()) {
+                                Log.d(TAG, "onSuccess: car = " + car.getCarNo());
+                                if (!carByTypeIsExists(car.getCarNo())) {
+                                    Log.d(TAG, "loadCarsDetails: onSuccess: car not Exists in Database");
+                                    realm.beginTransaction();
+                                    RealmCarByType realmCarByType = realm.createObject(RealmCarByType.class, car.getCarNo());
+                                    realmCarByType.setCarID(car.getCarID());
+                                    realmCarByType.setDisabledCount(car.getDisabledCount());
+                                    realmCarByType.setGpsUnitNo(car.getGpsUnitNo());
+                                    realmCarByType.setPhoneNo(car.getPhoneNo());
+                                    realm.commitTransaction();
+
+                                    Log.d(TAG, "loadCarsDetails: onSuccess: car " + car.getCarNo() + "is saved into Database");
+
+                                }
+                            }
+                        }
+                        Log.d(TAG, "loadCarDetails: onSuccess: calling onLogin");
+                        listener.onLogin(true, null);
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean carByTypeIsExists(String carNo) {
+        realm.beginTransaction();
+        RealmCarByType result = realm.where(RealmCarByType.class).equalTo("carNo", carNo).findFirst();
+        realm.commitTransaction();
+        return result != null;
     }
 
     public void login(LoginModel loginModel) {
@@ -41,8 +102,7 @@ public class LoginPresenter {
                                     mPrefManager.saveString(PrefManager.KEY_USERNAME, user.getUsername());
                                     mPrefManager.saveString(PrefManager.KEY_PASSWORD, loginModel.getPassword());
                                 }
-
-                                listener.onLogin(true, null);
+                                loadCarsDetails();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -90,4 +150,5 @@ public class LoginPresenter {
         }
         return false;
     }
+
 }

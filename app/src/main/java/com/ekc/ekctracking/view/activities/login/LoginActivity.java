@@ -26,6 +26,7 @@ import com.ekc.ekctracking.view.activities.mainActivity.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginViewListener {
 
@@ -71,6 +72,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
 
     private void init() {
         try {

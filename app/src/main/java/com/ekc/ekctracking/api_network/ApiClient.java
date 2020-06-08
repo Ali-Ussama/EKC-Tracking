@@ -10,6 +10,7 @@ import com.ekc.ekctracking.models.pojo.User;
 import com.ekc.ekctracking.models.findTrip.FindTrip;
 import com.ekc.ekctracking.models.findTrip.FindTripRequest;
 import com.ekc.ekctracking.models.hereMapRoutModel.HRoute;
+import com.ekc.ekctracking.models.pojo.carType.CarByType;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -217,6 +218,33 @@ public class ApiClient {
     private void handleHereRouteResult(HRoute hereRoute) {
         if (callback != null) {
             callback.onSuccess(hereRoute);
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    public void getCarByType(String auth, CommonCallback<Object> callback) {
+        try {
+            this.callback = callback;
+            NetworkAPIS networkAPIS = ApiClient.getInstance().getAPI();
+            Observable<CarByType> cryptoObservable = networkAPIS.getCarByType(auth);
+            cryptoObservable.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .map(result -> result)
+                    .subscribe(this::handleCarByTypeResult, this::handleCarByTypeError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleCarByTypeError(Throwable throwable) {
+        if (callback != null){
+            callback.onFailure(throwable);
+        }
+    }
+
+    private void handleCarByTypeResult(CarByType carByType) {
+        if (callback != null){
+            callback.onSuccess(carByType);
         }
     }
 }

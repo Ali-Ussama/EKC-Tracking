@@ -31,7 +31,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_moving_report"
+        android:id="@+id/nav_notifications"
         android:name="com.ekc.ekctracking.view.fragments.gallery.GalleryFragment"
         android:label="@string/menu_moving_report"
         tools:layout="@layout/fragment_moving_report" />
