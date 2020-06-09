@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_8sdp"
+    android:id="@+id/cars_counting_container"
+    android:visibility="gone"
+    android:background="@color/white"
+    android:layout_marginTop="?actionBarSize"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/cars_counting_disabled_cars_tv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.25"
+        android:drawableEnd="@drawable/rounded_ic_blue"
+        android:textSize="@dimen/_9ssp"
+        android:gravity="center"
+        android:text="31 غير مستخدمة" />
+
+    <TextView
+        android:id="@+id/cars_counting_disconnected_cars_tv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.25"
+        android:gravity="center"
+        android:textSize="@dimen/_8ssp"
+        android:drawableEnd="@drawable/rounded_ic_yellow"
+        android:text="31 خارج التغطية" />
+
+    <TextView
+        android:id="@+id/cars_counting_stopped_cars_tv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:drawableEnd="@drawable/rounded_ic_red"
+        android:text="31 متوقفة" />
+
+    <TextView
+        android:id="@+id/cars_counting_moving_cars_tv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableEnd="@drawable/rounded_ic_green"
+        android:text="31 متحركة" />
+
+
+
+</LinearLayout>

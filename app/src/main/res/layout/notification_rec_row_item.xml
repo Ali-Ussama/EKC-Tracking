@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_4sdp"
+    android:elevation="@dimen/_4sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp">
+
+        <ImageView
+            android:id="@+id/notification_row_item_car_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_directions_car_grey_24dp" />
+
+        <TextView
+            android:id="@+id/notification_row_item_car_no_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="1234 ا ب ط"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/notification_row_item_car_ic"
+            app:layout_constraintEnd_toStartOf="@id/notification_row_item_car_ic"
+            app:layout_constraintTop_toTopOf="@id/notification_row_item_car_ic" />
+
+        <ImageView
+            android:id="@+id/notification_row_item_date_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_car_ic"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_car_ic"
+            app:srcCompat="@drawable/ic_date_range_grey_24dp" />
+
+        <TextView
+            android:id="@+id/notification_row_item_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="29/3/2020"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_row_item_date_ic"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_car_no_tv"
+            app:layout_constraintTop_toTopOf="@+id/notification_row_item_date_ic" />
+
+
+        <ImageView
+            android:id="@+id/notification_row_item_time_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_car_ic"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_date_ic"
+            app:srcCompat="@drawable/ic_timer_grey_24dp" />
+
+        <TextView
+            android:id="@+id/notification_row_item_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="10:40:15 PM  - "
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_row_item_date_tv"
+            app:layout_constraintEnd_toStartOf="@+id/notification_row_item_date_tv"
+            app:layout_constraintTop_toTopOf="@+id/notification_row_item_date_tv" />
+
+        <ImageView
+            android:id="@+id/notification_row_item_status_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_time_ic"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_time_ic"
+            app:srcCompat="@drawable/rounded_ic_yellow" />
+
+        <TextView
+            android:id="@+id/notification_row_item_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/stopped"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_row_item_status_ic"
+            app:layout_constraintEnd_toEndOf="@+id/notification_row_item_date_tv"
+            app:layout_constraintTop_toTopOf="@+id/notification_row_item_status_ic" />
+
+        <View
+            android:id="@+id/car_config_check_car_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notification_row_item_status_tv" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/car_config_check_car_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:onClick="handleCarCheckAction"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/car_config_check_car_divider">
+
+            <ImageView
+                android:id="@+id/car_config_check_car_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_build_black_24dp" />
+
+            <TextView
+                android:id="@+id/activity_car_config_check_car_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/check_configuration"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@id/car_config_check_car_ic"
+                app:layout_constraintEnd_toStartOf="@+id/car_config_check_car_ic"
+                app:layout_constraintTop_toTopOf="@+id/car_config_check_car_ic" />
+
+            <ImageView
+                android:id="@+id/car_config_check_car_icc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/car_config_check_car_divider2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/car_config_check_car_container" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/car_config_check_gprs_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/car_config_check_car_divider2">
+
+            <ImageView
+                android:id="@+id/activity_car_config_check_gprs_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_memory_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@string/gprs_configuration"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintBottom_toBottomOf="@id/activity_car_config_check_gprs_ic"
+                app:layout_constraintEnd_toStartOf="@+id/activity_car_config_check_gprs_ic"
+                app:layout_constraintTop_toTopOf="@+id/activity_car_config_check_gprs_ic" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/notification_row_item_map_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_marker"
+            app:fabSize="mini"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/notification_row_item_car_ic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
