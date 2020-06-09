@@ -116,5 +116,5 @@
     <string name="are_you_sure_to_send_sms">هل أنت متأكد من إرسأل</string>
     <string name="send">إرسال</string>
     <string name="message_sent_successfully">تم إرسال رسالتك بنجاح</string>
-    <string name="_cancel">إلغاء</string>
+    <string name="_cancel">إلغاء</string>x
 </resources>
